@@ -15,7 +15,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
 
-            background: url('background.jpg') no-repeat center center/cover; 
+            background: url('image/Ep8a1_Defiance_Riot_Client_Login_Page_1440p.png') no-repeat center center/cover; 
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -69,7 +69,7 @@
             width: auto;
             cursor: pointer;
         }
-.error-text {
+        .error-text {
             color: #ff4655; 
             font-size: 12px;
             margin-top: 5px;
@@ -114,13 +114,34 @@
             text-decoration: none;
             font-weight: bold;
         }
+        .pesan-error {
+            color: #ff4655;
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
     </style>
-</head>
+</head> 
 <body>
     <div class="login-container">
         <h2>Sign Up</h2>
         
-        <form action="registerCon.php" method="POST" onsubmit="return cekPassword()">
+        <?php 
+        if(isset($_GET['pesan'])){
+            if($_GET['pesan'] == "password_tidak_cocok"){
+                echo "<div class='pesan-error'>Password dan Konfirmasi tidak sama!</div>";
+            }else if($_GET['pesan'] == "email_sudah_ada"){
+                echo "<div class='pesan-error'>Email sudah terdaftar, pakai yang lain!</div>";
+            }else if($_GET['pesan'] == "gagal"){
+                echo "<div class='pesan-error'>Gagal mendaftar, coba lagi.</div>";
+            }else if($_GET['pesan'] == "error_db"){
+                echo "<div class='pesan-error'>Terjadi kesalahan sistem.</div>";
+            }
+        }
+        ?>
+
+        <form action="registerCon.php" method="POST">
             
             <div class="input-group">
                 <label>Nama Lengkap</label>
@@ -140,9 +161,7 @@
             <div class="input-group">
                 <label>Konfirmasi Kata Sandi</label>
                 <input type="password" name="confirm_password" id="confirm_password" placeholder="Ulangi password" required />
-
-                <small id="pesan-error" class="error-text">Password Invalid!</small>
-
+                
                 <div class="show-pass">
                     <input type="checkbox" id="togglePass" onclick="togglePassword()">
                     <label for="togglePass">Tampilkan Password</label>
@@ -164,30 +183,6 @@
             const type = pass.type === 'password' ? 'text' : 'password';
             pass.type = type;
             confPass.type = type;
-        }
-
-        // Fungsi Baru: Cek Password sebelum Submit
-        function cekPassword() {
-            const pass = document.getElementById('password').value;
-            const confPass = document.getElementById('confirm_password').value;
-            const pesanError = document.getElementById('pesan-error');
-            const inputConf = document.getElementById('confirm_password');
-
-            if (pass !== confPass) {
-                // Munculin pesan error
-                pesanError.style.display = 'block';
-                // Ubah border jadi merah
-                inputConf.classList.add('input-error');
-                
-                return false; 
-            } else {
-                // Kalau bener, sembunyiin error
-                pesanError.style.display = 'none';
-                inputConf.classList.remove('input-error');
-                
-                // RETURN TRUE = LANJUT KIRIM KE PHP
-                return true;
-            }
         }
     </script>
 </body>

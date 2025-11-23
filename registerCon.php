@@ -1,17 +1,15 @@
 <?php
-include 'koneksi.php';
+include "koneksi.php";
 
-if (isset($_POST['register_btn'])) {
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if ($password !== $confirm_password) {
-        echo "<script>
-                alert('Konfirmasi sandi tidak cocok!');
-                window.location.href='register.php';
-              </script>";
+    if($password !== $confirm_password){
+        header("Location: register.php?pesan=password_tidak_cocok");
         exit();
     }
 
@@ -23,38 +21,25 @@ if (isset($_POST['register_btn'])) {
         $resultCheck = $stmtCheck->get_result();
 
         if ($resultCheck->num_rows > 0) {
-            echo "<script>
-                    alert('Email sudah terdaftar, gunakan email lain!');
-                    window.location.href='register.php';
-                  </script>";
+            header("Location: register.php?pesan=email_sudah_ada");
         } else {
             $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
             $stmt = $koneksi->prepare($sql);
             $stmt->bind_param("sss", $name, $email, $password);
 
             if ($stmt->execute()) {
-                echo "<script>
-                        alert('Pendaftaran Berhasil! Silakan Login.');
-                        window.location.href='login.php';
-                      </script>";
+                header("Location: login.php?pesan=register_berhasil");
             } else {
-                echo "<script>
-                        alert('Gagal mendaftar, silakan coba lagi.');
-                        window.location.href='register.php';
-                      </script>";
+                header("Location: register.php?pesan=gagal");
             }
             $stmt->close();
         }
         $stmtCheck->close();
 
-    } catch (Exception $e) {
-        echo "<script>
-                alert('Terjadi Error Sistem: " . addslashes($e->getMessage()) . "');
-                window.location.href='register.php';
-              </script>";
+    } catch (Exception $e) {    
+        header("Location: register.php?pesan=error_db");
     }
-} else {
-    header("Location: register.php");
-    exit();
+    
+    $koneksi->close();
 }
 ?>

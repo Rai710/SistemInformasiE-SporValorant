@@ -1,27 +1,46 @@
 <?php
+session_start();
 include "koneksi.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    try{
-        $sql = "INSERT INTO users (name, email, password) values (?,?,?)";
+    try {
+        $sql = "SELECT user_id, name, password, email FROM users WHERE name = ?";
         $stmt = $koneksi->prepare($sql);
-        $stmt->bind_param("sss", $name, $email, $password);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if($stmt->execute()){
-            header("Location: login.php");
-            exit();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+
+            if ($password == $row['password']) {
+                $_SESSION['user_id'] = $row['user_id'];
+                $_SESSION['username'] = $row['name']; 
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['status'] = "login";
+
+
+                header("Location: index.php");
+                exit();
+
+            } else {
+                header("Location: login.php?pesan=password_salah");
+                exit();
+            }
         } else {
-            echo "Gagal mendaftar.";
+            header("Location: login.php?pesan=user_tidak_ditemukan");
+            exit();
         }
-    } catch (mysqli_sql_exception $e){
-        echo "Pendaftaran gagal: " . $e->getMessage();
-    }
+        $stmt->close();
 
-    $stmt->close();
+    } catch (mysqli_sql_exception $e) {
+        echo "Error: " . $e->getMessage();
+        exit();
+    }
+    
     $koneksi->close();
 }
 ?>

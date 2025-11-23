@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: url('background.jpg') no-repeat center center/cover; 
+            background:url('image/Ep8a1_Defiance_Riot_Client_Login_Page_1440p.png') no-repeat center center/cover; 
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -101,13 +101,20 @@
             text-decoration: none;
             font-weight: bold;
         }
+        .pesan-error {
+            color: #ff4655;
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Sign In</h2>
             <form action="loginCon.php" method="POST">
-                        
+                
                 <div class="input-group">
                     <label>Nama Pengguna</label>
                     <input type="text" name="username" placeholder="Masukkan username" required />
@@ -122,6 +129,16 @@
                         <label for="togglePass">Tampilkan Password</label>
                     </div>
                 </div>
+
+                <?php 
+                if(isset($_GET['pesan'])){
+                    if($_GET['pesan'] == "password_salah"){
+                        echo "<div class='pesan-error'>Username dan password salah!</div>";
+                    }else if($_GET['pesan'] == "user_tidak_ditemukan"){
+                        echo "<div class='pesan-error'>Username dan password salah!</div>";
+                    }
+                }
+                ?>
 
                 <button type="submit" name="login_btn" class="login-btn">Masuk</button>
 
