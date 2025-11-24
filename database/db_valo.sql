@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2025 at 09:28 AM
+-- Generation Time: Nov 24, 2025 at 06:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,8 +56,58 @@ CREATE TABLE `match_esports` (
   `team1_score` int(11) DEFAULT 0,
   `team2_score` int(11) DEFAULT 0,
   `match_date` date DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL
+  `event_id` int(11) DEFAULT NULL,
+  `stage` enum('Group Stage','Playoffs','Grand Final') DEFAULT 'Group Stage',
+  `group_name` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `match_esports`
+--
+
+INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, `team2_score`, `match_date`, `event_id`, `stage`, `group_name`) VALUES
+(1, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', 'B'),
+(2, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', 'A'),
+(3, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', 'B'),
+(4, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', 'B'),
+(5, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', 'B'),
+(6, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', 'B'),
+(7, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', 'A'),
+(8, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', 'B'),
+(9, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', 'A'),
+(10, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', 'B'),
+(11, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', 'B'),
+(12, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', 'B'),
+(13, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', 'B'),
+(14, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', 'B'),
+(15, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', 'B'),
+(16, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', 'B'),
+(17, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', 'B'),
+(18, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', 'A'),
+(19, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', 'B'),
+(20, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', 'B'),
+(21, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', 'B'),
+(22, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', 'A'),
+(23, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', 'B'),
+(24, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', 'B'),
+(25, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', 'A'),
+(26, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', 'B'),
+(27, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', 'B'),
+(28, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', 'B'),
+(29, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', 'B'),
+(30, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', 'B'),
+(31, 5, 4, 1, 2, '2025-04-26', 1, 'Playoffs', NULL),
+(32, 2, 6, 2, 0, '2025-04-26', 1, 'Playoffs', NULL),
+(33, 8, 4, 0, 2, '2025-04-27', 1, 'Playoffs', NULL),
+(34, 3, 2, 2, 1, '2025-04-27', 1, 'Playoffs', NULL),
+(35, 7, 5, 1, 2, '2025-04-28', 1, 'Playoffs', NULL),
+(36, 1, 6, 2, 1, '2025-04-28', 1, 'Playoffs', NULL),
+(37, 5, 2, 0, 2, '2025-04-29', 1, 'Playoffs', NULL),
+(38, 1, 8, 2, 0, '2025-04-29', 1, 'Playoffs', NULL),
+(39, 4, 3, 2, 0, '2025-05-02', 1, 'Playoffs', NULL),
+(40, 2, 1, 0, 2, '2025-05-03', 1, 'Playoffs', NULL),
+(41, 3, 1, 3, 2, '2025-05-04', 1, 'Playoffs', NULL),
+(42, 4, 3, 1, 3, '2025-05-10', 1, 'Grand Final', NULL);
 
 -- --------------------------------------------------------
 
@@ -154,26 +204,27 @@ CREATE TABLE `team` (
   `team_name` varchar(255) NOT NULL,
   `country` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL
+  `logo` varchar(255) DEFAULT NULL,
+  `group_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`team_id`, `team_name`, `country`, `description`, `logo`) VALUES
-(1, 'Paper Rex', 'Singapore', 'Paper Rex adalah salah satu tim Valorant paling ikonik di APAC, terkenal dengan gaya bermain yang agresif dan kreatif. Mereka sering tampil memukau di turnamen regional maupun internasional, membawa nama Singapore ke level tinggi dan selalu menjadi favorit fans di setiap kompetisi.', 'https://link.logo/prx.png'),
-(2, 'DRX', 'Korea', 'DRX merupakan tim Korea yang dikenal dengan kedisiplinan luar biasa dan strategi matang. Meskipun menghadapi tekanan dari tim-tim APAC lain, DRX selalu mampu menunjukkan permainan solid yang membuat mereka menjadi salah satu tim terkuat di regional, serta memiliki beberapa pemain bintang yang diakui secara internasional.', 'https://link.logo/drx.png'),
-(3, 'RRQ', 'Indonesia', 'RRQ Valorant adalah wakil Indonesia yang sudah membuktikan diri di berbagai turnamen APAC. Dengan kombinasi pemain muda berbakat dan veteran berpengalaman, mereka mampu menghadirkan permainan yang cepat, taktis, dan sering memberikan momen-momen menegangkan bagi fans. RRQ terus membangun reputasi sebagai tim yang sulit dikalahkan.', 'https://link.logo/rrq.png'),
-(4, 'GENG', 'Malaysia', 'GENG adalah tim Malaysia yang fokus membina pemain muda berbakat untuk bersaing di kancah APAC. Mereka dikenal dengan gaya bermain agresif, kerja sama tim yang solid, dan sering menampilkan kejutan-kejutan menarik di setiap turnamen, menjadikan mereka tim yang selalu diperhitungkan oleh lawan.', 'https://link.logo/geng.png'),
-(5, 'Talon Esports', 'Thailand', 'Talon Esports berasal dari Thailand dan telah lama berkompetisi di berbagai turnamen APAC. Tim ini terkenal dengan roster yang seimbang antara pengalaman dan pemain muda, serta strategi yang fleksibel. Talon sering menjadi sorotan karena kemampuan mereka mengubah alur pertandingan dengan taktik brilian.', 'https://link.logo/talon.png'),
-(6, 'T1', 'Korea', 'T1 adalah tim Korea yang memiliki reputasi kuat dalam hal strategi dan disiplin. Mereka selalu mempersiapkan diri secara matang sebelum setiap turnamen, sehingga mampu mengontrol permainan lawan dan menunjukkan performa stabil. T1 juga sering menjadi pelopor inovasi strategi baru di kancah APAC.', 'https://link.logo/t1.png'),
-(7, 'Nongshim RedForce', 'Korea', 'Nongshim RedForce (NS RedForce) adalah tim Valorant Korea yang agresif dan memiliki pemain muda berbakat. Mereka tampil konsisten di kancah APAC dan selalu menjadi lawan tangguh di setiap turnamen.', NULL),
-(8, 'BOOM Esports', 'Indonesia', 'BOOM Esports adalah salah satu tim Indonesia yang dikenal konsisten dan kompetitif di APAC. Mereka menekankan komunikasi tim yang kuat dan strategi matang, sering menunjukkan performa mengejutkan dalam turnamen regional dan selalu memberikan pertandingan seru bagi para penonton.', 'https://link.logo/boom.png'),
-(9, 'ZETA Division', 'Japan', 'ZETA Division adalah tim Jepang yang memiliki reputasi tinggi berkat pemain muda berbakat dan kerja sama tim yang solid. Mereka sering tampil di turnamen APAC dengan performa menawan, serta dikenal karena ketekunan dalam latihan dan inovasi strategi yang membuat lawan kesulitan.', 'https://link.logo/zeta.png'),
-(10, 'Team Secret', 'Thailand', 'Team Secret dari Thailand dikenal fleksibilitas pemainnya dan gaya bermain kreatif. Tim ini mampu menyesuaikan strategi di tengah pertandingan dan sering menciptakan momen mengejutkan yang membuat mereka menjadi lawan yang tangguh di setiap turnamen APAC.', 'https://link.logo/secret.png'),
-(11, 'Global Esports', 'Malaysia', 'Global Esports adalah tim Malaysia yang fokus mengembangkan pemain muda berbakat. Mereka dikenal mampu menghadirkan permainan cepat dan agresif, dengan kerja sama tim yang baik, serta sering memberikan kejutan pada turnamen-turnamen besar di APAC.', 'https://link.logo/global.png'),
-(12, 'Detonation FocusMe', 'Japan', 'Detonation FocusMe (DFM) adalah tim Jepang yang konsisten menunjukkan performa tinggi di kancah APAC. Mereka terkenal dengan strategi matang, komunikasi yang efektif, dan kemampuan adaptasi yang baik, menjadikan DFM selalu diperhitungkan dalam setiap pertandingan.', 'https://link.logo/dfm.png');
+INSERT INTO `team` (`team_id`, `team_name`, `country`, `description`, `logo`, `group_name`) VALUES
+(1, 'Paper Rex', 'Singapore', 'Paper Rex adalah salah satu tim Valorant paling ikonik di APAC, terkenal dengan gaya bermain yang agresif dan kreatif. Mereka sering tampil memukau di turnamen regional maupun internasional, membawa nama Singapore ke level tinggi dan selalu menjadi favorit fans di setiap kompetisi.', 'https://link.logo/prx.png', 'Group A'),
+(2, 'DRX', 'Korea', 'DRX merupakan tim Korea yang dikenal dengan kedisiplinan luar biasa dan strategi matang. Meskipun menghadapi tekanan dari tim-tim APAC lain, DRX selalu mampu menunjukkan permainan solid yang membuat mereka menjadi salah satu tim terkuat di regional, serta memiliki beberapa pemain bintang yang diakui secara internasional.', 'https://link.logo/drx.png', 'Group B'),
+(3, 'RRQ', 'Indonesia', 'RRQ Valorant adalah wakil Indonesia yang sudah membuktikan diri di berbagai turnamen APAC. Dengan kombinasi pemain muda berbakat dan veteran berpengalaman, mereka mampu menghadirkan permainan yang cepat, taktis, dan sering memberikan momen-momen menegangkan bagi fans. RRQ terus membangun reputasi sebagai tim yang sulit dikalahkan.', 'https://link.logo/rrq.png', 'Group B'),
+(4, 'GENG', 'Malaysia', 'GENG adalah tim Malaysia yang fokus membina pemain muda berbakat untuk bersaing di kancah APAC. Mereka dikenal dengan gaya bermain agresif, kerja sama tim yang solid, dan sering menampilkan kejutan-kejutan menarik di setiap turnamen, menjadikan mereka tim yang selalu diperhitungkan oleh lawan.', 'https://link.logo/geng.png', NULL),
+(5, 'Talon Esports', 'Thailand', 'Talon Esports berasal dari Thailand dan telah lama berkompetisi di berbagai turnamen APAC. Tim ini terkenal dengan roster yang seimbang antara pengalaman dan pemain muda, serta strategi yang fleksibel. Talon sering menjadi sorotan karena kemampuan mereka mengubah alur pertandingan dengan taktik brilian.', 'https://link.logo/talon.png', 'Group B'),
+(6, 'T1', 'Korea', 'T1 adalah tim Korea yang memiliki reputasi kuat dalam hal strategi dan disiplin. Mereka selalu mempersiapkan diri secara matang sebelum setiap turnamen, sehingga mampu mengontrol permainan lawan dan menunjukkan performa stabil. T1 juga sering menjadi pelopor inovasi strategi baru di kancah APAC.', 'https://link.logo/t1.png', 'Group A'),
+(7, 'Nongshim RedForce', 'Korea', 'Nongshim RedForce (NS RedForce) adalah tim Valorant Korea yang agresif dan memiliki pemain muda berbakat. Mereka tampil konsisten di kancah APAC dan selalu menjadi lawan tangguh di setiap turnamen.', NULL, 'Group B'),
+(8, 'BOOM Esports', 'Indonesia', 'BOOM Esports adalah salah satu tim Indonesia yang dikenal konsisten dan kompetitif di APAC. Mereka menekankan komunikasi tim yang kuat dan strategi matang, sering menunjukkan performa mengejutkan dalam turnamen regional dan selalu memberikan pertandingan seru bagi para penonton.', 'https://link.logo/boom.png', 'Group B'),
+(9, 'ZETA Division', 'Japan', 'ZETA Division adalah tim Jepang yang memiliki reputasi tinggi berkat pemain muda berbakat dan kerja sama tim yang solid. Mereka sering tampil di turnamen APAC dengan performa menawan, serta dikenal karena ketekunan dalam latihan dan inovasi strategi yang membuat lawan kesulitan.', 'https://link.logo/zeta.png', 'Group A'),
+(10, 'Team Secret', 'Thailand', 'Team Secret dari Thailand dikenal fleksibilitas pemainnya dan gaya bermain kreatif. Tim ini mampu menyesuaikan strategi di tengah pertandingan dan sering menciptakan momen mengejutkan yang membuat mereka menjadi lawan yang tangguh di setiap turnamen APAC.', 'https://link.logo/secret.png', 'Group A'),
+(11, 'Global Esports', 'Malaysia', 'Global Esports adalah tim Malaysia yang fokus mengembangkan pemain muda berbakat. Mereka dikenal mampu menghadirkan permainan cepat dan agresif, dengan kerja sama tim yang baik, serta sering memberikan kejutan pada turnamen-turnamen besar di APAC.', 'https://link.logo/global.png', 'Group A'),
+(12, 'Detonation FocusMe', 'Japan', 'Detonation FocusMe (DFM) adalah tim Jepang yang konsisten menunjukkan performa tinggi di kancah APAC. Mereka terkenal dengan strategi matang, komunikasi yang efektif, dan kemampuan adaptasi yang baik, menjadikan DFM selalu diperhitungkan dalam setiap pertandingan.', 'https://link.logo/dfm.png', 'Group B');
 
 -- --------------------------------------------------------
 
@@ -189,6 +240,27 @@ CREATE TABLE `team_stats` (
   `last_updates` timestamp NOT NULL DEFAULT current_timestamp(),
   `event` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`) VALUES
+(1, 'admin', 'admin@val.id', 'admin', '2025-11-24 03:36:29');
 
 --
 -- Indexes for dumped tables
@@ -230,6 +302,13 @@ ALTER TABLE `team_stats`
   ADD KEY `fk_teamstats_team` (`team_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -243,7 +322,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `match_esports`
 --
 ALTER TABLE `match_esports`
-  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `players`
@@ -262,6 +341,12 @@ ALTER TABLE `team`
 --
 ALTER TABLE `team_stats`
   MODIFY `stat_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
