@@ -1,6 +1,14 @@
 <?php 
 include 'koneksi.php';
 
+session_start();
+
+if (!isset($_SESSION['username'])) {
+
+    header("Location: login.php");
+    exit();
+}
+
 $id_tim = isset($_GET['id']) ? $_GET['id'] : 1;
 
 // Ambil Data Tim
@@ -62,7 +70,7 @@ $result_players = $query_players->get_result();
     width: 300px;
     height: 300px;
     border-radius: 12px;
-    overflow: hidden; /* Penting: Biar gambar gak keluar kotak */
+    overflow: hidden; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     background: #1b2733;
     cursor: pointer;
@@ -117,8 +125,8 @@ $result_players = $query_players->get_result();
   
   /* Info Tambahan (Awalnya ngumpet di bawah) */
   .p-details {
-    opacity: 0; /* Transparan dulu */
-    transition: opacity 0.3s 0.1s; /* Delay dikit biar smooth */
+    opacity: 0; 
+    transition: opacity 0.3s 0.1s; 
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 10px;
     font-size: 13px;
@@ -148,8 +156,8 @@ $result_players = $query_players->get_result();
     <a href="home.php">Home</a>
     <a href="tim.php" style="color:#ff4655;">Tim</a>
     <a href="match.php">Jadwal</a>
-    <a href="#">Tiket</a>
-    <a href="#">Statistik</a>
+    <a href="berita.php">Berita</a>
+    <a href="logout.php">Logout</a>
   </nav>
 </header>
 

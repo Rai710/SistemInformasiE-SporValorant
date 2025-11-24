@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2025 at 03:03 PM
+-- Generation Time: Nov 24, 2025 at 04:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -136,18 +136,18 @@ INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, 
 (68, 8, 9, 1, 2, '2025-08-09', 2, 'Group Stage', NULL),
 (69, 3, 10, 2, 1, '2025-08-10', 2, 'Group Stage', NULL),
 (70, 6, 12, 2, 0, '2025-08-10', 2, 'Group Stage', NULL),
-(71, 5, 7, 2, 0, '2025-08-13', 1, 'Playoffs', NULL),
-(72, 3, 6, 1, 2, '2025-08-13', 1, 'Playoffs', NULL),
-(73, 2, 5, 1, 2, '2025-08-14', 1, 'Playoffs', NULL),
-(74, 1, 6, 2, 0, '2025-08-14', 1, 'Playoffs', NULL),
-(75, 7, 12, 2, 0, '2025-08-15', 1, 'Playoffs', NULL),
-(76, 3, 4, 2, 1, '2025-08-15', 1, 'Playoffs', NULL),
-(77, 6, 7, 2, 0, '2025-08-16', 1, 'Playoffs', NULL),
-(78, 2, 3, 0, 2, '2025-08-16', 1, 'Playoffs', NULL),
-(79, 5, 1, 0, 2, '2025-08-17', 1, 'Playoffs', NULL),
-(80, 6, 3, 1, 2, '2025-08-17', 1, 'Playoffs', NULL),
-(81, 5, 3, 2, 3, '2025-08-30', 1, 'Playoffs', NULL),
-(82, 1, 3, 3, 1, '2025-08-31', 1, 'Grand Final', NULL);
+(71, 5, 7, 2, 0, '2025-08-13', 2, 'Playoffs', NULL),
+(72, 3, 6, 1, 2, '2025-08-13', 2, 'Playoffs', NULL),
+(73, 2, 5, 1, 2, '2025-08-14', 2, 'Playoffs', NULL),
+(74, 1, 6, 2, 0, '2025-08-14', 2, 'Playoffs', NULL),
+(75, 7, 12, 2, 0, '2025-08-15', 2, 'Playoffs', NULL),
+(76, 3, 4, 2, 1, '2025-08-15', 2, 'Playoffs', NULL),
+(77, 6, 7, 2, 0, '2025-08-16', 2, 'Playoffs', NULL),
+(78, 2, 3, 0, 2, '2025-08-16', 2, 'Playoffs', NULL),
+(79, 5, 1, 0, 2, '2025-08-17', 2, 'Playoffs', NULL),
+(80, 6, 3, 1, 2, '2025-08-17', 2, 'Playoffs', NULL),
+(81, 5, 3, 2, 3, '2025-08-30', 2, 'Playoffs', NULL),
+(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL);
 
 -- --------------------------------------------------------
 

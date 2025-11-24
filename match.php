@@ -1,6 +1,12 @@
 <?php
-session_start();
+
 include "koneksi.php";
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
 // LOGIKA PILIH STAGE
 $selected_stage = isset($_GET['stage']) ? $_GET['stage'] : 1; 
@@ -191,7 +197,6 @@ function getMatch($data, $index) {
   .match-box .t-info { width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .match-box .t-logo { width: 24px; height: 24px; flex-shrink: 0; margin-right: 10px; }
 
-  /* KONEKTOR SEDERHANA TAPI NYAMBUNG */
   .pair-wrapper { display: flex; flex-direction: column; gap: 20px; position: relative; justify-content: center; }
 
   /* Garis keluar ke kanan */
@@ -238,8 +243,8 @@ function getMatch($data, $index) {
             <a href="match.php?stage=2">STAGE 2</a>
         </div>
     </div>
-    <a href="#" class="nav-link">Tiket</a>
-    <a href="#" class="nav-link">Statistik</a>
+    <a href="berita.php" class="nav-link">Berita</a>
+    <a href="logout.php" class="nav-link">Logout</a>
   </nav>
 </header>
 
