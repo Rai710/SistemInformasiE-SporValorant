@@ -165,11 +165,6 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) OR
       .stat-divider { width: 100px; height: 1px; }
   }
 
-  /* FOOTER */
-  footer { background: #000; border-top: 2px solid #ff4655; padding: 40px 20px; text-align: center; }
-  .footer-links a { color: #888; text-decoration: none; margin: 0 15px; font-size: 14px; font-weight: 600; transition: 0.3s; }
-  .footer-links a:hover { color: #ff4655; }
-  .copyright { font-size: 12px; color: #555; margin-top: 20px; }
 
 </style>
 </head>
@@ -311,12 +306,6 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) OR
     </div>
 
 </div>
-
-<footer>
-    <div class="footer-logo"><img src="image/logoVCT.png" width="100" style="opacity:0.6;"></div>
-    <div class="footer-links"><a href="#">HOME</a><a href="#">TEAMS</a><a href="#">SCHEDULE</a></div>
-    <div class="copyright">&copy; 2025 VCT PACIFIC. Riot Games, Inc.</div>
-</footer>
 
 <script>
     let current = 0; const slides = document.querySelectorAll('.slide');
