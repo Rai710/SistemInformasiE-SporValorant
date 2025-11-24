@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2025 at 04:00 PM
+-- Generation Time: Nov 24, 2025 at 05:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,36 +66,36 @@ CREATE TABLE `match_esports` (
 --
 
 INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, `team2_score`, `match_date`, `event_id`, `stage`, `group_name`) VALUES
-(1, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', 'B'),
-(2, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', 'A'),
-(3, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', 'B'),
-(4, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', 'B'),
-(5, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', 'B'),
-(6, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', 'B'),
-(7, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', 'A'),
-(8, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', 'B'),
-(9, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', 'A'),
-(10, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', 'B'),
-(11, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', 'B'),
-(12, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', 'B'),
-(13, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', 'B'),
-(14, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', 'B'),
-(15, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', 'B'),
-(16, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', 'B'),
-(17, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', 'B'),
-(18, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', 'A'),
-(19, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', 'B'),
-(20, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', 'B'),
-(21, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', 'B'),
-(22, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', 'A'),
-(23, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', 'B'),
-(24, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', 'B'),
-(25, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', 'A'),
-(26, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', 'B'),
-(27, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', 'B'),
-(28, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', 'B'),
-(29, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', 'B'),
-(30, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', 'B'),
+(1, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', NULL),
+(2, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', NULL),
+(3, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', NULL),
+(4, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', NULL),
+(5, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', NULL),
+(6, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', NULL),
+(7, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', NULL),
+(8, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', NULL),
+(9, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', NULL),
+(10, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', NULL),
+(11, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', NULL),
+(12, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', NULL),
+(13, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', NULL),
+(14, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', NULL),
+(15, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', NULL),
+(16, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', NULL),
+(17, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', NULL),
+(18, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', NULL),
+(19, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', NULL),
+(20, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', NULL),
+(21, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', NULL),
+(22, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', NULL),
+(23, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', NULL),
+(24, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', NULL),
+(25, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', NULL),
+(26, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', NULL),
+(27, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', NULL),
+(28, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', NULL),
+(29, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', NULL),
+(30, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', NULL),
 (31, 5, 4, 1, 2, '2025-04-26', 1, 'Playoffs', NULL),
 (32, 2, 6, 2, 0, '2025-04-26', 1, 'Playoffs', NULL),
 (33, 8, 4, 0, 2, '2025-04-27', 1, 'Playoffs', NULL),
@@ -147,7 +147,9 @@ INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, 
 (79, 5, 1, 0, 2, '2025-08-17', 2, 'Playoffs', NULL),
 (80, 6, 3, 1, 2, '2025-08-17', 2, 'Playoffs', NULL),
 (81, 5, 3, 2, 3, '2025-08-30', 2, 'Playoffs', NULL),
-(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL);
+(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL),
+(83, 4, 10, 2, 0, '2025-08-01', 2, 'Group Stage', NULL),
+(84, 5, 6, 2, 0, '2025-08-01', 2, 'Group Stage', NULL);
 
 -- --------------------------------------------------------
 
@@ -300,7 +302,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`) VALUES
-(1, 'admin', 'admin@val.id', 'admin', '2025-11-24 03:36:29');
+(1, 'admin', 'admin@val.id', 'admin', '2025-11-24 03:36:29'),
+(2, 'raihan', 'ad@gmail.com', 'admin', '2025-11-24 15:17:47');
 
 --
 -- Indexes for dumped tables
@@ -362,7 +365,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `match_esports`
 --
 ALTER TABLE `match_esports`
-  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `players`
@@ -386,7 +389,7 @@ ALTER TABLE `team_stats`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
