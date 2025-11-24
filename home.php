@@ -36,11 +36,20 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) OR
   }
 
   /* === HEADER === */
-  header { background: #000; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; position: sticky; top: 0; z-index: 100; }
-  .logos img { vertical-align: middle; margin-right: 10px; }
-  header nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+  header { background: #000; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; }
+  header nav { display: flex; align-items: center; }
+  header nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
   header nav a:hover { color: #ff4655; }
 
+  /* DROPDOWN */
+  .dropdown { position: relative; display: inline-block; margin-left: 20px; }
+  .dropbtn { color: white; font-weight: bold; font-size: 14px; text-transform: uppercase; text-decoration: none; cursor: pointer; padding: 10px 0; }
+  .dropbtn:hover { color: #ff4655; }
+  .dropdown-content { display: none; position: absolute; background-color: #1b2733; min-width: 140px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); z-index: 100; border: 1px solid #ff4655; border-radius: 4px; top: 100%; left: 0; }
+  .dropdown-content a { color: white; padding: 12px 16px; text-decoration: none; display: block; margin: 0; font-size: 13px; text-align: left; border-bottom: 1px solid #333; }
+  .dropdown-content a:last-child { border-bottom: none; }
+  .dropdown-content a:hover { background-color: #ff4655; color: white; }
+  .dropdown:hover .dropdown-content { display: block; }
   /* === SLIDER === */
   .hero-section { position: relative; width: 100%; height: 600px; overflow: hidden; border-bottom: 1px solid #333; }
   .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
@@ -169,7 +178,19 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) OR
 
 <header>
   <div class="logos"><img src="image/logoValo.png" width="80"><img src="image/logoVCT.png" width="80"></div>
-  <nav><a href="home.php" style="color:#ff4655;">Home</a><a href="tim.php">Tim</a><a href="match.php">Jadwal</a><a href="berita.php">Berita</a><a href="logout.php">Logout</a></nav>
+  <nav>
+    <a href="home.php" style="color:#ff4655;">Home</a>
+    <a href="tim.php">Tim</a>
+   <div class="dropdown">
+        <a href="#" class="dropbtn">Jadwal ▾</a>
+        <div class="dropdown-content">
+            <a href="match.php?stage=1">STAGE 1</a>
+            <a href="match.php?stage=2">STAGE 2</a>
+        </div>
+    </div>
+    <a href="berita.php" class="nav-link">Berita</a>
+    <a href="logout.php" class="nav-link">Logout</a>
+  </nav>
 </header>
 
 <div class="hero-section">

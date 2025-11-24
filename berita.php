@@ -133,7 +133,7 @@ $berita = [
         </div>
     </div>
     <a href="berita.php" style="color:#ff4655;" class="nav-link">Berita</a>
-    <a href="#" class="nav-link">Statistik</a>
+    <a href="logout.php" class="nav-link">Logout</a>
   </nav>
 </header>
 
