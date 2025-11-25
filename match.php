@@ -1,3 +1,4 @@
+
 <?php
 
 include "koneksi.php";
@@ -8,6 +9,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// LOGIKA PILIH STAGE
 $selected_stage = isset($_GET['stage']) ? $_GET['stage'] : 1; 
 $stage_name = ($selected_stage == 1) ? "STAGE 1" : "STAGE 2";
 
@@ -20,7 +22,7 @@ $matches_by_week = [
 ];
 $playoff = []; 
 
-
+// QUERY MATCH
 $sql = "SELECT m.*, 
                t1.team_name as team1_name, t1.logo as team1_logo,
                t2.team_name as team2_name, t2.logo as team2_logo
@@ -55,7 +57,7 @@ if($result && $result->num_rows > 0){
     }
 }
 
-
+// QUERY TEAM & KLASEMEN
 $sql_teams = "SELECT * FROM team ORDER BY team_name ASC";
 $res_teams = $koneksi->query($sql_teams);
 $team_list = [];
@@ -110,7 +112,28 @@ function getMatch($data, $index) {
   :root { --conn-color: #555; --conn-width: 2px; }
 
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-  body { margin: 0; background-color: #0f1923; color: #ece8e1; padding-bottom: 80px; overflow-x: hidden; } 
+   body { 
+    margin: 0; 
+    padding: 0; 
+    /* BACKGROUND KEREN (Sama kayak match.php) */
+    background-image: 
+        linear-gradient(
+            to bottom, 
+            rgba(15, 25, 35, 1) 0%,    
+            rgba(15, 25, 35, 0.9) 60%, 
+            rgba(15, 25, 35, 0.5) 100% 
+        ),
+        url('image/bg.jpg'); /* Pastikan ada file bg.jpg di folder image */
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    
+    color: #ece8e1; 
+    padding-bottom: 80px; 
+    overflow-x: hidden; 
+  } 
 
   /* HEADER */
   header { background: #000; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; }
@@ -198,26 +221,31 @@ function getMatch($data, $index) {
 
   .pair-wrapper { display: flex; flex-direction: column; gap: 20px; position: relative; justify-content: center; }
 
+  /* Garis keluar ke kanan */
   .connector-right::after {
       content: ''; position: absolute; right: -40px; top: 50%; width: 40px; height: 2px; background: #555; z-index: 0;
   }
-
+  /* Garis masuk dari kiri */
   .connector-left::before {
       content: ''; position: absolute; left: -40px; top: 50%; width: 40px; height: 2px; background: #555; z-index: 0;
   }
   
+  /* Garis Vertikal + Cabang */
   .pair-wrapper::after {
       content: ''; position: absolute; right: -40px; top: 24%; bottom: 24%; width: 2px; background: #555;
   }
   
+  /* Jembatan Horizontal dari titik tengah pair */
   .pair-wrapper::before {
       content: ''; position: absolute; right: -80px; top: 50%; width: 40px; height: 2px; background: #555;
   }
 
+  /* Garis Khusus Grand Final */
   .grand-final-column { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; position: relative; margin-left: 40px; }
   .gf-card { border: 2px solid #ffd700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); height: 110px; }
   .gf-header { color: #ffd700 !important; background: rgba(255, 215, 0, 0.1) !important; text-align:center; display:block !important; font-size:11px; padding: 5px 0;}
   
+  /* Tiang Vertikal GF */
   .gf-pole { position: absolute; left: -60px; top: 50%; transform: translateY(-50%); height: 500px; width: 2px; background: #555; }
   .gf-connector { position: absolute; left: -60px; top: 50%; width: 60px; height: 2px; background: #ffd700; }
 
