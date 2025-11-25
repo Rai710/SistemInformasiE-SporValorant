@@ -115,7 +115,6 @@ function getMatch($data, $index) {
    body { 
     margin: 0; 
     padding: 0; 
-    /* BACKGROUND KEREN (Sama kayak match.php) */
     background-image: 
         linear-gradient(
             to bottom, 
@@ -123,7 +122,7 @@ function getMatch($data, $index) {
             rgba(15, 25, 35, 0.9) 60%, 
             rgba(15, 25, 35, 0.5) 100% 
         ),
-        url('image/bg.jpg'); /* Pastikan ada file bg.jpg di folder image */
+        url('image/bg.jpg');
 
     background-repeat: no-repeat;
     background-position: center center;
@@ -207,7 +206,7 @@ function getMatch($data, $index) {
 
   .round-column { 
       display: flex; flex-direction: column; 
-      gap: 40px; /* Jarak antar match dalam satu kolom */
+      gap: 40px;
       width: 240px; flex-shrink: 0; position: relative; justify-content: center;
   }
   
@@ -221,31 +220,26 @@ function getMatch($data, $index) {
 
   .pair-wrapper { display: flex; flex-direction: column; gap: 20px; position: relative; justify-content: center; }
 
-  /* Garis keluar ke kanan */
   .connector-right::after {
       content: ''; position: absolute; right: -40px; top: 50%; width: 40px; height: 2px; background: #555; z-index: 0;
   }
-  /* Garis masuk dari kiri */
+
   .connector-left::before {
       content: ''; position: absolute; left: -40px; top: 50%; width: 40px; height: 2px; background: #555; z-index: 0;
   }
   
-  /* Garis Vertikal + Cabang */
   .pair-wrapper::after {
       content: ''; position: absolute; right: -40px; top: 24%; bottom: 24%; width: 2px; background: #555;
   }
   
-  /* Jembatan Horizontal dari titik tengah pair */
   .pair-wrapper::before {
       content: ''; position: absolute; right: -80px; top: 50%; width: 40px; height: 2px; background: #555;
   }
 
-  /* Garis Khusus Grand Final */
   .grand-final-column { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; position: relative; margin-left: 40px; }
   .gf-card { border: 2px solid #ffd700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); height: 110px; }
   .gf-header { color: #ffd700 !important; background: rgba(255, 215, 0, 0.1) !important; text-align:center; display:block !important; font-size:11px; padding: 5px 0;}
   
-  /* Tiang Vertikal GF */
   .gf-pole { position: absolute; left: -60px; top: 50%; transform: translateY(-50%); height: 500px; width: 2px; background: #555; }
   .gf-connector { position: absolute; left: -60px; top: 50%; width: 60px; height: 2px; background: #ffd700; }
 
