@@ -77,7 +77,6 @@ if (!isset($_SESSION['username'])) {
 
 .teams-container {
     display: grid;
-    /* KUNCI: repeat(4, 1fr) artinya 4 kolom dengan lebar sama */
     grid-template-columns: repeat(4, 1fr); 
     
     gap: 30px;               
@@ -85,7 +84,7 @@ if (!isset($_SESSION['username'])) {
     margin: auto;
     justify-content: center;
   }
-  /* RESPONSIF: Kalau layar mengecil, kolomnya berkurang */
+
   @media (max-width: 1024px) { 
       .teams-container { grid-template-columns: repeat(3, 1fr); } 
   }
@@ -108,7 +107,6 @@ if (!isset($_SESSION['username'])) {
     filter: drop-shadow(0 15px 20px rgba(255, 70, 85, 0.4)); 
   }
 
-  /* Header Merah */
   .team-header {
     background-color: #ff4655; 
     color: white;
@@ -125,7 +123,6 @@ if (!isset($_SESSION['username'])) {
   }
 
   .team-body {
-    /* Gradasi Spotlight */
     background: radial-gradient(circle, #34495e 0%, #1b2733 80%);
     height: 240px;
     display: flex;
@@ -133,7 +130,6 @@ if (!isset($_SESSION['username'])) {
     align-items: center;
     position: relative;
     
-    /* BENTUK LANCIP (Clip Path) */
     clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
     
     border-top: 1px solid rgba(255,255,255,0.1);

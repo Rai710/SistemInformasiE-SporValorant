@@ -79,7 +79,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .section-title span { color: #ff4655; }
   .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #ff4655; margin: 15px auto 0; }
 
-  /* === NEW: PACIFIC FACTS (PENGGANTI COUNTDOWN) === */
+  /* === NEW: PACIFIC FACTS === */
   .facts-grid { 
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; 
   }
@@ -151,7 +151,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .meta-role { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
   .meta-pick { position: absolute; top: 20px; right: 20px; background: #fff; color: #000; font-weight: 800; padding: 5px 10px; border-radius: 4px; font-size: 12px; }
 
-  /* === 5. TOURNAMENT STATS === */
+  /* === 4. TOURNAMENT STATS === */
   .stats-banner {
       background: rgba(255,255,255,0.03);
       padding: 40px; border-radius: 12px; border: 1px solid #333;

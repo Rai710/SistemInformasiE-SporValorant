@@ -1,5 +1,4 @@
 <?php
-// Daftar berita manual tanpa database
 $berita = [
     [
         "id" => 1,
@@ -45,7 +44,6 @@ $berita = [
   body { 
     margin: 0; 
     padding: 0; 
-    /* BACKGROUND KEREN (Sama kayak match.php) */
     background-image: 
         linear-gradient(
             to bottom, 
@@ -53,7 +51,7 @@ $berita = [
             rgba(15, 25, 35, 0.9) 60%, 
             rgba(15, 25, 35, 0.5) 100% 
         ),
-        url('image/bg.jpg'); /* Pastikan ada file bg.jpg di folder image */
+        url('image/bg.jpg');
 
     background-repeat: no-repeat;
     background-position: center center;

@@ -41,7 +41,6 @@ $result_players = $query_players->get_result();
   body { 
     margin: 0; 
     padding: 0; 
-    /* BACKGROUND KEREN (Sama kayak match.php) */
     background-image: 
         linear-gradient(
             to bottom, 
@@ -136,13 +135,11 @@ $result_players = $query_players->get_result();
     padding: 20px;
     color: white;
     
-    /* KUNCI ANIMASI: Geser ke bawah biar cuma keliatan namanya doang */
     transform: translateY(65px); 
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .drawer-card:hover .drawer-info {
-    /* Pas hover, balikin ke posisi normal (Slide Up) */
     transform: translateY(0);
     background: linear-gradient(to top, #0f1923 40%, rgba(15, 25, 35, 0.9) 100%);
   }
@@ -151,7 +148,6 @@ $result_players = $query_players->get_result();
   .p-ign { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; line-height: 1; margin-bottom: 5px; }
   .p-role { font-size: 14px; color: #ff4655; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; display: block; }
   
-  /* Info Tambahan (Awalnya ngumpet di bawah) */
   .p-details {
     opacity: 0; 
     transition: opacity 0.3s 0.1s; 
@@ -162,7 +158,7 @@ $result_players = $query_players->get_result();
   }
 
   .drawer-card:hover .p-details {
-    opacity: 1; /* Muncul pas hover */
+    opacity: 1;
   }
 
   .detail-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
