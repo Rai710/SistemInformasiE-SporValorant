@@ -1,3 +1,4 @@
+
 <?php 
 include 'koneksi.php';
 
@@ -35,19 +36,46 @@ $result_players = $query_players->get_result();
 
 <style>
   /* BASIC SETUP */
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-  
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+
   body { 
-    margin: 0; padding: 0; 
-    background-image: linear-gradient(to bottom, rgba(15, 25, 35, 1) 0%, rgba(15, 25, 35, 0.9) 60%, rgba(15, 25, 35, 0.5) 100%), url('image/bg.jpg'); 
-    background-repeat: no-repeat; background-position: center center; background-attachment: fixed; background-size: cover;
-    color: #ece8e1; padding-bottom: 80px; overflow-x: hidden; 
+    margin: 0; 
+    padding: 0; 
+    /* BACKGROUND KEREN (Sama kayak match.php) */
+    background-image: 
+        linear-gradient(
+            to bottom, 
+            rgba(15, 25, 35, 1) 0%,    
+            rgba(15, 25, 35, 0.9) 60%, 
+            rgba(15, 25, 35, 0.5) 100% 
+        ),
+        url('image/bg.jpg'); /* Pastikan ada file bg.jpg di folder image */
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    
+    color: #ece8e1; 
+    padding-bottom: 80px; 
+    overflow-x: hidden; 
   }
 
   /* HEADER */
-  header { background: #000; color: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; }
-  header nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; transition:0.3s; }
+  header { background: #000; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; }
+  header nav { display: flex; align-items: center; }
+  header nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
   header nav a:hover { color: #ff4655; }
+
+    /* DROPDOWN */
+  .dropdown { position: relative; display: inline-block; margin-left: 20px; }
+  .dropbtn { color: white; font-weight: bold; font-size: 14px; text-transform: uppercase; text-decoration: none; cursor: pointer; padding: 10px 0; }
+  .dropbtn:hover { color: #ff4655; }
+  .dropdown-content { display: none; position: absolute; background-color: #1b2733; min-width: 140px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); z-index: 100; border: 1px solid #ff4655; border-radius: 4px; top: 100%; left: 0; }
+  .dropdown-content a { color: white; padding: 12px 16px; text-decoration: none; display: block; margin: 0; font-size: 13px; text-align: left; border-bottom: 1px solid #333; }
+  .dropdown-content a:last-child { border-bottom: none; }
+  .dropdown-content a:hover { background-color: #ff4655; color: white; }
+  .dropdown:hover .dropdown-content { display: block; }
 
   /* TEAM INFO */
   .header-team { text-align: center; padding: 60px 20px 40px; animation: fadeIn 1s; }
@@ -152,12 +180,18 @@ $result_players = $query_players->get_result();
     <img src="image/logoValo.png" width="80">
     <img src="image/logoVCT.png" width="80">
   </div>
-  <nav>
-    <a href="home.php">Home</a>
-    <a href="tim.php" style="color:#ff4655;">Tim</a>
-    <a href="match.php">Jadwal</a>
-    <a href="berita.php">Berita</a>
-    <a href="logout.php">Logout</a>
+<nav>
+    <a href="home.php" class="nav-link">Home</a>
+    <a href="tim.php" style="color:#ff4655;" class="nav-link">Tim</a>
+    <div class="dropdown">
+        <a href="#" class="dropbtn">Jadwal ▾</a>
+        <div class="dropdown-content">
+            <a href="match.php?stage=1">STAGE 1</a>
+            <a href="match.php?stage=2">STAGE 2</a>
+        </div>
+    </div>
+    <a href="berita.php" class="nav-link">Berita</a>
+    <a href="logout.php" class="nav-link">Logout</a>
   </nav>
 </header>
 
