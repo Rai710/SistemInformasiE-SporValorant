@@ -1,3 +1,4 @@
+
 <?php 
 include 'koneksi.php';
 session_start();
@@ -17,7 +18,7 @@ $q_mvp2 = $koneksi->query("SELECT p.*, t.team_name, t.logo as team_logo FROM pla
 $mvp2 = $q_mvp2->fetch_assoc();
 
 // --- 2. DATA CHAMPIONS (TOP 4) ---
-$q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) ORDER BY team_name ASC");
+$q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) ORDER BY team_name ASC");
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) OR
     margin: 0; padding: 0; 
     background-image: linear-gradient(to bottom, rgba(15, 25, 35, 1) 0%, rgba(15, 25, 35, 0.9) 50%, rgba(15, 25, 35, 1) 100%), url('image/bg.jpg');
     background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
-    color: #ece8e1; padding-bottom: 0; overflow-x: hidden; 
+    color: #ece8e1; padding-bottom: 0; overflow-x: hidden;
   }
 
   /* === HEADER === */
@@ -50,6 +51,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 4) OR
   .dropdown-content a:last-child { border-bottom: none; }
   .dropdown-content a:hover { background-color: #ff4655; color: white; }
   .dropdown:hover .dropdown-content { display: block; }
+  
   /* === SLIDER === */
   .hero-section { position: relative; width: 100%; height: 600px; overflow: hidden; border-bottom: 1px solid #333; }
   .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
