@@ -80,7 +80,7 @@
         }
         ?>
 
-        <form action="registerCon.php" method="POST">
+        <form action="action/registerCon.php" method="POST">
 
             <!-- Nama -->
             <div class="mb-3">

@@ -65,7 +65,7 @@
 
     <h3 class="login-title">Sign In</h3>
 
-    <form action="loginCon.php" method="POST">
+    <form action="action/loginCon.php" method="POST">
 
         <!-- Username -->
         <div class="mb-3">

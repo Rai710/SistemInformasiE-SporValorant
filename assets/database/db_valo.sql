@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2025 at 05:00 PM
+-- Generation Time: Nov 27, 2025 at 07:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -293,17 +293,24 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `riot_id` varchar(50) DEFAULT NULL,
+  `discord_username` varchar(50) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `role` enum('admin','user') DEFAULT 'user',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `bio` text DEFAULT NULL,
+  `avatar_image` varchar(255) DEFAULT 'default_agent.png',
+  `favorite_agent` enum('Astra','Breach','Brimstone','Chamber','Clove','Cypher','Deadlock','Fade','Gekko','Harbor','Iso','Jett','KAY/O','Killjoy','Neon','Omen','Phoenix','Raze','Reyna','Sage','Skye','Sova','Viper','Vyse','Yoru') DEFAULT NULL,
+  `rank_tier` enum('Unranked','Iron','Bronze','Silver','Gold','Platinum','Diamond','Ascendant','Immortal','Radiant') DEFAULT 'Unranked'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`) VALUES
-(1, 'admin', 'admin@val.id', 'admin', '2025-11-24 03:36:29'),
-(2, 'raihan', 'ad@gmail.com', 'admin', '2025-11-24 15:17:47');
+INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `favorite_agent`, `rank_tier`) VALUES
+(2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Jett', 'Bronze'),
+(3, 'admin', 'admin@val.id', '1', '', 'adadad', 'admin', '2025-11-25 07:47:37', '', 'assets/images/6927e9b941f88.png', 'Reyna', 'Ascendant');
 
 --
 -- Indexes for dumped tables
@@ -389,7 +396,7 @@ ALTER TABLE `team_stats`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

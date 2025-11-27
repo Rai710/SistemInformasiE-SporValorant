@@ -1,6 +1,6 @@
 
 <?php 
-include 'koneksi.php';
+include 'config/koneksi.php';
 session_start();
 
 if (!isset($_SESSION['username'])) {
@@ -23,36 +23,14 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
 
 <!DOCTYPE html>
 <html lang="id">
-<head>
+    <head>
 <meta charset="UTF-8" />
 <title>VCT Pacific - Home</title>
+   <link rel="stylesheet" href="assets/css/body.css">
 <style>
-  /* === GLOBAL === */
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-  body { 
-    margin: 0; padding: 0; 
-    background-image: linear-gradient(to bottom, rgba(15, 25, 35, 1) 0%, rgba(15, 25, 35, 0.9) 50%, rgba(15, 25, 35, 1) 100%), url('image/bg.jpg');
-    background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
-    color: #ece8e1; padding-bottom: 0; overflow-x: hidden;
-  }
-
-  /* === HEADER === */
-  header { background: #000; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; }
-  header nav { display: flex; align-items: center; }
-  header nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-  header nav a:hover { color: #ff4655; }
-
-  /* DROPDOWN */
-  .dropdown { position: relative; display: inline-block; margin-left: 20px; }
-  .dropbtn { color: white; font-weight: bold; font-size: 14px; text-transform: uppercase; text-decoration: none; cursor: pointer; padding: 10px 0; }
-  .dropbtn:hover { color: #ff4655; }
-  .dropdown-content { display: none; position: absolute; background-color: #1b2733; min-width: 140px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); z-index: 100; border: 1px solid #ff4655; border-radius: 4px; top: 100%; left: 0; }
-  .dropdown-content a { color: white; padding: 12px 16px; text-decoration: none; display: block; margin: 0; font-size: 13px; text-align: left; border-bottom: 1px solid #333; }
-  .dropdown-content a:last-child { border-bottom: none; }
-  .dropdown-content a:hover { background-color: #ff4655; color: white; }
-  .dropdown:hover .dropdown-content { display: block; }
-  
-  /* === SLIDER === */
+    
+ 
+    /* SLIDER */
   .hero-section { position: relative; width: 100%; height: 600px; overflow: hidden; border-bottom: 1px solid #333; }
   .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
   .slide.active { opacity: 1; }
@@ -73,13 +51,13 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .ticker-item { display: inline-block; padding: 0 30px; font-size: 14px; font-weight: bold; color: white; text-transform: uppercase; }
   @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-  /* === CONTAINER & TITLES === */
+  /*  CONTAINER & TITLES  */
   .content-container { max-width: 1300px; margin: 80px auto; padding: 0 20px; }
   .section-title { font-size: 36px; font-weight: 900; text-transform: uppercase; margin-bottom: 40px; text-align: center; color: #fff; letter-spacing: 2px; position: relative; }
   .section-title span { color: #ff4655; }
   .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #ff4655; margin: 15px auto 0; }
 
-  /* === NEW: PACIFIC FACTS === */
+  /*  NEW: PACIFIC FACTS */
   .facts-grid { 
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; 
   }
@@ -96,7 +74,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .fact-desc { font-size: 14px; color: #aaa; line-height: 1.6; }
 
 
-  /* === 1. CHAMPIONS QUALIFIED === */
+  /*  1. CHAMPIONS QUALIFIED  */
   .qualified-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 100px; }
   .q-card {
       background: linear-gradient(145deg, #1b2733 0%, #141e26 100%);
@@ -110,7 +88,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .q-name { font-size: 22px; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 10px; }
   .q-badge { background: rgba(255, 215, 0, 0.1); color: #ffd700; font-size: 11px; font-weight: bold; padding: 6px 15px; border-radius: 20px; text-transform: uppercase; border: 1px solid #ffd700; }
 
-  /* === 2. MVP SECTION === */
+  /*  2. MVP SECTION  */
   .mvp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 100px; }
   .mvp-card {
       background: #1b2733; border-radius: 12px; overflow: hidden; display: flex;
@@ -135,7 +113,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .stat-val { font-size: 24px; font-weight: 800; color: #ff4655; display: block; }
   .stat-lbl { font-size: 10px; color: #888; text-transform: uppercase; }
   
-  /* === 3. META WATCH === */
+  /*  3. META WATCH */
   .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
   .meta-card { 
       position: relative; height: 400px; background: #1b2733; border-radius: 8px; overflow: hidden; 
@@ -151,7 +129,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .meta-role { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
   .meta-pick { position: absolute; top: 20px; right: 20px; background: #fff; color: #000; font-weight: 800; padding: 5px 10px; border-radius: 4px; font-size: 12px; }
 
-  /* === 4. TOURNAMENT STATS === */
+  /*  5. TOURNAMENT STATS */
   .stats-banner {
       background: rgba(255,255,255,0.03);
       padding: 40px; border-radius: 12px; border: 1px solid #333;
@@ -173,22 +151,9 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
 
 <body>
 
-<header>
-  <div class="logos"><img src="image/logoValo.png" width="80"><img src="image/logoVCT.png" width="80"></div>
-  <nav>
-    <a href="home.php" style="color:#ff4655;">Home</a>
-    <a href="tim.php">Tim</a>
-   <div class="dropdown">
-        <a href="#" class="dropbtn">Jadwal ▾</a>
-        <div class="dropdown-content">
-            <a href="match.php?stage=1">STAGE 1</a>
-            <a href="match.php?stage=2">STAGE 2</a>
-        </div>
-    </div>
-    <a href="berita.php" class="nav-link">Berita</a>
-    <a href="logout.php" class="nav-link">Logout</a>
-  </nav>
-</header>
+
+
+<?php include 'config/navbar.php'; ?>
 
 <div class="hero-section">
     <div class="slide active">
@@ -308,6 +273,8 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
     </div>
 
 </div>
+
+<?php include 'config/footer.php'; ?>
 
 <script>
     let current = 0; const slides = document.querySelectorAll('.slide');

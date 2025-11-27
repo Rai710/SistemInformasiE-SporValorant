@@ -1,7 +1,7 @@
 
 <?php
 
-include "koneksi.php";
+include "config/koneksi.php";
 session_start();
 
 if (!isset($_SESSION['username'])) {
@@ -106,51 +106,19 @@ function getMatch($data, $index) {
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VCT Match Center</title>
+<link rel="stylesheet" href="assets/css/body.css">
 <style>
   /* === GLOBAL VARS === */
   :root { --conn-color: #555; --conn-width: 2px; }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-   body { 
-    margin: 0; 
-    padding: 0; 
-    background-image: 
-        linear-gradient(
-            to bottom, 
-            rgba(15, 25, 35, 1) 0%,    
-            rgba(15, 25, 35, 0.9) 60%, 
-            rgba(15, 25, 35, 0.5) 100% 
-        ),
-        url('image/bg.jpg');
-
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
-    
-    color: #ece8e1; 
-    padding-bottom: 80px; 
-    overflow-x: hidden; 
-  } 
-
-  /* HEADER */
-  header { background: #000; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff4655; }
-  header nav { display: flex; align-items: center; }
-  header nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-  header nav a:hover { color: #ff4655; }
-
-  /* DROPDOWN */
-  .dropdown { position: relative; display: inline-block; margin-left: 20px; }
-  .dropbtn { color: white; font-weight: bold; font-size: 14px; text-transform: uppercase; text-decoration: none; cursor: pointer; padding: 10px 0; }
-  .dropbtn:hover { color: #ff4655; }
-  .dropdown-content { display: none; position: absolute; background-color: #1b2733; min-width: 140px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); z-index: 100; border: 1px solid #ff4655; border-radius: 4px; top: 100%; left: 0; }
-  .dropdown-content a { color: white; padding: 12px 16px; text-decoration: none; display: block; margin: 0; font-size: 13px; text-align: left; border-bottom: 1px solid #333; }
-  .dropdown-content a:last-child { border-bottom: none; }
-  .dropdown-content a:hover { background-color: #ff4655; color: white; }
-  .dropdown:hover .dropdown-content { display: block; }
-
-  .container { max-width: 1400px; margin: 30px auto; padding: 20px; }
+.container { 
+    width: 100%;        
+    max-width: 70%;     
+    margin: 30px auto; 
+    padding: 20px;
+    flex: 1;           
+}
   .page-title { text-align: center; font-size: 42px; font-weight: 900; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; color: #fff; text-shadow: 0 0 20px rgba(255, 70, 85, 0.5); }
 
   /* TABS */
@@ -247,22 +215,7 @@ function getMatch($data, $index) {
 </head>
 <body>
 
-<header>
-  <div class="logos"><img src="image/logoValo.png" width="80"><img src="image/logoVCT.png" width="80"></div>
-  <nav>
-    <a href="home.php" class="nav-link">Home</a>
-    <a href="tim.php" class="nav-link">Tim</a>
-    <div class="dropdown">
-        <a href="#" class="dropbtn">Jadwal ▾</a>
-        <div class="dropdown-content">
-            <a href="match.php?stage=1">STAGE 1</a>
-            <a href="match.php?stage=2">STAGE 2</a>
-        </div>
-    </div>
-    <a href="berita.php" class="nav-link">Berita</a>
-    <a href="logout.php" class="nav-link">Logout</a>
-  </nav>
-</header>
+<?php include 'config/navbar.php'; ?>
 
 <div class="container">
     <h1 class="page-title">VCT PACIFIC <?php echo $stage_name; ?></h1>
@@ -393,6 +346,8 @@ function getMatch($data, $index) {
         </div>
     </div>
 </div>
+
+<?php include 'config/footer.php'; ?>
 
 <script>
     function openTab(tabName) {
