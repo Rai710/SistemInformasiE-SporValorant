@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2025 at 07:19 AM
+-- Generation Time: Nov 27, 2025 at 11:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -301,16 +301,17 @@ CREATE TABLE `users` (
   `bio` text DEFAULT NULL,
   `avatar_image` varchar(255) DEFAULT 'default_agent.png',
   `favorite_agent` enum('Astra','Breach','Brimstone','Chamber','Clove','Cypher','Deadlock','Fade','Gekko','Harbor','Iso','Jett','KAY/O','Killjoy','Neon','Omen','Phoenix','Raze','Reyna','Sage','Skye','Sova','Viper','Vyse','Yoru') DEFAULT NULL,
-  `rank_tier` enum('Unranked','Iron','Bronze','Silver','Gold','Platinum','Diamond','Ascendant','Immortal','Radiant') DEFAULT 'Unranked'
+  `rank_tier` enum('Unranked','Iron','Bronze','Silver','Gold','Platinum','Diamond','Ascendant','Immortal','Radiant') DEFAULT 'Unranked',
+  `favorite_team_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `favorite_agent`, `rank_tier`) VALUES
-(2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Jett', 'Bronze'),
-(3, 'admin', 'admin@val.id', '1', '', 'adadad', 'admin', '2025-11-25 07:47:37', '', 'assets/images/6927e9b941f88.png', 'Reyna', 'Ascendant');
+INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `favorite_agent`, `rank_tier`, `favorite_team_id`) VALUES
+(2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Jett', 'Bronze', NULL),
+(3, 'admin', 'admin@val.id', 'ADMIN', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/692808dfc6317.png', 'Reyna', 'Ascendant', 3);
 
 --
 -- Indexes for dumped tables
@@ -356,7 +357,8 @@ ALTER TABLE `team_stats`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `fk_fav_team` (`favorite_team_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -421,6 +423,12 @@ ALTER TABLE `players`
 --
 ALTER TABLE `team_stats`
   ADD CONSTRAINT `fk_teamstats_team` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_fav_team` FOREIGN KEY (`favorite_team_id`) REFERENCES `team` (`team_id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

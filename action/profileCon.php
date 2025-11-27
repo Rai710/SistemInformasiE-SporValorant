@@ -13,7 +13,6 @@ $action  = isset($_GET['action']) ? $_GET['action'] : '';
 
 if ($action == 'update') {
     
-    // Ambil Data Form
     $name           = $_POST['new_username'];
     $email          = $_POST['email'];
     $riot_id        = $_POST['riot_id'];
@@ -21,89 +20,78 @@ if ($action == 'update') {
     $favorite_agent = $_POST['favorite_agent'];
     $discord        = $_POST['discord'];
     $bio            = $_POST['bio'];
-    
+
+    $fav_team_id    = !empty($_POST['favorite_team_id']) ? $_POST['favorite_team_id'] : NULL;
+
     $new_password   = $_POST['password'];
     
+
     $query_foto = ""; 
     
-    // Cek apakah user milih file?
     if (isset($_FILES['foto_profil']['name']) && $_FILES['foto_profil']['name'] != "") {
-        
         $namaFile   = $_FILES['foto_profil']['name'];
         $tmpName    = $_FILES['foto_profil']['tmp_name'];
         $error      = $_FILES['foto_profil']['error'];
-        $ukuran     = $_FILES['foto_profil']['size'];
-
-        // Cek Error Bawaan PHP
-        if ($error === 4) {
-            // User gak jadi upload
-        } elseif ($error !== 0) {
-            // Ada error upload!
-            die(" ERROR UPLOAD: Kode Error " . $error . ". Coba cari di Google 'PHP Upload Error " . $error . "'");
-        } elseif ($ukuran > 5000000) { // 5MB Limit
-            die("ERROR: File kegedean, Bang! Maksimal 5MB.");
-        } else {
-            // Cek Ekstensi
+        
+        if ($error === 0) {
             $ekstensiValid = ['jpg', 'jpeg', 'png'];
             $ekstensiGambar = explode('.', $namaFile);
             $ekstensiGambar = strtolower(end($ekstensiGambar));
             
-            if (!in_array($ekstensiGambar, $ekstensiValid)) {
-                die("❌ ERROR: Yang lu upload bukan gambar (jpg/png)!");
-            }
-
-            // Generate Nama Baru
-            $namaBaru = uniqid() . '.' . $ekstensiGambar;
-
-            $tujuan = "../assets/images/" . $namaBaru;
-            
-            // Cek tujuan folder
-            if (!is_dir("../assets/images/")) {
-                die(" ERROR: Folder '../assets/images/' GAK KETEMU! Coba cek nama folder.");
-            }
-
-            // Coba Pindahin
-            if (move_uploaded_file($tmpName, $tujuan)) {
-                // BERHASIL UPLOAD
-                $path_db = "assets/images/" . $namaBaru;
-                $_SESSION['avatar'] = $path_db; // Update Session
-                $query_foto = ", avatar_image = '$path_db'";
-            } else {
-                die("❌ ERROR: Gagal mindahin file (Permission Denied). Cek folder assets/images lu.");
+            if (in_array($ekstensiGambar, $ekstensiValid)) {
+                $namaBaru = uniqid() . '.' . $ekstensiGambar;
+                $tujuan = "../assets/images/" . $namaBaru;
+                
+                if (move_uploaded_file($tmpName, $tujuan)) {
+                    $path_db = "assets/images/" . $namaBaru;
+                    $_SESSION['avatar'] = $path_db; 
+                    $query_foto = ", avatar_image = '$path_db'";
+                }
             }
         }
     }
 
-    // Update Password (Optional)
+    // Logic Password
     $query_pass = "";
     if (!empty($new_password)) {
         $query_pass = ", password = '$new_password'";
     }
 
-    // Eksekusi Update ke Database
+
     try {
         $sql = "UPDATE users SET 
-                name = ?, email = ?, riot_id = ?, rank_tier = ?, favorite_agent = ?, discord_username = ?, bio = ? 
+                name = ?, 
+                email = ?, 
+                riot_id = ?, 
+                rank_tier = ?, 
+                favorite_agent = ?, 
+                discord_username = ?, 
+                bio = ?,
+                favorite_team_id = ? 
                 $query_foto $query_pass 
                 WHERE user_id = ?";
                 
         $stmt = $koneksi->prepare($sql);
-        $stmt->bind_param("sssssssi", $name, $email, $riot_id, $rank_tier, $favorite_agent, $discord, $bio, $user_id);
+
+        $stmt->bind_param("sssssssii", $name, $email, $riot_id, $rank_tier, $favorite_agent, $discord, $bio, $fav_team_id, $user_id);
 
         if ($stmt->execute()) {
             $_SESSION['username'] = $name;
+            $_SESSION['fav_team_id'] = $fav_team_id;
+
             header("Location: ../profile.php?pesan=success");
         } else {
-            die("❌ ERROR DATABASE: Gagal update data text. " . $koneksi->error);
+            // Kalau gagal
+            header("Location: ../edit_profile.php?pesan=error_update");
         }
         $stmt->close();
 
     } catch (Exception $e) {
-        die("❌ ERROR SYSTEM: " . $e->getMessage());
+        die("Error: " . $e->getMessage());
     }
 
-} elseif ($action == 'delete') {
 } else {
+    // Kalau gak ada action, balik ke profil
     header("Location: ../profile.php");
 }
 $koneksi->close();

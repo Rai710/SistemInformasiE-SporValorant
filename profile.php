@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Sesuaikan path koneksi ini kalau folder lu beda
 include "config/koneksi.php";
 
 // Cek Login
@@ -11,19 +10,27 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Ambil Data User Terbaru
-$query = $koneksi->prepare("SELECT * FROM users WHERE user_id = ?");
+
+$sql = "SELECT u.*, t.team_name as fav_team_name, t.logo as fav_team_logo, t.team_id as fav_team_id
+        FROM users u
+        LEFT JOIN team t ON u.favorite_team_id = t.team_id
+        WHERE u.user_id = ?";
+
+$query = $koneksi->prepare($sql);
 $query->bind_param("i", $user_id);
 $query->execute();
 $user = $query->get_result()->fetch_assoc();
 
-// Default Values kalau kosong
+// Default Values
 $avatar = !empty($user['avatar_image']) ? $user['avatar_image'] : 'assets/images/default_agent.png';
-$fav_agent = !empty($user['favorite_agent']) ? $user['favorite_agent'] : 'Jett';
-$rank = !empty($user['rank_tier']) ? $user['rank_tier'] : 'Unranked';
-
-// Banner dinamis
+$rank   = !empty($user['rank_tier']) ? $user['rank_tier'] : 'Unranked';
+$agent  = !empty($user['favorite_agent']) ? $user['favorite_agent'] : 'Jett'; // Bisa dipake buat background nanti
 $banner_bg = "assets/images/bg.jpg"; 
+
+// Cek Tim Favorit
+$has_team = !empty($user['fav_team_name']);
+$team_name = $has_team ? $user['fav_team_name'] : "No Team Selected";
+$team_logo = $has_team ? $user['fav_team_logo'] : "assets/images/logoValo.png"; // Logo default kalau gak punya tim
 ?>
 
 <!DOCTYPE html>
@@ -31,264 +38,203 @@ $banner_bg = "assets/images/bg.jpg";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Profile - <?php echo $user['name']; ?></title>
+    <title>Agent Dossier - <?php echo $user['name']; ?></title>
     
-    <link rel="stylesheet" href="assets/css/body.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <?php include 'config/head.php'; ?>
 
     <style>
-        /* PROFILE SPECIFIC CSS */
-        .profile-wrapper {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .profile-container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+
+        /* GRID LAYOUT: Kiri (Agent Card) - Kanan (Stats & Team) */
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
         }
 
-        /* 1. HEADER BANNER */
-        .profile-banner {
-            height: 200px;
-            background: url('<?php echo $banner_bg; ?>') no-repeat center center/cover;
-            border-radius: 8px 8px 0 0;
+        /*  KIRI: AGENT ID CARD  */
+        .id-card {
+            background: #1b2733;
+            border: 1px solid #333;
+            border-radius: 4px;
+            overflow: hidden;
             position: relative;
-            border-bottom: 4px solid #ff4655;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
-        .profile-banner::after {
-            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(15, 25, 35, 0.9) 100%);
+        .id-header {
+            background: #ff4655;
+            padding: 15px;
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
         }
 
-        /* 2. MAIN CARD LAYOUT */
-        .profile-card {
-            background: #1b2733;
-            border-radius: 0 0 8px 8px;
-            border: 1px solid #333;
-            border-top: none;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            
-            
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        /* --- SIDEBAR KIRI (IDENTITY) --- */
-        .profile-sidebar {
-            padding: 0 30px 40px;
-            text-align: center;
-            border-right: 1px solid #333;
-            background: #141e26;
+        .avatar-box {
+            padding: 40px 0;
+            background: url('assets/images/bg.jpg') center/cover; /* Bisa diganti background agent */
             position: relative;
         }
-
-        .avatar-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: -75px auto 20px; 
-            z-index: 10;
-        }
-
-        .profile-avatar {
-            width: 100%; height: 100%;
+        
+        .avatar-real {
+            width: 180px; height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #1b2733;
-            background: #000;
-            transition: 0.3s;
+            border: 5px solid #1b2733;
+            box-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
         }
+
+        .id-body { padding: 20px; color: #ece8e1; }
+        .user-ign { font-size: 32px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; line-height: 1; }
+        .user-tag { font-size: 16px; color: #888; font-weight: bold; margin-bottom: 20px; }
         
-        .avatar-container:hover .profile-avatar { border-color: #ff4655; transform: scale(1.05); }
-
-        .rank-badge {
-            background: #263542;
-            color: #ffd700;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 14px;
-            border: 1px solid #ffd700;
-            display: inline-block;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .user-fullname { font-size: 24px; font-weight: 900; text-transform: uppercase; color: white; margin-bottom: 5px; }
-        .user-email { color: #888; font-size: 14px; margin-bottom: 30px; }
-
-        .btn-upload {
-            background: #333; color: white; border: none; padding: 10px 20px; width: 100%;
-            border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s;
+        .rank-display {
+            background: #0f1923;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
             display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-bottom: 20px;
         }
-        .btn-upload:hover { background: #ff4655; }
+        .rank-txt { font-weight: bold; color: #ffd700; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- CONTENT KANAN (FORM) --- */
-        .profile-content {
-            padding: 40px;
+        .btn-edit {
+            display: block; width: 100%;
+            background: transparent; border: 1px solid #ff4655; color: #ff4655;
+            padding: 12px; text-transform: uppercase; font-weight: bold;
+            text-decoration: none; transition: 0.3s;
         }
+        .btn-edit:hover { background: #ff4655; color: white; }
 
-        .section-title {
-            font-size: 18px; font-weight: 800; text-transform: uppercase;
-            color: #ff4655; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px;
-        }
-
-        .form-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-        }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: #aaa; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; }
+        /* === KANAN: DATA & MY TEAM === */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         
-        .form-input, .form-select {
-            width: 100%; background: #0f1923; border: 1px solid #444; color: white;
-            padding: 12px; border-radius: 4px; font-size: 14px; transition: 0.3s;
+        .info-box {
+            background: #1b2733; padding: 25px; border-radius: 4px; border: 1px solid #333;
+            position: relative; overflow: hidden;
         }
-        .form-input:focus, .form-select:focus { border-color: #ff4655; outline: none; }
-
-        .btn-save {
-            background: #ff4655; color: white; border: none; padding: 12px 30px;
-            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-            border-radius: 4px; cursor: pointer; float: right; margin-top: 20px;
+        .box-label { font-size: 12px; color: #888; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: block; }
+        .box-value { font-size: 18px; color: white; font-weight: bold; }
+        
+        .my-team-card {
+            grid-column: 1 / -1; 
+            background: linear-gradient(135deg, #1b2733 0%, #0f1923 100%);
+            border: 1px solid #444;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 30px;
+            position: relative;
+        }
+        .my-team-card::before {
+            content: "SUPPORTING";
+            position: absolute; top: 10px; left: 20px;
+            font-size: 10px; color: #ff4655; font-weight: 900; letter-spacing: 2px;
+        }
+        
+        .team-info { z-index: 2; }
+        .fav-team-name { font-size: 36px; font-weight: 900; text-transform: uppercase; color: white; line-height: 1; }
+        .fav-team-region { color: #888; font-size: 14px; margin-top: 5px; }
+        
+        .team-logo-bg {
+            width: 100px; opacity: 0.8;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
             transition: 0.3s;
         }
-        .btn-save:hover { background: #d93c48; box-shadow: 0 0 15px rgba(255, 70, 85, 0.4); }
+        .my-team-card:hover .team-logo-bg { transform: scale(1.1) rotate(-5deg); opacity: 1; }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .profile-card { grid-template-columns: 1fr; }
-            .profile-sidebar { border-right: none; border-bottom: 1px solid #333; }
-            .form-grid { grid-template-columns: 1fr; }
+        .bio-box {
+            grid-column: 1 / -1; background: rgba(0,0,0,0.3); padding: 20px;
+            border-left: 3px solid #ff4655; font-style: italic; color: #ccc;
         }
+
+        @media (max-width: 768px) { .dossier-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <?php include 'config/navbar.php'; ?>
 
-    <div class="profile-wrapper">
-        
-        <?php if(isset($_GET['pesan']) && $_GET['pesan'] == 'success'): ?>
-            <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981; padding: 15px; margin-bottom: 20px; border-radius: 4px; text-align: center; font-weight: bold;">
-                DATA AGEN BERHASIL DIPERBARUI!
+    <div class="profile-container">
+
+        <h1 style="color:white; text-transform:uppercase; font-weight:900; margin-bottom:30px; border-bottom:1px solid #333; padding-bottom:10px;"><?php echo $user['name']; ?><span style="color:#ff4655;"></span>
+        </h1>
+
+        <div class="dossier-grid">
+            
+            <div class="id-card">
+                <div class="id-header">VALORANT PACIFIC ID</div>
+                <div class="avatar-box">
+                    <img src="<?php echo $avatar; ?>" class="avatar-real">
+                </div>
+                <div class="id-body">
+                    <div class="user-ign"><?php echo !empty($user['riot_id']) ? explode('#', $user['riot_id'])[0] : $user['name']; ?></div>
+                    <div class="user-tag">#<?php echo !empty($user['riot_id']) && strpos($user['riot_id'], '#') !== false ? explode('#', $user['riot_id'])[1] : 'TAG'; ?></div>
+
+                    <div class="rank-display">
+                        <i class="fas fa-medal" style="color:#ffd700;"></i>
+                        <span class="rank-txt"><?php echo $rank; ?></span>
+                    </div>
+
+                    <a href="edit_profile.php" class="btn-edit">
+                        <i class="fas fa-cog"></i> Edit Data
+                    </a>
+                </div>
             </div>
-        <?php endif; ?>
 
-        <div class="profile-banner">
-        </div>
-
-         <form action="action/profileCon.php?action=update" method="POST" enctype="multipart/form-data">
-            <div class="profile-card">
+            <div class="right-col">
                 
-                <div class="profile-sidebar">
-                    <div class="avatar-container">
-                        <img src="<?php echo $avatar; ?>" class="profile-avatar" id="avatarPreview">
+                <a href="<?php echo $has_team ? 'detail_tim.php?id='.$user['fav_team_id'] : '#'; ?>" style="text-decoration:none;">
+                    <div class="info-box my-team-card">
+                        <div class="team-info">
+                            <span class="fav-team-name"><?php echo $team_name; ?></span>
+                            <div class="fav-team-region"><?php echo $has_team ? "Official Fanbase" : "Belum memilih tim"; ?></div>
+                        </div>
+                        <img src="<?php echo $team_logo; ?>" class="team-logo-bg">
+                    </div>
+                </a>
+
+                <div style="height:20px;"></div>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <span class="box-label">Agent Andalan</span>
+                        <div class="box-value"><?php echo $agent; ?></div>
+                        <div style="position:absolute; right:-10px; bottom:-10px; opacity:0.1; font-size:60px; font-weight:900;">
+                            <?php echo substr($agent, 0, 1); ?>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <span class="box-label">Discord</span>
+                        <div class="box-value" style="font-size:16px;">
+                            <?php echo !empty($user['discord_username']) ? $user['discord_username'] : '-'; ?>
+                        </div>
+                        <i class="fab fa-discord" style="position:absolute; right:15px; top:15px; color:#5865F2; font-size:24px;"></i>
+                    </div>
+
+                    <div class="info-box">
+                        <span class="box-label">Email Terdaftar</span>
+                        <div class="box-value" style="font-size:14px;"><?php echo $user['email']; ?></div>
                     </div>
                     
-                    <div class="rank-badge">
-                        <i class="fas fa-medal"></i> <?php echo $rank; ?>
+                    <div class="info-box">
+                        <span class="box-label">Status Akun</span>
+                        <div class="box-value" style="color:#10b981;">ACTIVE</div>
                     </div>
 
-                    <h2 class="user-fullname"><?php echo $user['name']; ?></h2>
-                    <p class="user-email"><?php echo $user['email']; ?></p>
-
-                    <input type="file" name="foto_profil" id="fotoInput" style="display: none;" accept="image/*" onchange="previewImage(this)">
-                    <label for="fotoInput" class="btn-upload">
-                        <i class="fas fa-camera"></i> Ganti Foto
-                    </label>
+                    <div class="bio-box">
+                        "<?php echo !empty($user['bio']) ? $user['bio'] : 'No bio yet.'; ?>"
+                    </div>
                 </div>
 
-                <div class="profile-content">
-                    
-                    <div class="section-title">Informasi Gamer</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Riot ID (Game Name #Tag)</label>
-                            <input type="text" name="riot_id" class="form-input" value="<?php echo $user['riot_id']; ?>" placeholder="Contoh: f0rsakeN #PRX">
-                        </div>
-
-                    <div class="form-group">
-                        <label>Rank Competitive</label>
-                        <select name="rank_tier" class="form-select">
-                            <?php 
-                            // List Rank Baru yang Simpel
-                            $list_rank = [
-                                'Unranked', 'Iron', 'Bronze', 'Silver', 'Gold', 
-                                'Platinum', 'Diamond', 'Ascendant', 'Immortal', 'Radiant'
-                            ];
-
-                            foreach($list_rank as $r){
-                                $cek = ($rank == $r) ? 'selected' : '';
-                                echo "<option value='$r' $cek>$r</option>";
-                            } 
-                            ?>
-                        </select>
-                    </div>
-
-                        <div class="form-group">
-                            <label>Agent Andalan</label>
-                            <select name="favorite_agent" class="form-select">
-                                <?php 
-                                $agents = ['Jett', 'Reyna', 'Raze', 'Omen', 'Sova', 'Sage', 'Chamber', 'Viper', 'Iso', 'Clove', 'Vyse']; 
-                                foreach($agents as $ag){
-                                    $sel = ($fav_agent == $ag) ? 'selected' : '';
-                                    echo "<option value='$ag' $sel>$ag</option>";
-                                } 
-                                ?>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Discord Username</label>
-                            <input type="text" name="discord" class="form-input" value="<?php echo $user['discord_username']; ?>" placeholder="user#1234">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Bio Singkat (Taunting Message)</label>
-                        <input type="text" name="bio" class="form-input" value="<?php echo $user['bio']; ?>" placeholder="Tulis sesuatu...">
-                    </div>
-
-                    <div class="section-title" style="margin-top: 30px;">Keamanan Akun</div>
-                    <div class="form-grid">
-                        
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" name="new_username" class="form-input" value="<?php echo $user['name']; ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Email Login</label>
-                            <input type="email" name="email" class="form-input" value="<?php echo $user['email']; ?>" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Password Baru (Opsional)</label>
-                            <input type="password" name="password" class="form-input" placeholder="Isi jika ingin ganti password">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-save">SIMPAN PERUBAHAN</button>
-
-                </div>
             </div>
-        </form>
+
+        </div>
     </div>
 
     <?php include 'config/footer.php'; ?>
-
-    <script>
-        // Script Preview Foto
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('avatarPreview').src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 
 </body>
 </html>

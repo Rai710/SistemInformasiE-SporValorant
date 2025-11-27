@@ -33,7 +33,7 @@ $result_players = $query_players->get_result();
 <meta charset="UTF-8" />
 <meta name="referrer" content="no-referrer" /> 
 <title><?= $team['team_name'] ?> – Roster</title>
-<link rel="stylesheet" href="assets/css/body.css">
+<?php include 'config/head.php'; ?>
 <style>
 
 

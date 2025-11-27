@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     try {
 
-        $sql = "SELECT user_id, name, password, email, role, avatar_image FROM users WHERE name = ?";
+        $sql = "SELECT user_id, name, password, email, role, avatar_image, favorite_team_id FROM users WHERE name = ?";
         
         $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("s", $username);
@@ -20,18 +20,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             if ($password == $row['password']) {
    
-                $_SESSION['user_id']  = $row['user_id'];
-                $_SESSION['username'] = $row['name']; 
-                $_SESSION['email']    = $row['email'];
-                $_SESSION['role']     = $row['role'];       
-                $_SESSION['avatar']   = $row['avatar_image'];  
-                $_SESSION['status']   = "login";
+                $_SESSION['user_id']      = $row['user_id'];
+                $_SESSION['username']     = $row['name']; 
+                $_SESSION['role']         = $row['role'];
+                $_SESSION['avatar']       = $row['avatar_image'];
+                $_SESSION['fav_team_id']  = $row['favorite_team_id']; 
 
+                $_SESSION['status']       = "login";
 
                 if($row['role'] == 'admin'){
                     header("Location: ../home.php");
                 } else {
-    
+
                     header("Location: ../home.php");
                 }
                 exit();

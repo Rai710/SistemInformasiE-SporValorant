@@ -3,6 +3,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 
 $user_avatar = isset($_SESSION['avatar']) ? $_SESSION['avatar'] : 'assets/images/default_agent.png';
+if (isset($_SESSION['fav_team_id']) && !empty($_SESSION['fav_team_id'])) {
+    $link_my_team = "detail_tim.php?id=" . $_SESSION['fav_team_id'];
+} else {
+    $link_my_team = "edit_profile.php"; 
+}
+
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -154,10 +160,18 @@ $user_avatar = isset($_SESSION['avatar']) ? $_SESSION['avatar'] : 'assets/images
                 <a href="profile.php" class="menu-item">
                     <i class="fas fa-user-circle"></i> Edit Profile
                 </a>
-                
-                <a href="#" class="menu-item">
+
+                <a href="<?php echo $link_my_team; ?>" class="menu-item">
                     <i class="fas fa-users"></i> My Team
                 </a>
+
+                <?php if (!isset($_SESSION['fav_team_id']) || empty($_SESSION['fav_team_id'])): ?>
+                <script>
+                    document.querySelector('a[href="edit_profile.php"].menu-item').onclick = function() {
+                        alert("Lu belum milih Tim Favorit, Bang! Pilih dulu di Edit Profile ya.");
+                    };
+                </script>
+                <?php endif; ?>
 
                 <div class="menu-divider"></div>
 

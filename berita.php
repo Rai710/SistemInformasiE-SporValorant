@@ -37,10 +37,11 @@ $berita = [
 ?>
 <!DOCTYPE html>
 <html lang="id">
-<head>
 <meta charset="UTF-8">
-<title>VCT - Berita</title>
-<link rel="stylesheet" href="assets/css/body.css">
+
+<head>
+<title>VCT - Berita</title> 
+<?php include 'config/head.php'; ?>
 <style>
 
 
@@ -76,10 +77,10 @@ $berita = [
     text-shadow: 0 5px 15px rgba(0,0,0,0.5);
   }
 </style>
+
 </head>
 
 <body>
-
 
 
 <?php include 'config/navbar.php'; ?>

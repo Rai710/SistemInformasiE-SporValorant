@@ -2,6 +2,7 @@
 <?php
 
 include "config/koneksi.php";
+
 session_start();
 
 if (!isset($_SESSION['username'])) {
@@ -108,9 +109,9 @@ function getMatch($data, $index) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VCT Match Center</title>
-<link rel="stylesheet" href="assets/css/body.css">
+<?php include 'config/head.php'; ?>
 <style>
-  /* === GLOBAL VARS === */
+  /*  GLOBAL VARS */
   :root { --conn-color: #555; --conn-width: 2px; }
 .container { 
     width: 100%;        
@@ -167,54 +168,216 @@ function getMatch($data, $index) {
   .rank-1 { color: #ffd700 !important; } .rank-2 { color: #c0c0c0 !important; } .rank-3 { color: #cd7f32 !important; }
   .diff-plus { color: #10b981; } .diff-min { color: #ff4655; }
 
-  /* === PLAYOFF BRACKET FIX === */
-  .playoff-container { display: flex; gap: 80px; overflow-x: auto; padding: 40px 20px; min-height: 600px; align-items: stretch; }
-  .bracket-tree { display: flex; flex-direction: column; justify-content: center; gap: 80px; } /* Pemisah Upper & Lower */
-  .bracket-row { display: flex; gap: 80px; align-items: center; } /* Baris Upper/Lower */
-
-  .round-column { 
-      display: flex; flex-direction: column; 
-      gap: 40px;
-      width: 240px; flex-shrink: 0; position: relative; justify-content: center;
-  }
-  
-  .round-header { text-align: center; font-size: 11px; font-weight: 800; color: #888; margin-bottom: 15px; letter-spacing: 1px; background: #263542; padding: 5px; border-radius: 4px; }
-  
-  .match-box { background: #1b2733; border: 1px solid #444; border-radius: 4px; padding: 0; position: relative; height: 88px; display:flex; flex-direction:column; justify-content:center; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-  .match-box .team-row { padding: 0 12px; height: 50%; border-bottom: 1px solid #2c3b4e; display:flex; justify-content:space-between; align-items:center; }
-  .match-box .team-row:last-child { border-bottom: none; }
-  .match-box .t-info { width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  .match-box .t-logo { width: 24px; height: 24px; flex-shrink: 0; margin-right: 10px; }
-
-  .pair-wrapper { display: flex; flex-direction: column; gap: 20px; position: relative; justify-content: center; }
-
-  .connector-right::after {
-      content: ''; position: absolute; right: -40px; top: 50%; width: 40px; height: 2px; background: #555; z-index: 0;
+    /* PLAYOFF STYLES */
+ .bracket-container {
+      display: flex;
+      gap: 60px; 
+      overflow-x: auto;
+      padding: 60px 20px 50px 20px;
+      min-height: 600px;
+      align-items: flex-start;
   }
 
-  .connector-left::before {
-      content: ''; position: absolute; left: -40px; top: 50%; width: 40px; height: 2px; background: #555; z-index: 0;
-  }
-  
-  .pair-wrapper::after {
-      content: ''; position: absolute; right: -40px; top: 24%; bottom: 24%; width: 2px; background: #555;
-  }
-  
-  .pair-wrapper::before {
-      content: ''; position: absolute; right: -80px; top: 50%; width: 40px; height: 2px; background: #555;
+  /* AREA KIRI: UPPER & LOWER */
+  .bracket-main-area {
+      display: flex; flex-direction: column; gap: 80px; /* Jarak Atas & Bawah */
   }
 
-  .grand-final-column { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; position: relative; margin-left: 40px; }
-  .gf-card { border: 2px solid #ffd700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); height: 110px; }
-  .gf-header { color: #ffd700 !important; background: rgba(255, 215, 0, 0.1) !important; text-align:center; display:block !important; font-size:11px; padding: 5px 0;}
-  
-  .gf-pole { position: absolute; left: -60px; top: 50%; transform: translateY(-50%); height: 500px; width: 2px; background: #555; }
-  .gf-connector { position: absolute; left: -60px; top: 50%; width: 60px; height: 2px; background: #ffd700; }
+  /* BARIS RONDE */
+  .bracket-row { display: flex; gap: 40px; }
 
+  /* KOLOM */
+  .round-col {
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 30px; width: 260px;
+  }
+
+  .round-label {
+      text-align: center; font-size: 11px; font-weight: 800; color: #888;
+      margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* MATCH CARD */
+  .m-card {
+      background: var(--card-bg); border: 1px solid #444; border-radius: 6px;
+      display: flex; flex-direction: column; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; transition: 0.2s;
+  }
+  .m-card:hover { border-color: var(--red); transform: translateY(-3px); }
+
+  .m-row {
+      padding: 12px 15px; display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px; color: #eee; font-weight: 600;
+  }
+  .m-row:first-child { border-bottom: 1px solid #2c3b4e; }
+  .m-logo { width: 20px; height: 20px; object-fit: contain; margin-right: 10px; vertical-align: middle; }
+  .m-score { font-weight: bold; color: #888; }
+  .m-score.win { color: #10b981; font-size: 15px; }
+
+  /* AREA KANAN: GRAND FINAL (LUXURY) */
+.gf-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 60px; /* Jarak dari bracket */
+    margin-top: 50px;
+    position: relative;
+}
+
+/* Container Horizontal (Kiri Skor, Kanan Piala) */
+.victory-stage {
+    display: flex;
+    align-items: center; /* Center Vertikal */
+    gap: 30px; /* Jarak Skor ke Piala */
+    
+    /* Background kaca tipis buat nyatuin */
+    background: rgba(255, 215, 0, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+/* Efek Cahaya Emas di Belakang Container */
+.victory-stage::before {
+    content: ''; position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 120%; height: 120%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Bagian Kiri: KARTU SKOR */
+.gf-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 80px; /* Jarakin lagi dari bracket kiri */
+    margin-top: 50px;
+    position: relative;
+}
+
+/* Container Utama (Flex Horizontal) */
+.victory-stage {
+    display: flex;
+    align-items: center; 
+    gap: 50px; /* Jarak Jauh antara Skor & Piala (BIAR TERPISAH) */
+    position: relative;
+}
+
+/* Bagian Kiri: KARTU SKOR (Berdiri Sendiri) */
+.gf-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 60px; 
+    margin-top: 50px;
+    position: relative;
+}
+
+/* CONTAINER HORIZONTAL: INI KUNCINYA BIAR MISAH */
+.victory-stage {
+    display: flex;
+    align-items: center; /* Center Vertikal */
+    gap: 50px; /* Jarak Jauh antara Skor & Piala (BIAR TERPISAH) */
+    position: relative;
+}
+
+/* Bagian Kiri: KARTU SKOR (Berdiri Sendiri) */
+.gf-card {
+    width: 300px; 
+    background: #1b2733;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.gf-header {
+    background: linear-gradient(to right, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1)); 
+    color: var(--gold); 
+    text-align: center;
+    font-size: 12px; font-weight: 900; padding: 12px; 
+    letter-spacing: 2px; border-bottom: 1px solid rgba(255,215,0,0.2);
+}
+
+.winner-row { 
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent); 
+    border-left: 3px solid var(--gold); 
+}
+
+/* Bagian Kanan: PIALA & CHAMPION (Berdiri Sendiri) */
+.champion-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 180px; 
+    /* Pialanya kita angkat ke atas dikit biar gagah & gak nutupin logo */
+    transform: translateY(-30px); 
+}
+
+/* Efek Sorot Lampu Lantai */
+.champion-side::after {
+    content: ''; position: absolute;
+    bottom: 10px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 15px;
+    background: radial-gradient(ellipse, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+    z-index: -1;
+}
+
+/* Gambar Piala */
+.trophy-img {
+    width: 150px; 
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7)); /* Glow Emas */
+    animation: floatTrophy 4s ease-in-out infinite;
+    margin-bottom: 15px; /* Kasih jarak ke logo bawahnya */
+}
+
+@keyframes floatTrophy {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); } /* Melayang */
+    100% { transform: translateY(0); }
+}
+
+/* Badge Logo Pemenang */
+.winner-badge {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 8px;
+    position: relative;
+    z-index: 10;
+}
+
+.winner-logo {
+    width: 90px; height: 90px; 
+    object-fit: contain;
+    /* Hapus background kotak item biar clean */
+    filter: drop-shadow(0 0 10px rgba(255,215,0,0.3)); 
+}
+
+.winner-label {
+    color: #000;
+    background: linear-gradient(to right, #ffd700, #ffea80, #ffd700);
+    font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+    padding: 6px 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+    100% { filter: brightness(1); }
+}
 </style>
 </head>
 <body>
-
 <?php include 'config/navbar.php'; ?>
 
 <div class="container">
@@ -268,87 +431,143 @@ function getMatch($data, $index) {
         </div>
     </div>
 
+
     <div id="playoff" class="tab-content">
-        <div class="playoff-container">
+        <div class="bracket-container">
             
-            <div class="bracket-tree">
-                <h3 style="color:#ff4655; margin:0;">UPPER BRACKET</h3>
+            <div class="bracket-main-area">
+                
+                <h3 style="color:var(--red); margin-bottom:10px; font-size:16px;">UPPER BRACKET</h3>
                 <div class="bracket-row">
-                    <div class="round-column">
-                        <div class="round-header">UB ROUND 1</div>
-                        <div class="pair-wrapper">
-                            <?php $m = getMatch($playoff, 0); ?>
-                            <div class="match-box connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score win"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
-                            <?php $m = getMatch($playoff, 1); ?>
-                            <div class="match-box connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score win"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
+                    <div class="round-col">
+                        <div class="round-label">UB Quarterfinals</div>
+                        <?php $m = getMatch($playoff, 0); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score win"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 1); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score win"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
                         </div>
                     </div>
-                    <div class="round-column">
-                        <div class="round-header">UB SEMIS</div>
-                         <div class="pair-wrapper" style="gap: 80px;">
-                            <?php $m = getMatch($playoff, 2); ?>
-                            <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
-                            <?php $m = getMatch($playoff, 3); ?>
-                            <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
+                    <div class="round-col">
+                        <div class="round-label">UB Semifinals</div>
+                        <?php $m = getMatch($playoff, 2); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 3); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
                         </div>
                     </div>
-                    <div class="round-column" style="justify-content: center;">
-                        <div class="round-header">UB FINAL</div>
+                    <div class="round-col">
+                        <div class="round-label">UB Final</div>
                         <?php $m = getMatch($playoff, 8); ?>
-                        <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 style="color:#ff4655; margin:30px 0 10px;">LOWER BRACKET</h3>
+                <h3 style="color:var(--red); margin-top:20px; margin-bottom:10px; font-size:16px;">LOWER BRACKET</h3>
                 <div class="bracket-row">
-                    <div class="round-column">
-                        <div class="round-header">LB ROUND 1</div>
-                         <div class="pair-wrapper">
-                            <?php $m = getMatch($playoff, 4); ?>
-                            <div class="match-box connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
-                            <?php $m = getMatch($playoff, 5); ?>
-                            <div class="match-box connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
+                    <div class="round-col">
+                        <div class="round-label">LB Round 1</div>
+                        <?php $m = getMatch($playoff, 4); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 5); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
                         </div>
                     </div>
-                    <div class="round-column">
-                        <div class="round-header">LB ROUND 2</div>
-                        <div class="pair-wrapper">
-                            <?php $m = getMatch($playoff, 6); ?>
-                            <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
-                            <?php $m = getMatch($playoff, 7); ?>
-                            <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
+                    <div class="round-col">
+                        <div class="round-label">LB Round 2</div>
+                        <?php $m = getMatch($playoff, 6); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 7); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
                         </div>
                     </div>
-                    <div class="round-column" style="justify-content: center;">
-                        <div class="round-header">LB SEMIS</div>
-                        <?php $m = getMatch($playoff, 9); ?>
-                        <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
-                    </div>
-                     <div class="round-column" style="justify-content: center;">
-                        <div class="round-header">LB FINAL</div>
+                    <div class="round-col">
+                        <div class="round-label">LB Final</div>
                         <?php $m = getMatch($playoff, 10); ?>
-                        <div class="match-box connector-left connector-right"><div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score"><?php echo $m['team1_score']; ?></span></div><div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div></div>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grand-final-column">
-                <div class="gf-pole"></div> <div class="gf-connector"></div>
-                <div class="round-header" style="color:#ffd700;">GRAND FINAL</div>
-                <?php $m = getMatch($playoff, 11); ?>
-                <div class="match-box gf-card">
-                    <div class="card-header gf-header">BO5 MATCH</div>
-                    <div class="team-row"><div class="t-info"><img src="<?php echo $m['team1_logo']; ?>" class="t-logo"><?php echo $m['team1_name']; ?></div><span class="t-score win" style="color:#d4af37;"><?php echo $m['team1_score']; ?></span></div>
-                    <div class="team-row"><div class="t-info"><img src="<?php echo $m['team2_logo']; ?>" class="t-logo"><?php echo $m['team2_name']; ?></div><span class="t-score"><?php echo $m['team2_score']; ?></span></div>
+            <div class="gf-area">
+                
+                <h3 style="color:var(--gold); text-align:center; margin-bottom:20px; font-size:18px; letter-spacing:3px; text-shadow:0 0 15px rgba(255,215,0,0.3);">
+                    <i class="fas fa-trophy"></i> GRAND FINAL
+                </h3>
+
+                <?php 
+                // Logic Piala & Winner (Tetap Sama)
+                $piala_img = ($selected_stage == 1) ? 'assets/images/pialaS1.png' : 'assets/images/pialaS2.png';
+                $m = getMatch($playoff, 11); 
+                $winner_logo = '';
+                if($m['team1_name'] != 'TBD' && is_numeric($m['team1_score'])) {
+                    if($m['team1_score'] > $m['team2_score']) $winner_logo = $m['team1_logo'];
+                    elseif ($m['team2_score'] > $m['team1_score']) $winner_logo = $m['team2_logo'];
+                }
+                ?>
+
+                <div class="victory-stage">
+                    
+                    <div class="m-card gf-card">
+                        <div class="gf-header">BO5 SERIES</div>
+                        <div class="m-row <?php echo ($m['team1_score'] > $m['team2_score']) ? 'winner-row' : ''; ?>">
+                            <span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo gf-logo"><?php echo $m['team1_name']; ?></span>
+                            <span class="m-score <?php echo ($m['team1_score'] > $m['team2_score']) ? 'win' : ''; ?>" style="color:var(--gold); font-size:18px;"><?php echo $m['team1_score']; ?></span>
+                        </div>
+                        <div class="m-row <?php echo ($m['team2_score'] > $m['team1_score']) ? 'winner-row' : ''; ?>">
+                            <span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo gf-logo"><?php echo $m['team2_name']; ?></span>
+                            <span class="m-score <?php echo ($m['team2_score'] > $m['team1_score']) ? 'win' : ''; ?>" style="color:var(--gold); font-size:18px;"><?php echo $m['team2_score']; ?></span>
+                        </div>
+                    </div>
+
+                    <div class="champion-side">
+                        <img src="<?php echo $piala_img; ?>" class="trophy-img" alt="Trophy">
+                        
+                        <?php if(!empty($winner_logo)): ?>
+                            <div class="winner-badge">
+                                <img src="<?php echo $winner_logo; ?>" class="winner-logo">
+                                <span class="winner-label">CHAMPION</span>
+                            </div>
+                        <?php else: ?>
+                            <div class="winner-label" style="background:transparent; border:1px solid #555; color:#888; box-shadow:none;">
+                                ???
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
-<?php include 'config/footer.php'; ?>
 
+<?php include 'config/footer.php'; ?>
 <script>
     function openTab(tabName) {
         var contents = document.getElementsByClassName("tab-content");

@@ -14,7 +14,7 @@ if (!isset($_SESSION['username'])) {
 <head>
 <meta charset="UTF-8" />
 <title>VCT - Tim</title>
-<link rel="stylesheet" href="assets/css/body.css">
+<?php include 'config/head.php'; ?>
 <style>
 
   /*  TIM SECTION */
