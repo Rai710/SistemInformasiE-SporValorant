@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2025 at 11:06 AM
+-- Generation Time: Nov 27, 2025 at 12:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -311,7 +311,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `favorite_agent`, `rank_tier`, `favorite_team_id`) VALUES
 (2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Jett', 'Bronze', NULL),
-(3, 'admin', 'admin@val.id', 'ADMIN', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/692808dfc6317.png', 'Reyna', 'Ascendant', 3);
+(3, 'admin', 'admin@val.id', 'ADMIN', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/692834f0efbac.png', 'Reyna', 'Radiant', 3);
 
 --
 -- Indexes for dumped tables

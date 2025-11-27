@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $confirm_password = $_POST['confirm_password'];
 
     if($password !== $confirm_password){
-        header("Location: register.php?pesan=password_tidak_cocok");
+        header("Location: ../register.php?pesan=password_tidak_cocok");
         exit();
     }
 
@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $resultCheck = $stmtCheck->get_result();
 
         if ($resultCheck->num_rows > 0) {
-            header("Location: register.php?pesan=email_sudah_ada");
+            header("Location: ../register.php?pesan=email_sudah_ada");
         } else {
             $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
             $stmt = $koneksi->prepare($sql);

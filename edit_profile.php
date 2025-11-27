@@ -18,7 +18,6 @@ $user = $query->get_result()->fetch_assoc();
 
 // Default values
 $avatar = !empty($user['avatar_image']) ? $user['avatar_image'] : 'assets/images/default_agent.png';
-$banner_bg = "assets/images/bg.jpg"; 
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +85,15 @@ $banner_bg = "assets/images/bg.jpg";
         .btn-back { color: white; text-decoration: none; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
         .btn-back:hover { color: #ccc; }
 
+        /* Alert Box */
+        .alert-box {
+            padding: 15px; margin-bottom: 25px; border-radius: 6px; 
+            text-align: center; font-weight: bold; font-size: 14px;
+            border: 1px solid transparent;
+        }
+        .alert-success { background: rgba(16, 185, 129, 0.2); color: #10b981; border-color: #10b981; }
+        .alert-danger { background: rgba(255, 70, 85, 0.2); color: #ff4655; border-color: #ff4655; }
+
         @media (max-width: 768px) {
             .edit-body { grid-template-columns: 1fr; }
             .form-section { border-left: none; padding-left: 0; border-top: 1px solid #333; padding-top: 30px; }
@@ -100,6 +108,23 @@ $banner_bg = "assets/images/bg.jpg";
     <div style="margin-bottom: 20px;">
         <a href="profile.php" class="btn-back"><i class="fas fa-arrow-left"></i> KEMBALI KE PROFIL</a>
     </div>
+
+    <?php 
+    if(isset($_GET['pesan'])){
+        if($_GET['pesan'] == 'success') {
+            echo "<div class='alert-box alert-success'><i class='fas fa-check-circle'></i> Data Agen Berhasil Diperbarui!</div>";
+        } 
+        else if($_GET['pesan'] == 'format_salah') {
+            echo "<div class='alert-box alert-danger'><i class='fas fa-exclamation-triangle'></i> Format file salah! Hanya boleh JPG, JPEG, PNG.</div>";
+        }
+        else if($_GET['pesan'] == 'error_upload') {
+            echo "<div class='alert-box alert-danger'><i class='fas fa-times-circle'></i> Gagal upload gambar ke server. Cek folder permission.</div>";
+        }
+        else if($_GET['pesan'] == 'error_update') {
+            echo "<div class='alert-box alert-danger'><i class='fas fa-database'></i> Database Error: Gagal menyimpan data.</div>";
+        }
+    }
+    ?>
 
     <form action="action/profileCon.php?action=update" method="POST" enctype="multipart/form-data">
         <div class="edit-card">
@@ -118,7 +143,7 @@ $banner_bg = "assets/images/bg.jpg";
                     <label for="fotoInput" class="btn-upload-custom">
                         <i class="fas fa-camera"></i> Ganti Foto Profil
                     </label>
-                    <p style="font-size: 11px; color: #666; margin-top: 10px;">Format: JPG, PNG (Max 2MB)</p>
+                    <p style="font-size: 11px; color: #666; margin-top: 10px;">Max 2MB (JPG, PNG)</p>
                 </div>
 
                 <div class="form-section">
@@ -165,7 +190,6 @@ $banner_bg = "assets/images/bg.jpg";
                             // Ambil semua tim dari database
                             $q_team = $koneksi->query("SELECT team_id, team_name FROM team ORDER BY team_name ASC");
                             while($t = $q_team->fetch_assoc()) {
-                                // Cek tim mana yang user pilih 
                                 $sel_team = ($user['favorite_team_id'] == $t['team_id']) ? 'selected' : '';
                                 echo "<option value='".$t['team_id']."' $sel_team>".$t['team_name']."</option>";
                             }

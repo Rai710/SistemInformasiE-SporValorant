@@ -20,12 +20,10 @@ if ($action == 'update') {
     $favorite_agent = $_POST['favorite_agent'];
     $discord        = $_POST['discord'];
     $bio            = $_POST['bio'];
-
     $fav_team_id    = !empty($_POST['favorite_team_id']) ? $_POST['favorite_team_id'] : NULL;
-
     $new_password   = $_POST['password'];
     
-
+    // --- LOGIKA UPLOAD FOTO (ANTI AVIF) ---
     $query_foto = ""; 
     
     if (isset($_FILES['foto_profil']['name']) && $_FILES['foto_profil']['name'] != "") {
@@ -34,7 +32,9 @@ if ($action == 'update') {
         $error      = $_FILES['foto_profil']['error'];
         
         if ($error === 0) {
-            $ekstensiValid = ['jpg', 'jpeg', 'png'];
+            // [FIX] CUMA BOLEH JPG/PNG
+            $ekstensiValid = ['jpg', 'jpeg', 'png']; 
+            
             $ekstensiGambar = explode('.', $namaFile);
             $ekstensiGambar = strtolower(end($ekstensiGambar));
             
@@ -43,10 +43,17 @@ if ($action == 'update') {
                 $tujuan = "../assets/images/" . $namaBaru;
                 
                 if (move_uploaded_file($tmpName, $tujuan)) {
-                    $path_db = "assets/images/" . $namaBaru;
+                    $path_db = "assets/images/" . $namaBaru; 
                     $_SESSION['avatar'] = $path_db; 
                     $query_foto = ", avatar_image = '$path_db'";
+                } else {
+                    header("Location: ../edit_profile.php?pesan=error_upload");
+                    exit();
                 }
+            } else {
+                // Kalo maksa upload AVIF, tendang ke sini
+                header("Location: ../edit_profile.php?pesan=format_salah");
+                exit();
             }
         }
     }
@@ -57,31 +64,21 @@ if ($action == 'update') {
         $query_pass = ", password = '$new_password'";
     }
 
-
+    // Eksekusi Database
     try {
         $sql = "UPDATE users SET 
-                name = ?, 
-                email = ?, 
-                riot_id = ?, 
-                rank_tier = ?, 
-                favorite_agent = ?, 
-                discord_username = ?, 
-                bio = ?,
-                favorite_team_id = ? 
+                name = ?, email = ?, riot_id = ?, rank_tier = ?, favorite_agent = ?, discord_username = ?, bio = ?, favorite_team_id = ? 
                 $query_foto $query_pass 
                 WHERE user_id = ?";
                 
         $stmt = $koneksi->prepare($sql);
-
         $stmt->bind_param("sssssssii", $name, $email, $riot_id, $rank_tier, $favorite_agent, $discord, $bio, $fav_team_id, $user_id);
 
         if ($stmt->execute()) {
             $_SESSION['username'] = $name;
             $_SESSION['fav_team_id'] = $fav_team_id;
-
             header("Location: ../profile.php?pesan=success");
         } else {
-            // Kalau gagal
             header("Location: ../edit_profile.php?pesan=error_update");
         }
         $stmt->close();
@@ -91,7 +88,6 @@ if ($action == 'update') {
     }
 
 } else {
-    // Kalau gak ada action, balik ke profil
     header("Location: ../profile.php");
 }
 $koneksi->close();
