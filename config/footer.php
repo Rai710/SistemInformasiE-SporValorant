@@ -52,7 +52,7 @@
 <footer>
     <div class="footer-content">
         <div style="opacity: 0.5; margin-bottom: 10px;">
-            <img src="image/logoValo.png" width="40">
+            <img src="assets/images/logoValo.png" width="40">
         </div>
 
         <div class="footer-links">
