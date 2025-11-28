@@ -30,7 +30,14 @@ $avatar = !empty($user['avatar_image']) ? $user['avatar_image'] : 'assets/images
     <?php include 'config/head.php'; ?>
 
     <style>
-        .edit-wrapper { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+
+        .edit-wrapper { 
+            max-width: 900px; 
+            margin: 40px auto; 
+        
+            padding: 0 20px 300px 20px;
+        }
         
         .edit-card {
             background: #1b2733; border: 1px solid #333; border-radius: 8px;
@@ -169,21 +176,24 @@ $avatar = !empty($user['avatar_image']) ? $user['avatar_image'] : 'assets/images
                             </select>
                         </div>
                         <div>
-                            <label>Agent Andalan</label>
-                            <select name="favorite_agent" class="form-control">
+                            <label>Favorite Agent</label>
+                            <select name="agent_id" class="form-control"> <option value="">-- Pilih Agent --</option>
                                 <?php 
-                                $agents = ['Jett', 'Reyna', 'Raze', 'Omen', 'Sova', 'Sage', 'Chamber', 'Viper', 'Iso', 'Clove', 'Vyse']; 
-                                foreach($agents as $ag) {
-                                    $sel = ($user['favorite_agent'] == $ag) ? 'selected' : '';
-                                    echo "<option value='$ag' $sel>$ag</option>";
-                                }
-                                ?>
-                            </select>
+                                // Ambil list agent dari database
+                                $q_agent = $koneksi->query("SELECT * FROM agents ORDER BY agent_name ASC");
+
+                                while($ag = $q_agent->fetch_assoc()) {
+                                    $sel = ($user['agent_id'] == $ag['agent_id']) ? 'selected' : '';
+
+                                        echo "<option value='".$ag['agent_id']."' $sel>".$ag['agent_name']." (".$ag['role'].")</option>";
+                                    }
+                                    ?>
+                                </select>
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <label style="color:#ff4655;">❤️ Tim Favorit (My Team)</label>
+                        <label style="color:#ff4655;">Tim Favorit (My Team)</label>
                         <select name="favorite_team_id" class="form-control">
                             <option value="">-- Pilih Tim Favoritmu --</option>
                             <?php

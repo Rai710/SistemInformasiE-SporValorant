@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2025 at 12:47 PM
+-- Generation Time: Nov 28, 2025 at 01:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,50 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_valo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agents`
+--
+
+CREATE TABLE `agents` (
+  `agent_id` int(11) NOT NULL,
+  `agent_name` varchar(50) NOT NULL,
+  `role` enum('Duelist','Controller','Sentinel','Initiator') NOT NULL,
+  `agent_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `agents`
+--
+
+INSERT INTO `agents` (`agent_id`, `agent_name`, `role`, `agent_image`) VALUES
+(1, 'Jett', 'Duelist', NULL),
+(2, 'Raze', 'Duelist', NULL),
+(3, 'Reyna', 'Duelist', NULL),
+(4, 'Phoenix', 'Duelist', NULL),
+(5, 'Yoru', 'Duelist', NULL),
+(6, 'Neon', 'Duelist', NULL),
+(7, 'Iso', 'Duelist', NULL),
+(8, 'Omen', 'Controller', NULL),
+(9, 'Brimstone', 'Controller', NULL),
+(10, 'Viper', 'Controller', NULL),
+(11, 'Astra', 'Controller', NULL),
+(12, 'Harbor', 'Controller', NULL),
+(13, 'Clove', 'Controller', NULL),
+(14, 'Sova', 'Initiator', NULL),
+(15, 'Breach', 'Initiator', NULL),
+(16, 'Skye', 'Initiator', NULL),
+(17, 'KAY/O', 'Initiator', NULL),
+(18, 'Fade', 'Initiator', NULL),
+(19, 'Gekko', 'Initiator', NULL),
+(20, 'Sage', 'Sentinel', NULL),
+(21, 'Cypher', 'Sentinel', NULL),
+(22, 'Killjoy', 'Sentinel', NULL),
+(23, 'Chamber', 'Sentinel', NULL),
+(24, 'Deadlock', 'Sentinel', NULL),
+(25, 'Vyse', 'Sentinel', NULL);
 
 -- --------------------------------------------------------
 
@@ -46,6 +90,61 @@ INSERT INTO `events` (`event_id`, `event_name`, `event_date`, `status_event`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event_teams`
+--
+
+CREATE TABLE `event_teams` (
+  `id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `group_name` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_teams`
+--
+
+INSERT INTO `event_teams` (`id`, `event_id`, `team_id`, `group_name`) VALUES
+(1, 1, 1, 'Group A'),
+(2, 1, 2, 'Group B'),
+(3, 1, 3, 'Group B'),
+(4, 1, 4, 'Group A'),
+(5, 1, 5, 'Group B'),
+(6, 1, 6, 'Group A'),
+(7, 1, 7, 'Group B'),
+(8, 1, 8, 'Group B'),
+(9, 1, 9, 'Group A'),
+(10, 1, 10, 'Group A'),
+(11, 1, 11, 'Group A'),
+(12, 1, 12, 'Group B'),
+(16, 3, 1, 'Group A'),
+(17, 3, 2, 'Group A'),
+(18, 3, 3, 'Group B'),
+(19, 3, 4, 'Group B'),
+(20, 3, 5, 'Group B'),
+(21, 3, 6, 'Group A'),
+(22, 3, 7, 'Group B'),
+(24, 3, 9, 'Group A'),
+(25, 3, 10, 'Group A'),
+(26, 3, 11, 'Group B'),
+(27, 3, 12, 'Group B'),
+(28, 3, 13, 'Group A'),
+(31, 2, 1, 'Group A'),
+(32, 2, 2, 'Group B'),
+(33, 2, 3, 'Group B'),
+(34, 2, 4, 'Group A'),
+(35, 2, 5, 'Group B'),
+(36, 2, 6, 'Group A'),
+(37, 2, 7, 'Group B'),
+(38, 2, 8, 'Group B'),
+(39, 2, 9, 'Group A'),
+(40, 2, 10, 'Group A'),
+(41, 2, 11, 'Group A'),
+(42, 2, 12, 'Group B');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `match_esports`
 --
 
@@ -58,98 +157,156 @@ CREATE TABLE `match_esports` (
   `match_date` date DEFAULT NULL,
   `event_id` int(11) DEFAULT NULL,
   `stage` enum('Group Stage','Playoffs','Grand Final') DEFAULT 'Group Stage',
-  `group_name` char(1) DEFAULT NULL
+  `group_name` char(1) DEFAULT NULL,
+  `match_week` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `match_esports`
 --
 
-INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, `team2_score`, `match_date`, `event_id`, `stage`, `group_name`) VALUES
-(1, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', NULL),
-(2, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', NULL),
-(3, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', NULL),
-(4, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', NULL),
-(5, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', NULL),
-(6, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', NULL),
-(7, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', NULL),
-(8, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', NULL),
-(9, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', NULL),
-(10, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', NULL),
-(11, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', NULL),
-(12, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', NULL),
-(13, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', NULL),
-(14, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', NULL),
-(15, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', NULL),
-(16, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', NULL),
-(17, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', NULL),
-(18, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', NULL),
-(19, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', NULL),
-(20, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', NULL),
-(21, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', NULL),
-(22, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', NULL),
-(23, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', NULL),
-(24, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', NULL),
-(25, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', NULL),
-(26, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', NULL),
-(27, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', NULL),
-(28, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', NULL),
-(29, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', NULL),
-(30, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', NULL),
-(31, 5, 4, 1, 2, '2025-04-26', 1, 'Playoffs', NULL),
-(32, 2, 6, 2, 0, '2025-04-26', 1, 'Playoffs', NULL),
-(33, 8, 4, 0, 2, '2025-04-27', 1, 'Playoffs', NULL),
-(34, 3, 2, 2, 1, '2025-04-27', 1, 'Playoffs', NULL),
-(35, 7, 5, 1, 2, '2025-04-28', 1, 'Playoffs', NULL),
-(36, 1, 6, 2, 1, '2025-04-28', 1, 'Playoffs', NULL),
-(37, 5, 2, 0, 2, '2025-04-29', 1, 'Playoffs', NULL),
-(38, 1, 8, 2, 0, '2025-04-29', 1, 'Playoffs', NULL),
-(39, 4, 3, 2, 0, '2025-05-02', 1, 'Playoffs', NULL),
-(40, 2, 1, 0, 2, '2025-05-03', 1, 'Playoffs', NULL),
-(41, 3, 1, 3, 2, '2025-05-04', 1, 'Playoffs', NULL),
-(42, 4, 3, 1, 3, '2025-05-10', 1, 'Grand Final', NULL),
-(43, 8, 5, 0, 2, '2025-07-15', 2, 'Group Stage', NULL),
-(44, 7, 10, 2, 1, '2025-07-15', 2, 'Group Stage', NULL),
-(45, 6, 1, 0, 2, '2025-07-16', 2, 'Group Stage', NULL),
-(46, 2, 4, 0, 2, '2025-07-16', 2, 'Group Stage', NULL),
-(47, 3, 11, 0, 2, '2025-07-17', 2, 'Group Stage', NULL),
-(48, 9, 12, 1, 2, '2025-07-17', 2, 'Group Stage', NULL),
-(49, 2, 7, 2, 1, '2025-07-18', 2, 'Group Stage', NULL),
-(50, 8, 6, 0, 2, '2025-07-18', 2, 'Group Stage', NULL),
-(51, 11, 10, 1, 2, '2025-07-19', 2, 'Group Stage', NULL),
-(52, 1, 12, 2, 0, '2025-07-19', 2, 'Group Stage', NULL),
-(53, 5, 9, 2, 0, '2025-07-20', 2, 'Group Stage', NULL),
-(54, 3, 4, 2, 1, '2025-07-20', 2, 'Group Stage', NULL),
-(55, 4, 11, 2, 1, '2025-07-25', 2, 'Group Stage', NULL),
-(56, 5, 12, 1, 2, '2025-07-25', 2, 'Group Stage', NULL),
-(57, 6, 9, 2, 0, '2025-07-26', 2, 'Group Stage', NULL),
-(58, 3, 7, 2, 1, '2025-07-26', 2, 'Group Stage', NULL),
-(59, 2, 10, 2, 0, '2025-07-27', 2, 'Group Stage', NULL),
-(60, 8, 1, 0, 2, '2025-07-27', 2, 'Group Stage', NULL),
-(61, 8, 12, 0, 2, '2025-08-02', 2, 'Group Stage', NULL),
-(62, 3, 2, 0, 2, '2025-08-02', 2, 'Group Stage', NULL),
-(63, 7, 11, 2, 0, '2025-08-03', 2, 'Group Stage', NULL),
-(64, 1, 9, 0, 2, '2025-08-03', 2, 'Group Stage', NULL),
-(65, 4, 7, 0, 2, '2025-08-08', 2, 'Group Stage', NULL),
-(66, 5, 1, 0, 2, '2025-08-08', 2, 'Group Stage', NULL),
-(67, 2, 11, 2, 0, '2025-08-09', 2, 'Group Stage', NULL),
-(68, 8, 9, 1, 2, '2025-08-09', 2, 'Group Stage', NULL),
-(69, 3, 10, 2, 1, '2025-08-10', 2, 'Group Stage', NULL),
-(70, 6, 12, 2, 0, '2025-08-10', 2, 'Group Stage', NULL),
-(71, 5, 7, 2, 0, '2025-08-13', 2, 'Playoffs', NULL),
-(72, 3, 6, 1, 2, '2025-08-13', 2, 'Playoffs', NULL),
-(73, 2, 5, 1, 2, '2025-08-14', 2, 'Playoffs', NULL),
-(74, 1, 6, 2, 0, '2025-08-14', 2, 'Playoffs', NULL),
-(75, 7, 12, 2, 0, '2025-08-15', 2, 'Playoffs', NULL),
-(76, 3, 4, 2, 1, '2025-08-15', 2, 'Playoffs', NULL),
-(77, 6, 7, 2, 0, '2025-08-16', 2, 'Playoffs', NULL),
-(78, 2, 3, 0, 2, '2025-08-16', 2, 'Playoffs', NULL),
-(79, 5, 1, 0, 2, '2025-08-17', 2, 'Playoffs', NULL),
-(80, 6, 3, 1, 2, '2025-08-17', 2, 'Playoffs', NULL),
-(81, 5, 3, 2, 3, '2025-08-30', 2, 'Playoffs', NULL),
-(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL),
-(83, 4, 10, 2, 0, '2025-08-01', 2, 'Group Stage', NULL),
-(84, 5, 6, 2, 0, '2025-08-01', 2, 'Group Stage', NULL);
+INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, `team2_score`, `match_date`, `event_id`, `stage`, `group_name`, `match_week`) VALUES
+(1, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', NULL, 1),
+(2, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', NULL, 1),
+(3, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', NULL, 1),
+(4, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', NULL, 1),
+(5, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', NULL, 1),
+(6, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', NULL, 1),
+(7, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', NULL, 2),
+(8, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', NULL, 2),
+(9, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', NULL, 2),
+(10, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', NULL, 2),
+(11, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', NULL, 2),
+(12, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', NULL, 2),
+(13, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', NULL, 3),
+(14, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', NULL, 3),
+(15, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', NULL, 3),
+(16, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', NULL, 3),
+(17, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', NULL, 3),
+(18, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', NULL, 3),
+(19, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', NULL, 4),
+(20, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', NULL, 4),
+(21, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', NULL, 4),
+(22, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', NULL, 4),
+(23, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', NULL, 4),
+(24, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', NULL, 4),
+(25, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', NULL, 5),
+(26, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', NULL, 5),
+(27, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', NULL, 5),
+(28, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', NULL, 5),
+(29, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', NULL, 5),
+(30, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', NULL, 5),
+(31, 5, 4, 1, 2, '2025-04-26', 1, 'Playoffs', NULL, 5),
+(32, 2, 6, 2, 0, '2025-04-26', 1, 'Playoffs', NULL, 5),
+(33, 8, 4, 0, 2, '2025-04-27', 1, 'Playoffs', NULL, 5),
+(34, 3, 2, 2, 1, '2025-04-27', 1, 'Playoffs', NULL, 5),
+(35, 7, 5, 1, 2, '2025-04-28', 1, 'Playoffs', NULL, NULL),
+(36, 1, 6, 2, 1, '2025-04-28', 1, 'Playoffs', NULL, NULL),
+(37, 5, 2, 0, 2, '2025-04-29', 1, 'Playoffs', NULL, NULL),
+(38, 1, 8, 2, 0, '2025-04-29', 1, 'Playoffs', NULL, NULL),
+(39, 4, 3, 2, 0, '2025-05-02', 1, 'Playoffs', NULL, NULL),
+(40, 2, 1, 0, 2, '2025-05-03', 1, 'Playoffs', NULL, NULL),
+(41, 3, 1, 3, 2, '2025-05-04', 1, 'Playoffs', NULL, NULL),
+(42, 4, 3, 1, 3, '2025-05-10', 1, 'Grand Final', NULL, NULL),
+(43, 8, 5, 0, 2, '2025-07-15', 2, 'Group Stage', NULL, 1),
+(44, 7, 10, 2, 1, '2025-07-15', 2, 'Group Stage', NULL, 1),
+(45, 6, 1, 0, 2, '2025-07-16', 2, 'Group Stage', NULL, 1),
+(46, 2, 4, 0, 2, '2025-07-16', 2, 'Group Stage', NULL, 1),
+(47, 3, 11, 0, 2, '2025-07-17', 2, 'Group Stage', NULL, 1),
+(48, 9, 12, 1, 2, '2025-07-17', 2, 'Group Stage', NULL, 1),
+(49, 2, 7, 2, 1, '2025-07-18', 2, 'Group Stage', NULL, 1),
+(50, 8, 6, 0, 2, '2025-07-18', 2, 'Group Stage', NULL, 1),
+(51, 11, 10, 1, 2, '2025-07-19', 2, 'Group Stage', NULL, 1),
+(52, 1, 12, 2, 0, '2025-07-19', 2, 'Group Stage', NULL, 1),
+(53, 5, 9, 2, 0, '2025-07-20', 2, 'Group Stage', NULL, 1),
+(54, 3, 4, 2, 1, '2025-07-20', 2, 'Group Stage', NULL, 1),
+(55, 4, 11, 2, 1, '2025-07-25', 2, 'Group Stage', NULL, 2),
+(56, 5, 12, 1, 2, '2025-07-25', 2, 'Group Stage', NULL, 2),
+(57, 6, 9, 2, 0, '2025-07-26', 2, 'Group Stage', NULL, 2),
+(58, 3, 7, 2, 1, '2025-07-26', 2, 'Group Stage', NULL, 2),
+(59, 2, 10, 2, 0, '2025-07-27', 2, 'Group Stage', NULL, 2),
+(60, 8, 1, 0, 2, '2025-07-27', 2, 'Group Stage', NULL, 2),
+(61, 8, 12, 0, 2, '2025-08-02', 2, 'Group Stage', NULL, 3),
+(62, 3, 2, 0, 2, '2025-08-02', 2, 'Group Stage', NULL, 3),
+(63, 7, 11, 2, 0, '2025-08-03', 2, 'Group Stage', NULL, 3),
+(64, 1, 9, 0, 2, '2025-08-03', 2, 'Group Stage', NULL, 3),
+(65, 4, 7, 0, 2, '2025-08-08', 2, 'Group Stage', NULL, 4),
+(66, 5, 1, 0, 2, '2025-08-08', 2, 'Group Stage', NULL, 4),
+(67, 2, 11, 2, 0, '2025-08-09', 2, 'Group Stage', NULL, 4),
+(68, 8, 9, 1, 2, '2025-08-09', 2, 'Group Stage', NULL, 4),
+(69, 3, 10, 2, 1, '2025-08-10', 2, 'Group Stage', NULL, 4),
+(70, 6, 12, 2, 0, '2025-08-10', 2, 'Group Stage', NULL, 4),
+(71, 5, 7, 2, 0, '2025-08-13', 2, 'Playoffs', NULL, NULL),
+(72, 3, 6, 1, 2, '2025-08-13', 2, 'Playoffs', NULL, NULL),
+(73, 2, 5, 1, 2, '2025-08-14', 2, 'Playoffs', NULL, NULL),
+(74, 1, 6, 2, 0, '2025-08-14', 2, 'Playoffs', NULL, NULL),
+(75, 7, 12, 2, 0, '2025-08-15', 2, 'Playoffs', NULL, NULL),
+(76, 3, 4, 2, 1, '2025-08-15', 2, 'Playoffs', NULL, NULL),
+(77, 6, 7, 2, 0, '2025-08-16', 2, 'Playoffs', NULL, NULL),
+(78, 2, 3, 0, 2, '2025-08-16', 2, 'Playoffs', NULL, NULL),
+(79, 5, 1, 0, 2, '2025-08-17', 2, 'Playoffs', NULL, NULL),
+(80, 6, 3, 1, 2, '2025-08-17', 2, 'Playoffs', NULL, NULL),
+(81, 5, 3, 2, 3, '2025-08-30', 2, 'Playoffs', NULL, NULL),
+(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL, NULL),
+(83, 4, 10, 2, 0, '2025-08-01', 2, 'Group Stage', NULL, 3),
+(84, 5, 6, 2, 0, '2025-08-01', 2, 'Group Stage', NULL, 3),
+(233, 1, 13, 0, 0, '2026-03-15', 3, 'Group Stage', NULL, 1),
+(234, 3, 6, 0, 0, '2026-03-15', 3, 'Group Stage', NULL, 1),
+(235, 2, 9, 0, 0, '2026-03-16', 3, 'Group Stage', NULL, 1),
+(236, 5, 4, 0, 0, '2026-03-16', 3, 'Group Stage', NULL, 1),
+(237, 7, 10, 0, 0, '2026-03-17', 3, 'Group Stage', NULL, 1),
+(238, 11, 12, 0, 0, '2026-03-17', 3, 'Group Stage', NULL, 1),
+(239, 1, 2, 0, 0, '2026-03-22', 3, 'Group Stage', NULL, 2),
+(240, 6, 5, 0, 0, '2026-03-22', 3, 'Group Stage', NULL, 2),
+(241, 3, 13, 0, 0, '2026-03-23', 3, 'Group Stage', NULL, 2),
+(242, 4, 7, 0, 0, '2026-03-23', 3, 'Group Stage', NULL, 2),
+(243, 9, 11, 0, 0, '2026-03-24', 3, 'Group Stage', NULL, 2),
+(244, 12, 10, 0, 0, '2026-03-24', 3, 'Group Stage', NULL, 2),
+(245, 1, 3, 0, 0, '2026-03-29', 3, 'Group Stage', NULL, 3),
+(246, 2, 5, 0, 0, '2026-03-29', 3, 'Group Stage', NULL, 3),
+(247, 6, 4, 0, 0, '2026-03-30', 3, 'Group Stage', NULL, 3),
+(248, 13, 7, 0, 0, '2026-03-30', 3, 'Group Stage', NULL, 3),
+(249, 9, 12, 0, 0, '2026-03-31', 3, 'Group Stage', NULL, 3),
+(250, 10, 11, 0, 0, '2026-03-31', 3, 'Group Stage', NULL, 3),
+(251, 1, 6, 0, 0, '2026-04-05', 3, 'Group Stage', NULL, 4),
+(252, 3, 2, 0, 0, '2026-04-05', 3, 'Group Stage', NULL, 4),
+(253, 5, 13, 0, 0, '2026-04-06', 3, 'Group Stage', NULL, 4),
+(254, 4, 9, 0, 0, '2026-04-06', 3, 'Group Stage', NULL, 4),
+(255, 7, 12, 0, 0, '2026-04-07', 3, 'Group Stage', NULL, 4),
+(256, 11, 1, 0, 0, '2026-04-07', 3, 'Group Stage', NULL, 4),
+(257, 13, 2, 0, 0, '2026-04-12', 3, 'Group Stage', NULL, 5),
+(258, 3, 5, 0, 0, '2026-04-12', 3, 'Group Stage', NULL, 5),
+(259, 4, 11, 0, 0, '2026-04-13', 3, 'Group Stage', NULL, 5),
+(260, 6, 10, 0, 0, '2026-04-13', 3, 'Group Stage', NULL, 5),
+(261, 9, 7, 0, 0, '2026-04-14', 3, 'Group Stage', NULL, 5),
+(262, 12, 13, 0, 0, '2026-04-14', 3, 'Group Stage', NULL, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pickem_predictions`
+--
+
+CREATE TABLE `pickem_predictions` (
+  `prediction_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `match_id` int(11) NOT NULL,
+  `predicted_winner_id` int(11) DEFAULT NULL,
+  `predicted_score_t1` tinyint(4) NOT NULL,
+  `predicted_score_t2` tinyint(4) NOT NULL,
+  `is_graded` tinyint(1) DEFAULT 0,
+  `score_awarded` tinyint(4) DEFAULT 0,
+  `prediction_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pickem_predictions`
+--
+
+INSERT INTO `pickem_predictions` (`prediction_id`, `user_id`, `match_id`, `predicted_winner_id`, `predicted_score_t1`, `predicted_score_t2`, `is_graded`, `score_awarded`, `prediction_date`) VALUES
+(1, 3, 234, 3, 2, 1, 0, 0, '2025-11-28 11:29:27'),
+(2, 3, 233, 1, 2, 0, 0, 0, '2025-11-28 11:29:37'),
+(3, 3, 236, 5, 2, 0, 0, 0, '2025-11-28 12:28:16');
 
 -- --------------------------------------------------------
 
@@ -233,7 +390,30 @@ INSERT INTO `players` (`player_id`, `team_id`, `player_name`, `in_game_name`, `n
 (62, 7, 'Goo Sang-min', 'Rb', 'Korea', 'Initiator', '2025-06-17', NULL, 'https://owcdn.net/img/678247d54091c.png'),
 (63, 7, 'Lee Hyuk-kyu', 'Dambi', 'Korea', 'Flex', '2024-11-26', NULL, 'https://owcdn.net/img/679063171f64c.png'),
 (64, 7, 'Park Sung-hyeon', 'Ivy', 'Korea', 'Sentinel', '2024-11-26', NULL, 'https://owcdn.net/img/6790670e30a6c.png'),
-(65, 7, 'Jeonghwan', 'Xross', 'Korea', 'Controller', '2024-02-20', NULL, 'https://prosettings.net/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=contain%2Cg=top%2Ch=300%2Cq=99%2Csharpen=1%2Cw=300/wp-content/uploads/xross.png');
+(65, 7, 'Jeonghwan', 'Xross', 'Korea', 'Controller', '2024-02-20', NULL, 'https://prosettings.net/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=contain%2Cg=top%2Ch=300%2Cq=99%2Csharpen=1%2Cw=300/wp-content/uploads/xross.png'),
+(66, 13, 'Ko Jae-hyuk', 'C1nder', 'South Korea', 'Duelist', '2024-10-07', NULL, 'https://liquipedia.net/commons/images/thumb/8/83/SLT_C1ndeR_VCK25_S1.png/900px-SLT_C1ndeR_VCK25_S1.png'),
+(67, 13, 'Kim Min-hyuk', 'Klaus', 'South Korea', 'Controller', '2024-10-07', NULL, 'https://liquipedia.net/valorant/File:SLT_Klaus_VCK25_S1.png'),
+(68, 13, 'Shin Sang-beom', 'oonzmlp', 'South Korea', 'Initiator', '2024-10-07', NULL, 'https://liquipedia.net/commons/images/c/c2/SLT_oonzmlp_VCK25_S1.png'),
+(69, 13, 'Kim Tae-geon', 'XuNa', 'South Korea', 'Sentinel', '2024-10-07', NULL, 'https://liquipedia.net/valorant/File:SLT_XuNa_VCK25_S1.png'),
+(70, 13, 'Jang Suk-hyun', 'Zexy', 'South Korea', 'Duelist', '2024-10-07', NULL, 'https://liquipedia.net/valorant/File:SLT_zexy_VCK25_S1.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_settings`
+--
+
+CREATE TABLE `system_settings` (
+  `setting_key` varchar(50) NOT NULL,
+  `setting_value` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `system_settings`
+--
+
+INSERT INTO `system_settings` (`setting_key`, `setting_value`) VALUES
+('active_week', 'Week 1');
 
 -- --------------------------------------------------------
 
@@ -266,7 +446,8 @@ INSERT INTO `team` (`team_id`, `team_name`, `country`, `description`, `logo`, `g
 (9, 'ZETA Division', 'Japan', 'ZETA Division adalah tim Jepang yang memiliki reputasi tinggi berkat pemain muda berbakat dan kerja sama tim yang solid. Mereka sering tampil di turnamen APAC dengan performa menawan, serta dikenal karena ketekunan dalam latihan dan inovasi strategi yang membuat lawan kesulitan.', 'https://liquipedia.net/commons/images/thumb/9/95/ZETA_DIVISION_darkmode.png/600px-ZETA_DIVISION_darkmode.png', 'Group A'),
 (10, 'Team Secret', 'Thailand', 'Team Secret dari Thailand dikenal fleksibilitas pemainnya dan gaya bermain kreatif. Tim ini mampu menyesuaikan strategi di tengah pertandingan dan sering menciptakan momen mengejutkan yang membuat mereka menjadi lawan yang tangguh di setiap turnamen APAC.', 'https://liquipedia.net/commons/images/thumb/d/d2/Team_Secret_darkmode.png/600px-Team_Secret_darkmode.png', 'Group A'),
 (11, 'Global Esports', 'Malaysia', 'Global Esports adalah tim Malaysia yang fokus mengembangkan pemain muda berbakat. Mereka dikenal mampu menghadirkan permainan cepat dan agresif, dengan kerja sama tim yang baik, serta sering memberikan kejutan pada turnamen-turnamen besar di APAC.', 'https://owcdn.net/img/629f316ddd4dd.png', 'Group A'),
-(12, 'Detonation FocusMe', 'Japan', 'Detonation FocusMe (DFM) adalah tim Jepang yang konsisten menunjukkan performa tinggi di kancah APAC. Mereka terkenal dengan strategi matang, komunikasi yang efektif, dan kemampuan adaptasi yang baik, menjadikan DFM selalu diperhitungkan dalam setiap pertandingan.', 'https://liquipedia.net/commons/images/thumb/0/08/DetonatioN_FocusMe_2022_full_darkmode.png/600px-DetonatioN_FocusMe_2022_full_darkmode.png', 'Group B');
+(12, 'Detonation FocusMe', 'Japan', 'Detonation FocusMe (DFM) adalah tim Jepang yang konsisten menunjukkan performa tinggi di kancah APAC. Mereka terkenal dengan strategi matang, komunikasi yang efektif, dan kemampuan adaptasi yang baik, menjadikan DFM selalu diperhitungkan dalam setiap pertandingan.', 'https://liquipedia.net/commons/images/thumb/0/08/DetonatioN_FocusMe_2022_full_darkmode.png/600px-DetonatioN_FocusMe_2022_full_darkmode.png', 'Group B'),
+(13, 'SLT Seongnam', 'South Korea', 'SLT Seongnam merupakan tim akademi Gen.G Esports yang berkompetisi di VCL Korea. Dikenal sebagai tim pengembang bakat muda Korea.', 'https://owcdn.net/img/641d8f2b943ee.png', 'Group C');
 
 -- --------------------------------------------------------
 
@@ -300,28 +481,43 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `bio` text DEFAULT NULL,
   `avatar_image` varchar(255) DEFAULT 'default_agent.png',
-  `favorite_agent` enum('Astra','Breach','Brimstone','Chamber','Clove','Cypher','Deadlock','Fade','Gekko','Harbor','Iso','Jett','KAY/O','Killjoy','Neon','Omen','Phoenix','Raze','Reyna','Sage','Skye','Sova','Viper','Vyse','Yoru') DEFAULT NULL,
   `rank_tier` enum('Unranked','Iron','Bronze','Silver','Gold','Platinum','Diamond','Ascendant','Immortal','Radiant') DEFAULT 'Unranked',
-  `favorite_team_id` int(11) DEFAULT NULL
+  `favorite_team_id` int(11) DEFAULT NULL,
+  `agent_id` int(11) DEFAULT NULL,
+  `total_pickem_points` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `favorite_agent`, `rank_tier`, `favorite_team_id`) VALUES
-(2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Jett', 'Bronze', NULL),
-(3, 'admin', 'admin@val.id', 'ADMIN', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/692834f0efbac.png', 'Reyna', 'Radiant', 3);
+INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `rank_tier`, `favorite_team_id`, `agent_id`, `total_pickem_points`) VALUES
+(2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Bronze', NULL, NULL, 0),
+(3, 'admin', 'admin@val.id', 'BAJA', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/69298b6ee496e.jpg', 'Radiant', 8, 23, 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `agents`
+--
+ALTER TABLE `agents`
+  ADD PRIMARY KEY (`agent_id`);
+
+--
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`event_id`);
+
+--
+-- Indexes for table `event_teams`
+--
+ALTER TABLE `event_teams`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_team_event` (`event_id`,`team_id`),
+  ADD KEY `team_id` (`team_id`);
 
 --
 -- Indexes for table `match_esports`
@@ -333,11 +529,26 @@ ALTER TABLE `match_esports`
   ADD KEY `fk_match_event` (`event_id`);
 
 --
+-- Indexes for table `pickem_predictions`
+--
+ALTER TABLE `pickem_predictions`
+  ADD PRIMARY KEY (`prediction_id`),
+  ADD UNIQUE KEY `unique_prediction` (`user_id`,`match_id`),
+  ADD KEY `match_id` (`match_id`),
+  ADD KEY `predicted_winner_id` (`predicted_winner_id`);
+
+--
 -- Indexes for table `players`
 --
 ALTER TABLE `players`
   ADD PRIMARY KEY (`player_id`),
   ADD KEY `fk_players_team` (`team_id`);
+
+--
+-- Indexes for table `system_settings`
+--
+ALTER TABLE `system_settings`
+  ADD PRIMARY KEY (`setting_key`);
 
 --
 -- Indexes for table `team`
@@ -358,11 +569,18 @@ ALTER TABLE `team_stats`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `fk_fav_team` (`favorite_team_id`);
+  ADD KEY `fk_fav_team` (`favorite_team_id`),
+  ADD KEY `fk_user_agent` (`agent_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `agents`
+--
+ALTER TABLE `agents`
+  MODIFY `agent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -371,22 +589,34 @@ ALTER TABLE `events`
   MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `event_teams`
+--
+ALTER TABLE `event_teams`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
 -- AUTO_INCREMENT for table `match_esports`
 --
 ALTER TABLE `match_esports`
-  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+
+--
+-- AUTO_INCREMENT for table `pickem_predictions`
+--
+ALTER TABLE `pickem_predictions`
+  MODIFY `prediction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `team_stats`
@@ -405,12 +635,27 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `event_teams`
+--
+ALTER TABLE `event_teams`
+  ADD CONSTRAINT `event_teams_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`),
+  ADD CONSTRAINT `event_teams_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`);
+
+--
 -- Constraints for table `match_esports`
 --
 ALTER TABLE `match_esports`
   ADD CONSTRAINT `fk_match_event` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_match_team1` FOREIGN KEY (`team1_id`) REFERENCES `team` (`team_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_match_team2` FOREIGN KEY (`team2_id`) REFERENCES `team` (`team_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `pickem_predictions`
+--
+ALTER TABLE `pickem_predictions`
+  ADD CONSTRAINT `pickem_predictions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pickem_predictions_ibfk_2` FOREIGN KEY (`match_id`) REFERENCES `match_esports` (`match_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pickem_predictions_ibfk_3` FOREIGN KEY (`predicted_winner_id`) REFERENCES `team` (`team_id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `players`
@@ -428,7 +673,8 @@ ALTER TABLE `team_stats`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `fk_fav_team` FOREIGN KEY (`favorite_team_id`) REFERENCES `team` (`team_id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_fav_team` FOREIGN KEY (`favorite_team_id`) REFERENCES `team` (`team_id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_user_agent` FOREIGN KEY (`agent_id`) REFERENCES `agents` (`agent_id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

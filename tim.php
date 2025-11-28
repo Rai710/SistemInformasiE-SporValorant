@@ -8,16 +8,23 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
+
+// [FIX 1] Tangkap Event ID dari URL (Default ke 1/2025)
+$event_id = isset($_GET['event_id']) ? (int)$_GET['event_id'] : 1;
+
+// Ambil Nama Event untuk Judul Halaman
+$q_event = $koneksi->query("SELECT event_name FROM events WHERE event_id = $event_id")->fetch_assoc();
+$event_name = $q_event['event_name'] ?? 'VCT PACIFIC';
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<title>VCT - Tim</title>
+<title><?php echo $event_name; ?> - Tim</title>
 <?php include 'config/head.php'; ?>
 <style>
 
-  /*  TIM SECTION */
+  /* TIM SECTION */
   .teams-section {
     text-align: center;
     padding: 60px 20px;
@@ -121,12 +128,16 @@ if (!isset($_SESSION['username'])) {
 
 <section class="teams-section">
 
-  <h1 class="teams-title">TIM PACIFIC</h1>
+  <h1 class="teams-title"><?php echo $event_name; ?></h1>
   
   <div class="teams-container">
     <?php
-    // Ambil data tim
-    $sql = "SELECT * FROM team ORDER BY team_name ASC";
+    // [FIX 2] Update SQL Query: JOIN ke event_teams dan filter berdasarkan event_id
+    $sql = "SELECT t.* FROM team t
+            JOIN event_teams et ON t.team_id = et.team_id
+            WHERE et.event_id = $event_id
+            ORDER BY t.team_name ASC";
+    
     $result = $koneksi->query($sql);
 
     if($result->num_rows > 0){
@@ -136,7 +147,7 @@ if (!isset($_SESSION['username'])) {
             
             <a href="<?php echo $link; ?>" class="team-card">
                 <div class="team-header">
-                    <?php echo $row['team_name']; ?>
+                    <?php echo $row['team_name']; ?> 
                 </div>
                 <div class="team-body">
                     <img src="<?php echo $row['logo'] ? $row['logo'] : 'image/default.png'; ?>" class="team-logo">
@@ -146,7 +157,7 @@ if (!isset($_SESSION['username'])) {
             <?php
         }
     } else {
-        echo "<p>Data tim belum tersedia.</p>";
+        echo "<p style='color:white; font-size:20px; margin-top:50px;'>Tidak ada tim terdaftar untuk event ini.</p>";
     }
     ?>
   </div>
