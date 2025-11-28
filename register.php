@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="assets/css/auth.css">
 </head>
 
+    <style>
+        body.auth-page {
+            animation: zoomInStart 0.8s ease-out forwards;
+            opacity: 0; 
+        }
+
+        @keyframes zoomInStart {
+            0% { transform: scale(1.1); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+
+        body.zoom-out {
+            transform: scale(1.2);
+            opacity: 0;
+            filter: blur(5px);
+            transition: all 0.6s ease-in;
+        }
+    </style>
 <body class="auth-page">
 
     <div class="container d-flex justify-content-center">

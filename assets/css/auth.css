@@ -8,6 +8,7 @@ body.auth-page {
     align-items: center; /* Center Vertikal */
     justify-content: center; /* Center Horizontal */
     position: relative;
+    transition: transform 0.8s ease-in, opacity 0.8s ease-in;
 }
 
 /* Overlay Gelap (Biar tulisan kebaca) */
@@ -74,3 +75,12 @@ body.auth-page::before {
     text-decoration: none;
 }
 .auth-link:hover { text-decoration: underline; color: #d93c48; }
+/* === TAMBAHAN ANIMASI TRANSISI (TARUH PALING BAWAH) === */
+
+
+/* Class ini yang bikin efek masuk ke dalam layar */
+body.zoom-out {
+    transform: scale(3);
+    opacity: 0;
+    filter: blur(10px);
+}
