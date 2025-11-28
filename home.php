@@ -25,6 +25,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
 <html lang="id">
     <head>
 <meta charset="UTF-8" />
+
 <title>VCT Pacific - Home</title>
 <?php include 'config/head.php'; ?>
 <style>
