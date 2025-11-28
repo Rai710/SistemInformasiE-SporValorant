@@ -1,4 +1,3 @@
-
 <?php 
 include 'config/koneksi.php';
 session_start();
@@ -52,13 +51,13 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .ticker-item { display: inline-block; padding: 0 30px; font-size: 14px; font-weight: bold; color: white; text-transform: uppercase; }
   @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-  /*  CONTAINER & TITLES  */
+  /* CONTAINER & TITLES  */
   .content-container { max-width: 1300px; margin: 80px auto; padding: 0 20px; }
   .section-title { font-size: 36px; font-weight: 900; text-transform: uppercase; margin-bottom: 40px; text-align: center; color: #fff; letter-spacing: 2px; position: relative; }
   .section-title span { color: #ff4655; }
   .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #ff4655; margin: 15px auto 0; }
 
-  /*  NEW: PACIFIC FACTS */
+  /* NEW: PACIFIC FACTS */
   .facts-grid { 
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; 
   }
@@ -75,7 +74,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .fact-desc { font-size: 14px; color: #aaa; line-height: 1.6; }
 
 
-  /*  1. CHAMPIONS QUALIFIED  */
+  /* 1. CHAMPIONS QUALIFIED  */
   .qualified-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 100px; }
   .q-card {
       background: linear-gradient(145deg, #1b2733 0%, #141e26 100%);
@@ -89,7 +88,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .q-name { font-size: 22px; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 10px; }
   .q-badge { background: rgba(255, 215, 0, 0.1); color: #ffd700; font-size: 11px; font-weight: bold; padding: 6px 15px; border-radius: 20px; text-transform: uppercase; border: 1px solid #ffd700; }
 
-  /*  2. MVP SECTION  */
+  /* 2. MVP SECTION  */
   .mvp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 100px; }
   .mvp-card {
       background: #1b2733; border-radius: 12px; overflow: hidden; display: flex;
@@ -114,23 +113,25 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   .stat-val { font-size: 24px; font-weight: 800; color: #ff4655; display: block; }
   .stat-lbl { font-size: 10px; color: #888; text-transform: uppercase; }
   
-  /*  3. META WATCH */
+  /* 3. META WATCH */
   .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
   .meta-card { 
-      position: relative; height: 400px; background: #1b2733; border-radius: 8px; overflow: hidden; 
+      position: relative; height: 500px; background: #1b2733; border-radius: 8px; overflow: hidden; 
       border: 1px solid #333; transition: 0.3s;
   }
   .meta-card:hover { border-color: #ff4655; transform: scale(1.02); }
-  .meta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: 0.3s; }
+  /* Ubah .meta-img agar bisa dipakai oleh tag VIDEO juga */
+  .meta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: 0.3s; display: block; }
+  
   .meta-overlay {
       position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
       background: linear-gradient(to top, #0f1923 10%, transparent 100%);
   }
   .meta-name { font-size: 32px; font-weight: 900; text-transform: uppercase; color: #fff; line-height: 1; }
   .meta-role { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
-  .meta-pick { position: absolute; top: 20px; right: 20px; background: #fff; color: #000; font-weight: 800; padding: 5px 10px; border-radius: 4px; font-size: 12px; }
+  .meta-pick { position: absolute; top: 20px; right: 20px; background: #fff; color: #000; font-weight: 800; padding: 5px 10px; border-radius: 4px; font-size: 12px; z-index: 5; }
 
-  /*  5. TOURNAMENT STATS */
+  /* 5. TOURNAMENT STATS */
   .stats-banner {
       background: rgba(255,255,255,0.03);
       padding: 40px; border-radius: 12px; border: 1px solid #333;
@@ -248,17 +249,17 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
     <div class="meta-grid">
         <div class="meta-card">
             <div class="meta-pick">85% PICK RATE</div>
-            <img src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/d41286dc9017bf79c0b4d907b7a260c27b0adb69-616x822.png?auto=format&fit=fill&q=80&w=352" class="meta-img">
+            <video src="assets/video/jett.mp4" class="meta-img" autoplay loop muted playsinline></video>
             <div class="meta-overlay"><div class="meta-name">JETT</div><div class="meta-role">DUELIST</div></div>
         </div>
         <div class="meta-card">
             <div class="meta-pick">78% PICK RATE</div>
-            <img src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/015a083717e9687de8a741cfceddb836775b5f9f-616x822.png?auto=format&fit=fill&q=80&w=352" class="meta-img">
+            <video src="assets/video/omen.mp4" class="meta-img" autoplay loop muted playsinline></video>
             <div class="meta-overlay"><div class="meta-name">OMEN</div><div class="meta-role">CONTROLLER</div></div>
         </div>
         <div class="meta-card">
             <div class="meta-pick">72% PICK RATE</div>
-            <img src="https://media.valorant-api.com/agents/707eab51-4836-f488-046a-cda6bf494859/fullportrait.png" class="meta-img">
+            <video src="assets/video/viper.mp4" class="meta-img" autoplay loop muted playsinline></video>
             <div class="meta-overlay"><div class="meta-name">VIPER</div><div class="meta-role">CONTROLLER</div></div>
         </div>
     </div>

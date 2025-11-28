@@ -119,6 +119,7 @@ $link_my_team = $fav_team_id ? "detail_tim.php?id=" . $fav_team_id : "edit_profi
         </div>
         
         <a href="prediction.php" class="nav-link <?= ($current_page == 'prediction.php') ? 'active' : '' ?>">Prediction</a>
+        <a href="agent.php" class="nav-link <?= ($current_page == 'agent.php') ? 'active' : '' ?>">Agent</a>
         <a href="berita.php" class="nav-link <?= ($current_page == 'berita.php') ? 'active' : '' ?>">Berita</a>
 
         <div class="profile-dropdown">
