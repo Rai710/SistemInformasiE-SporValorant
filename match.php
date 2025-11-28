@@ -197,13 +197,137 @@ function getMatch($data, $index) {
         </div>
     </div>
 
-    <div id="playoff" class="tab-content">
-        <?php if($selected_stage == 3): ?>
-            <h3 style="color:#ff4655; text-align:center; padding:50px;">PLAYOFFS DITUTUP SEMENTARA (UPCOMING)</h3>
-        <?php else: ?>
-             <div class="bracket-container">
+   <div id="playoff" class="tab-content">
+        <div class="bracket-container">
+            
+            <div class="bracket-main-area">
+                
+                <h3 style="color:var(--red); margin-bottom:10px; font-size:16px;">UPPER BRACKET</h3>
+                <div class="bracket-row">
+                    <div class="round-col">
+                        <div class="round-label">UB Quarterfinals</div>
+                        <?php $m = getMatch($playoff, 0); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score win"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 1); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score win"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                    </div>
+                    <div class="round-col">
+                        <div class="round-label">UB Semifinals</div>
+                        <?php $m = getMatch($playoff, 2); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 3); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                    </div>
+                    <div class="round-col">
+                        <div class="round-label">UB Final</div>
+                        <?php $m = getMatch($playoff, 8); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                    </div>
                 </div>
-        <?php endif; ?>
+
+                <h3 style="color:var(--red); margin-top:20px; margin-bottom:10px; font-size:16px;">LOWER BRACKET</h3>
+                <div class="bracket-row">
+                    <div class="round-col">
+                        <div class="round-label">LB Round 1</div>
+                        <?php $m = getMatch($playoff, 4); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 5); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                    </div>
+                    <div class="round-col">
+                        <div class="round-label">LB Round 2</div>
+                        <?php $m = getMatch($playoff, 6); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                        <?php $m = getMatch($playoff, 7); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                    </div>
+                    <div class="round-col">
+                        <div class="round-label">LB Final</div>
+                        <?php $m = getMatch($playoff, 10); ?>
+                        <div class="m-card">
+                            <div class="m-row"><span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo"><?php echo $m['team1_name']; ?></span><span class="m-score"><?php echo $m['team1_score']; ?></span></div>
+                            <div class="m-row"><span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo"><?php echo $m['team2_name']; ?></span><span class="m-score"><?php echo $m['team2_score']; ?></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gf-area">
+                
+                <h3 style="color:var(--gold); text-align:center; margin-bottom:20px; font-size:18px; letter-spacing:3px; text-shadow:0 0 15px rgba(255,215,0,0.3);">
+                    <i class="fas fa-trophy"></i> GRAND FINAL
+                </h3>
+
+                <?php 
+                // Logic Piala & Winner (Tetap Sama)
+                $piala_img = ($selected_stage == 1) ? 'assets/images/pialaS1.png' : 'assets/images/pialaS2.png';
+                $m = getMatch($playoff, 11); 
+                $winner_logo = '';
+                if($m['team1_name'] != 'TBD' && is_numeric($m['team1_score'])) {
+                    if($m['team1_score'] > $m['team2_score']) $winner_logo = $m['team1_logo'];
+                    elseif ($m['team2_score'] > $m['team1_score']) $winner_logo = $m['team2_logo'];
+                }
+                ?>
+
+                <div class="victory-stage">
+                    
+                    <div class="m-card gf-card">
+                        <div class="gf-header">BO5 SERIES</div>
+                        <div class="m-row <?php echo ($m['team1_score'] > $m['team2_score']) ? 'winner-row' : ''; ?>">
+                            <span><img src="<?php echo $m['team1_logo']; ?>" class="m-logo gf-logo"><?php echo $m['team1_name']; ?></span>
+                            <span class="m-score <?php echo ($m['team1_score'] > $m['team2_score']) ? 'win' : ''; ?>" style="color:var(--gold); font-size:18px;"><?php echo $m['team1_score']; ?></span>
+                        </div>
+                        <div class="m-row <?php echo ($m['team2_score'] > $m['team1_score']) ? 'winner-row' : ''; ?>">
+                            <span><img src="<?php echo $m['team2_logo']; ?>" class="m-logo gf-logo"><?php echo $m['team2_name']; ?></span>
+                            <span class="m-score <?php echo ($m['team2_score'] > $m['team1_score']) ? 'win' : ''; ?>" style="color:var(--gold); font-size:18px;"><?php echo $m['team2_score']; ?></span>
+                        </div>
+                    </div>
+
+                    <div class="champion-side">
+                        <img src="<?php echo $piala_img; ?>" class="trophy-img" alt="Trophy">
+                        
+                        <?php if(!empty($winner_logo)): ?>
+                            <div class="winner-badge">
+                                <img src="<?php echo $winner_logo; ?>" class="winner-logo">
+                                <span class="winner-label">CHAMPION</span>
+                            </div>
+                        <?php else: ?>
+                            <div class="winner-label" style="background:transparent; border:1px solid #555; color:#888; box-shadow:none;">
+                                ???
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
