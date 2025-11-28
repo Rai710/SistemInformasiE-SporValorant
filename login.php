@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <title>Login - VCT Pacific</title>
-    <?php include 'config/head.php'; ?>
-    
+
+    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/auth.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/auth.css">
@@ -16,7 +16,7 @@
         <div class="card auth-card p-4">
             <div class="card-body">
                 
-                <h3 class="auth-title">Agent Login</h3>
+                <h3 class="auth-title">Valorant Login</h3>
 
                 <form action="action/loginCon.php" method="POST">
                     
@@ -46,7 +46,7 @@
                 </form>
 
                 <div class="text-center mt-4 small">
-                    Belum punya akun? <a href="register.php" class="auth-link">Daftar jadi Agent</a>
+                    Belum punya akun? <a href="register.php" class="auth-link">Daftar akun</a>
                 </div>
 
             </div>

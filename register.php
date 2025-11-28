@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <title>Register - VCT Pacific</title>
-    <?php include 'config/head.php'; ?>
+    <link rel="stylesheet" href="<?php echo $path; ?>assets/css/auth.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/auth.css">
 </head>
