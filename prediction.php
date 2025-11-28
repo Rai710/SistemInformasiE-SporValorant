@@ -68,9 +68,18 @@ while($row = $result->fetch_assoc()){
 
 <?php include 'config/navbar.php'; ?>
 
+
 <div class="container">
-    <h1 class="page-title">PICK'EM CHALLENGE</h1>
     
+    <h1 class="page-title">PICK'EM CHALLENGE</h1>
+    <div class="leaderboard-link">
+        <p style="color:#aaa; margin-top:20px;">
+            Total Poin Kamu: <span style="color:#ffd700; font-weight:bold;"><?php echo $_SESSION['total_pickem_points'] ?? 0; ?></span>
+        </p>
+        <a href="leaderboard.php" style="color:#ff4655; font-weight:bold; text-decoration:none; border:1px solid #ff4655; padding:8px 20px; border-radius:4px; display:inline-block; margin-top:10px;">
+            LIHAT GLOBAL LEADERBOARD
+        </a>
+    </div>
     <div class="tabs">
         <button class="tab-btn active" onclick="openMainTab('regular')">REGULAR SEASON</button>
         <button class="tab-btn" onclick="openMainTab('playoff')">PLAYOFFS</button>
@@ -159,8 +168,8 @@ while($row = $result->fetch_assoc()){
         </div>
     </div>
 
+    
 </div>
-
 <?php include 'config/footer.php'; ?>
 
 <script>
