@@ -44,7 +44,32 @@ header nav a.nav-link:hover, header nav a.nav-link.active { color: #ff4655; }
 
 .profile-wrapper { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 .profile-banner { height: 200px; border-radius: 8px 8px 0 0; position: relative; border-bottom: 4px solid #ff4655; }
-/* ... dst ... */
+.profile-container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+.dossier-grid { display: grid; grid-template-columns: 350px 1fr; gap: 30px; }
+.id-card { background: #1b2733; border: 1px solid #333; border-radius: 4px; overflow: hidden; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.id-header { background: #ff4655; padding: 15px; color: white; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; }
+.avatar-box { padding: 40px 0; background: url('assets/images/bg.jpg') center/cover; position: relative; }
+.avatar-real { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 5px solid #1b2733; box-shadow: 0 0 20px rgba(255, 70, 85, 0.5); }
+.id-body { padding: 20px; color: #ece8e1; }
+.user-ign { font-size: 32px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; line-height: 1; }
+.user-tag { font-size: 16px; color: #888; font-weight: bold; margin-bottom: 20px; }
+.rank-display { background: #0f1923; padding: 10px; border-radius: 4px; border: 1px solid #444; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.rank-txt { font-weight: bold; color: #ffd700; text-transform: uppercase; letter-spacing: 1px; }
+.btn-edit { display: block; width: 100%; background: transparent; border: 1px solid #ff4655; color: #ff4655; padding: 12px; text-transform: uppercase; font-weight: bold; text-decoration: none; transition: 0.3s; }
+.btn-edit:hover { background: #ff4655; color: white; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.info-box { background: #1b2733; padding: 25px; border-radius: 4px; border: 1px solid #333; position: relative; overflow: hidden; }
+.box-label { font-size: 12px; color: #888; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: block; }
+.box-value { font-size: 18px; color: white; font-weight: bold; }
+.my-team-card { grid-column: 1 / -1; background: linear-gradient(135deg, #1b2733 0%, #0f1923 100%); border: 1px solid #444; display: flex; align-items: center; justify-content: space-between; padding: 30px; position: relative; }
+.my-team-card::before { content: "SUPPORTING"; position: absolute; top: 10px; left: 20px; font-size: 10px; color: #ff4655; font-weight: 900; letter-spacing: 2px; }
+.team-info { z-index: 2; }
+.fav-team-name { font-size: 36px; font-weight: 900; text-transform: uppercase; color: white; line-height: 1; }
+.fav-team-region { color: #888; font-size: 14px; margin-top: 5px; }
+.team-logo-bg { width: 100px; opacity: 0.8; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); transition: 0.3s; }
+.my-team-card:hover .team-logo-bg { transform: scale(1.1) rotate(-5deg); opacity: 1; }
+.bio-box { grid-column: 1 / -1; background: rgba(0,0,0,0.3); padding: 20px; border-left: 3px solid #ff4655; font-style: italic; color: #ccc; }
+@media (max-width: 768px) { .dossier-grid { grid-template-columns: 1fr; } }
 
 
 .text-center { text-align: center; }

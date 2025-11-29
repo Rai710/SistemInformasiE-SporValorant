@@ -29,10 +29,7 @@ $m = $stmt->get_result()->fetch_assoc();
 
 if(!$m) { echo "<h3 style='color:white;text-align:center;'>Match Not Found</h3>"; exit(); }
 
-// --- LOGIKA BO3 vs BO5 ---
-// BO5 aktif jika stage = 'Grand Final' (Sesuai request lu)
-// Atau bisa lu tambah kondisi: || $m['stage'] == 'Upper Final' dst kalau kolom stage mendukung
-$isBO5 = ($m['stage'] == 'Grand Final'); 
+$isBO5 = ($m['stage'] == 'Grand Final' || $m['match_week'] == 7);
 $maxScore = $isBO5 ? 3 : 2; 
 
 // --- LOGIKA LOCK ---
@@ -214,7 +211,7 @@ $winId = $hasPred ? $m['predicted_winner_id'] : 0;
 <!-- SCRIPT PINTAR AUTO WIN -->
 <script>
     function autoWin(team, maxScore) {
-        // Tentukan ID lawan
+        // Tentukan ID lawan (t1 vs t2)
         let opponent = (team === 't1') ? 't2' : 't1';
         
         let myInput = document.getElementById('sc_' + team);
@@ -223,26 +220,25 @@ $winId = $hasPred ? $m['predicted_winner_id'] : 0;
 
         let val = parseInt(myInput.value);
 
-        // 1. Validasi Max (Biar user gak iseng isi 99)
+        // 1. Cegah angka minus atau berlebih
+        if (val < 0) { myInput.value = 0; val = 0; }
         if (val > maxScore) { myInput.value = maxScore; val = maxScore; }
 
-        // 2. LOGIKA AUTO WIN
-        // Kalau skor kita = Max Score (2 utk BO3, 3 utk BO5) -> Kita Auto Menang
+        // 2. Logika Pemenang
         if (val === maxScore) {
-            myRad.checked = true; // Pilih Radio Button
+            // Kalau skor kita Max (Menang), otomatis centang kita sebagai pemenang
+            if(myRad) myRad.checked = true; 
             
-            // Limit skor lawan jadi (Max - 1)
-            // Contoh BO3: Kita 2, Lawan Max 1
-            // Contoh BO5: Kita 3, Lawan Max 2
+            // Lawan maksimal cuma boleh (Max - 1)
+            // BO3: Lawan max 1. BO5: Lawan max 2.
             if (parseInt(opInput.value) >= maxScore) {
                 opInput.value = maxScore - 1;
             }
-            opInput.max = maxScore - 1; 
+            opInput.setAttribute('max', maxScore - 1);
 
         } else {
-            // Kalau skor kita belum Max (misal 0 atau 1)
-            // Balikin Max lawan ke normal, siapa tau user mau ganti prediksi
-            opInput.max = maxScore;
+            // Kalau kita belum menang, lawan masih punya kesempatan menang
+            opInput.setAttribute('max', maxScore);
         }
     }
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2025 at 01:51 PM
+-- Generation Time: Nov 29, 2025 at 11:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,31 +39,33 @@ CREATE TABLE `agents` (
 --
 
 INSERT INTO `agents` (`agent_id`, `agent_name`, `role`, `agent_image`) VALUES
-(1, 'Jett', 'Duelist', NULL),
-(2, 'Raze', 'Duelist', NULL),
-(3, 'Reyna', 'Duelist', NULL),
-(4, 'Phoenix', 'Duelist', NULL),
-(5, 'Yoru', 'Duelist', NULL),
-(6, 'Neon', 'Duelist', NULL),
-(7, 'Iso', 'Duelist', NULL),
-(8, 'Omen', 'Controller', NULL),
-(9, 'Brimstone', 'Controller', NULL),
-(10, 'Viper', 'Controller', NULL),
-(11, 'Astra', 'Controller', NULL),
-(12, 'Harbor', 'Controller', NULL),
-(13, 'Clove', 'Controller', NULL),
-(14, 'Sova', 'Initiator', NULL),
-(15, 'Breach', 'Initiator', NULL),
-(16, 'Skye', 'Initiator', NULL),
-(17, 'KAY/O', 'Initiator', NULL),
-(18, 'Fade', 'Initiator', NULL),
-(19, 'Gekko', 'Initiator', NULL),
-(20, 'Sage', 'Sentinel', NULL),
-(21, 'Cypher', 'Sentinel', NULL),
-(22, 'Killjoy', 'Sentinel', NULL),
-(23, 'Chamber', 'Sentinel', NULL),
-(24, 'Deadlock', 'Sentinel', NULL),
-(25, 'Vyse', 'Sentinel', NULL);
+(1, 'Jett', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/d41286dc9017bf79c0b4d907b7a260c27b0adb69-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(2, 'Raze', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/40b4b242b68afe30d21e7f95bdcacaebca46ea60-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(3, 'Reyna', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/7cb513c9b3eae3286449776e85753138436d553c-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(4, 'Phoenix', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/47387e354c34d51b84066bc47af3c5755b92b9c5-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(5, 'Yoru', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/05e1a996814dd10d7179efee327d29a7be00e912-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(6, 'Neon', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/14145d7bf9be17afa80c04ee4fbe200076cc1769-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(7, 'Iso', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/2c35cef9c38283f8478d1e808b1c129f371e50b3-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(8, 'Omen', 'Controller', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/015a083717e9687de8a741cfceddb836775b5f9f-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(9, 'Brimstone', 'Controller', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/51e62f3c74356a7501d06feba42ac643133257d7-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(10, 'Viper', 'Controller', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/152244f121e61ca32bdd2bea9fc5370e315664fb-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(11, 'Astra', 'Controller', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/ba51d43803082941b0274b66413b0acc972546dd-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(12, 'Harbor', 'Controller', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1246b5c517f6c8fa660e884a7032c1c54994003e-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(13, 'Clove', 'Controller', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/9f02060077f9d61dbe89555a339e6231006d9b7b-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(14, 'Sova', 'Initiator', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/08b3d8822544bd327ebed0768c8b90fcec83d1a5-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(15, 'Breach', 'Initiator', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/e435c3378b7999a3338b408dbb5da8ba63f91150-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(16, 'Skye', 'Initiator', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/37ea1466beebb54aad4f16efbad184566cb80368-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(17, 'KAY/O', 'Initiator', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/fe52e0efac73ec782b19a54e98a4658b03677407-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(18, 'Fade', 'Initiator', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/e7099cc13a665ed2b556d514e50984393ed49967-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(19, 'Gekko', 'Initiator', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/8d88f133f735f6a9077679b1ece754e5624c728e-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(20, 'Sage', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/58a180961a14beb631877921e647c233804853c1-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(21, 'Cypher', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/4a648cdbcbbeef137050deefeaf6a1369c606666-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(22, 'Killjoy', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/820d36d431fff77b1e1ece39ad6f007746bd31f6-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(23, 'Chamber', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/0f5b668b77499c0051201389d6ac5e7343c9727f-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(24, 'Deadlock', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/477284dfe402a85abcf6b07512bcd6f01c8fe60e-616x822.png?auto=format&fit=fill&q=80&w=402'),
+(25, 'Vyse', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/370e4b820670ef0bac7e685f6e8c5e64d19f1890-587x900.png?auto=format&fit=fill&q=80&w=402'),
+(26, 'Veto', 'Sentinel', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/b89de74fedbb633bdbd7a4423c270957aef18514-587x900.png?auto=format&fit=fill&q=80&w=402'),
+(27, 'Waylay', 'Duelist', 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/11c2b158d932076d3215749a34b7b4209b48ce44-587x900.png?auto=format&fit=fill&q=80&w=402');
 
 -- --------------------------------------------------------
 
@@ -106,17 +108,17 @@ CREATE TABLE `event_teams` (
 
 INSERT INTO `event_teams` (`id`, `event_id`, `team_id`, `group_name`) VALUES
 (1, 1, 1, 'Group A'),
-(2, 1, 2, 'Group B'),
+(2, 1, 2, 'Group A'),
 (3, 1, 3, 'Group B'),
 (4, 1, 4, 'Group A'),
 (5, 1, 5, 'Group B'),
-(6, 1, 6, 'Group A'),
+(6, 1, 6, 'Group B'),
 (7, 1, 7, 'Group B'),
-(8, 1, 8, 'Group B'),
-(9, 1, 9, 'Group A'),
-(10, 1, 10, 'Group A'),
+(8, 1, 8, 'Group A'),
+(9, 1, 9, 'Group B'),
+(10, 1, 10, 'Group B'),
 (11, 1, 11, 'Group A'),
-(12, 1, 12, 'Group B'),
+(12, 1, 12, 'Group A'),
 (16, 3, 1, 'Group A'),
 (17, 3, 2, 'Group A'),
 (18, 3, 3, 'Group B'),
@@ -129,15 +131,15 @@ INSERT INTO `event_teams` (`id`, `event_id`, `team_id`, `group_name`) VALUES
 (26, 3, 11, 'Group B'),
 (27, 3, 12, 'Group B'),
 (28, 3, 13, 'Group A'),
-(31, 2, 1, 'Group A'),
-(32, 2, 2, 'Group B'),
-(33, 2, 3, 'Group B'),
+(31, 2, 1, 'Group B'),
+(32, 2, 2, 'Group A'),
+(33, 2, 3, 'Group A'),
 (34, 2, 4, 'Group A'),
 (35, 2, 5, 'Group B'),
-(36, 2, 6, 'Group A'),
-(37, 2, 7, 'Group B'),
+(36, 2, 6, 'Group B'),
+(37, 2, 7, 'Group A'),
 (38, 2, 8, 'Group B'),
-(39, 2, 9, 'Group A'),
+(39, 2, 9, 'Group B'),
 (40, 2, 10, 'Group A'),
 (41, 2, 11, 'Group A'),
 (42, 2, 12, 'Group B');
@@ -166,48 +168,6 @@ CREATE TABLE `match_esports` (
 --
 
 INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, `team2_score`, `match_date`, `event_id`, `stage`, `group_name`, `match_week`) VALUES
-(1, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', NULL, 1),
-(2, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', NULL, 1),
-(3, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', NULL, 1),
-(4, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', NULL, 1),
-(5, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', NULL, 1),
-(6, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', NULL, 1),
-(7, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', NULL, 2),
-(8, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', NULL, 2),
-(9, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', NULL, 2),
-(10, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', NULL, 2),
-(11, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', NULL, 2),
-(12, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', NULL, 2),
-(13, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', NULL, 3),
-(14, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', NULL, 3),
-(15, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', NULL, 3),
-(16, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', NULL, 3),
-(17, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', NULL, 3),
-(18, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', NULL, 3),
-(19, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', NULL, 4),
-(20, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', NULL, 4),
-(21, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', NULL, 4),
-(22, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', NULL, 4),
-(23, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', NULL, 4),
-(24, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', NULL, 4),
-(25, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', NULL, 5),
-(26, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', NULL, 5),
-(27, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', NULL, 5),
-(28, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', NULL, 5),
-(29, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', NULL, 5),
-(30, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', NULL, 5),
-(31, 5, 4, 1, 2, '2025-04-26', 1, 'Playoffs', NULL, 5),
-(32, 2, 6, 2, 0, '2025-04-26', 1, 'Playoffs', NULL, 5),
-(33, 8, 4, 0, 2, '2025-04-27', 1, 'Playoffs', NULL, 5),
-(34, 3, 2, 2, 1, '2025-04-27', 1, 'Playoffs', NULL, 5),
-(35, 7, 5, 1, 2, '2025-04-28', 1, 'Playoffs', NULL, NULL),
-(36, 1, 6, 2, 1, '2025-04-28', 1, 'Playoffs', NULL, NULL),
-(37, 5, 2, 0, 2, '2025-04-29', 1, 'Playoffs', NULL, NULL),
-(38, 1, 8, 2, 0, '2025-04-29', 1, 'Playoffs', NULL, NULL),
-(39, 4, 3, 2, 0, '2025-05-02', 1, 'Playoffs', NULL, NULL),
-(40, 2, 1, 0, 2, '2025-05-03', 1, 'Playoffs', NULL, NULL),
-(41, 3, 1, 3, 2, '2025-05-04', 1, 'Playoffs', NULL, NULL),
-(42, 4, 3, 1, 3, '2025-05-10', 1, 'Grand Final', NULL, NULL),
 (43, 8, 5, 0, 2, '2025-07-15', 2, 'Group Stage', NULL, 1),
 (44, 7, 10, 2, 1, '2025-07-15', 2, 'Group Stage', NULL, 1),
 (45, 6, 1, 0, 2, '2025-07-16', 2, 'Group Stage', NULL, 1),
@@ -236,50 +196,104 @@ INSERT INTO `match_esports` (`match_id`, `team1_id`, `team2_id`, `team1_score`, 
 (68, 8, 9, 1, 2, '2025-08-09', 2, 'Group Stage', NULL, 4),
 (69, 3, 10, 2, 1, '2025-08-10', 2, 'Group Stage', NULL, 4),
 (70, 6, 12, 2, 0, '2025-08-10', 2, 'Group Stage', NULL, 4),
-(71, 5, 7, 2, 0, '2025-08-13', 2, 'Playoffs', NULL, NULL),
-(72, 3, 6, 1, 2, '2025-08-13', 2, 'Playoffs', NULL, NULL),
-(73, 2, 5, 1, 2, '2025-08-14', 2, 'Playoffs', NULL, NULL),
-(74, 1, 6, 2, 0, '2025-08-14', 2, 'Playoffs', NULL, NULL),
-(75, 7, 12, 2, 0, '2025-08-15', 2, 'Playoffs', NULL, NULL),
-(76, 3, 4, 2, 1, '2025-08-15', 2, 'Playoffs', NULL, NULL),
-(77, 6, 7, 2, 0, '2025-08-16', 2, 'Playoffs', NULL, NULL),
-(78, 2, 3, 0, 2, '2025-08-16', 2, 'Playoffs', NULL, NULL),
-(79, 5, 1, 0, 2, '2025-08-17', 2, 'Playoffs', NULL, NULL),
-(80, 6, 3, 1, 2, '2025-08-17', 2, 'Playoffs', NULL, NULL),
-(81, 5, 3, 2, 3, '2025-08-30', 2, 'Playoffs', NULL, NULL),
-(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL, NULL),
+(71, 5, 7, 2, 0, '2025-08-13', 2, 'Playoffs', NULL, 1),
+(72, 3, 6, 1, 2, '2025-08-13', 2, 'Playoffs', NULL, 1),
+(73, 2, 5, 1, 2, '2025-08-14', 2, 'Playoffs', NULL, 2),
+(74, 1, 6, 2, 0, '2025-08-14', 2, 'Playoffs', NULL, 2),
+(75, 7, 12, 2, 0, '2025-08-15', 2, 'Playoffs', NULL, 4),
+(76, 3, 4, 2, 1, '2025-08-15', 2, 'Playoffs', NULL, 4),
+(77, 6, 7, 2, 0, '2025-08-16', 2, 'Playoffs', NULL, 5),
+(78, 2, 3, 0, 2, '2025-08-16', 2, 'Playoffs', NULL, 5),
+(79, 5, 1, 0, 2, '2025-08-17', 2, 'Playoffs', NULL, 3),
+(80, 6, 3, 1, 2, '2025-08-17', 2, 'Playoffs', NULL, 6),
+(81, 5, 3, 2, 3, '2025-08-30', 2, 'Playoffs', NULL, 7),
+(82, 1, 3, 3, 1, '2025-08-31', 2, 'Grand Final', NULL, 8),
 (83, 4, 10, 2, 0, '2025-08-01', 2, 'Group Stage', NULL, 3),
 (84, 5, 6, 2, 0, '2025-08-01', 2, 'Group Stage', NULL, 3),
-(233, 1, 13, 0, 0, '2026-03-15', 3, 'Group Stage', NULL, 1),
-(234, 3, 6, 0, 0, '2026-03-15', 3, 'Group Stage', NULL, 1),
-(235, 2, 9, 0, 0, '2026-03-16', 3, 'Group Stage', NULL, 1),
-(236, 5, 4, 0, 0, '2026-03-16', 3, 'Group Stage', NULL, 1),
-(237, 7, 10, 0, 0, '2026-03-17', 3, 'Group Stage', NULL, 1),
-(238, 11, 12, 0, 0, '2026-03-17', 3, 'Group Stage', NULL, 1),
-(239, 1, 2, 0, 0, '2026-03-22', 3, 'Group Stage', NULL, 2),
-(240, 6, 5, 0, 0, '2026-03-22', 3, 'Group Stage', NULL, 2),
-(241, 3, 13, 0, 0, '2026-03-23', 3, 'Group Stage', NULL, 2),
-(242, 4, 7, 0, 0, '2026-03-23', 3, 'Group Stage', NULL, 2),
-(243, 9, 11, 0, 0, '2026-03-24', 3, 'Group Stage', NULL, 2),
-(244, 12, 10, 0, 0, '2026-03-24', 3, 'Group Stage', NULL, 2),
-(245, 1, 3, 0, 0, '2026-03-29', 3, 'Group Stage', NULL, 3),
-(246, 2, 5, 0, 0, '2026-03-29', 3, 'Group Stage', NULL, 3),
-(247, 6, 4, 0, 0, '2026-03-30', 3, 'Group Stage', NULL, 3),
-(248, 13, 7, 0, 0, '2026-03-30', 3, 'Group Stage', NULL, 3),
-(249, 9, 12, 0, 0, '2026-03-31', 3, 'Group Stage', NULL, 3),
-(250, 10, 11, 0, 0, '2026-03-31', 3, 'Group Stage', NULL, 3),
-(251, 1, 6, 0, 0, '2026-04-05', 3, 'Group Stage', NULL, 4),
-(252, 3, 2, 0, 0, '2026-04-05', 3, 'Group Stage', NULL, 4),
-(253, 5, 13, 0, 0, '2026-04-06', 3, 'Group Stage', NULL, 4),
-(254, 4, 9, 0, 0, '2026-04-06', 3, 'Group Stage', NULL, 4),
-(255, 7, 12, 0, 0, '2026-04-07', 3, 'Group Stage', NULL, 4),
-(256, 11, 1, 0, 0, '2026-04-07', 3, 'Group Stage', NULL, 4),
-(257, 13, 2, 0, 0, '2026-04-12', 3, 'Group Stage', NULL, 5),
-(258, 3, 5, 0, 0, '2026-04-12', 3, 'Group Stage', NULL, 5),
-(259, 4, 11, 0, 0, '2026-04-13', 3, 'Group Stage', NULL, 5),
-(260, 6, 10, 0, 0, '2026-04-13', 3, 'Group Stage', NULL, 5),
-(261, 9, 7, 0, 0, '2026-04-14', 3, 'Group Stage', NULL, 5),
-(262, 12, 13, 0, 0, '2026-04-14', 3, 'Group Stage', NULL, 5);
+(233, 1, 13, 2, 0, '2026-03-15', 3, 'Group Stage', 'G', 1),
+(234, 2, 10, 2, 1, '2026-03-15', 3, 'Group Stage', 'G', 1),
+(235, 6, 9, 1, 2, '2026-03-16', 3, 'Group Stage', 'G', 1),
+(236, 3, 12, 2, 0, '2026-03-16', 3, 'Group Stage', 'G', 1),
+(237, 4, 11, 2, 0, '2026-03-17', 3, 'Group Stage', 'G', 1),
+(238, 5, 7, 2, 1, '2026-03-17', 3, 'Group Stage', 'G', 1),
+(239, 1, 10, 2, 1, '2026-03-22', 3, 'Group Stage', 'G', 2),
+(240, 13, 9, 2, 0, '2026-03-22', 3, 'Group Stage', 'G', 2),
+(241, 2, 6, 1, 2, '2026-03-23', 3, 'Group Stage', 'G', 2),
+(242, 3, 11, 1, 2, '2026-03-23', 3, 'Group Stage', 'G', 2),
+(243, 12, 7, 0, 2, '2026-03-24', 3, 'Group Stage', 'G', 2),
+(244, 4, 5, 2, 0, '2026-03-24', 3, 'Group Stage', 'G', 2),
+(245, 1, 9, 2, 0, '2026-03-29', 3, 'Group Stage', 'G', 3),
+(246, 10, 6, 2, 1, '2026-03-29', 3, 'Group Stage', 'G', 3),
+(247, 13, 2, 0, 2, '2026-03-30', 3, 'Group Stage', 'G', 3),
+(248, 3, 7, 2, 0, '2026-03-30', 3, 'Group Stage', 'G', 3),
+(249, 11, 5, 0, 2, '2026-03-31', 3, 'Group Stage', 'G', 3),
+(250, 12, 4, 1, 2, '2026-03-31', 3, 'Group Stage', 'G', 3),
+(251, 1, 6, 1, 2, '2026-04-05', 3, 'Group Stage', 'G', 4),
+(252, 9, 2, 1, 2, '2026-04-05', 3, 'Group Stage', 'G', 4),
+(253, 10, 13, 2, 1, '2026-04-06', 3, 'Group Stage', 'G', 4),
+(254, 3, 5, 2, 1, '2026-04-06', 3, 'Group Stage', 'G', 4),
+(255, 7, 4, 2, 1, '2026-04-07', 3, 'Group Stage', 'G', 4),
+(256, 11, 12, 1, 2, '2026-04-07', 3, 'Group Stage', 'G', 4),
+(257, 1, 2, 2, 1, '2026-04-12', 3, 'Group Stage', 'G', 5),
+(258, 6, 13, 2, 0, '2026-04-12', 3, 'Group Stage', 'G', 5),
+(259, 9, 10, 2, 0, '2026-04-13', 3, 'Group Stage', 'G', 5),
+(260, 3, 4, 2, 1, '2026-04-13', 3, 'Group Stage', 'G', 5),
+(261, 5, 12, 2, 0, '2026-04-14', 3, 'Group Stage', 'G', 5),
+(293, 7, 11, 2, 0, '2026-04-14', 3, 'Group Stage', NULL, 5),
+(450, 6, 4, 0, 2, '2026-04-21', 3, 'Playoffs', NULL, 1),
+(451, 5, 2, 0, 2, '2026-04-21', 3, 'Playoffs', NULL, 1),
+(452, 1, 4, 0, 2, '2026-04-23', 3, 'Playoffs', NULL, 2),
+(453, 3, 2, 2, 0, '2026-04-23', 3, 'Playoffs', NULL, 2),
+(454, 6, 7, 2, 0, '2026-04-22', 3, 'Playoffs', NULL, 4),
+(455, 5, 9, 2, 0, '2026-04-22', 3, 'Playoffs', NULL, 4),
+(456, 1, 6, 2, 0, '2026-04-24', 3, 'Playoffs', NULL, 5),
+(457, 2, 5, 2, 0, '2026-04-24', 3, 'Playoffs', NULL, 5),
+(458, 4, 3, 2, 0, '2026-04-26', 3, 'Playoffs', NULL, 3),
+(459, 1, 2, 0, 2, '2026-04-25', 3, 'Playoffs', NULL, 6),
+(460, 3, 2, 2, 0, '2026-04-27', 3, 'Playoffs', NULL, 7),
+(461, 4, 3, 3, 2, '2026-04-28', 3, 'Grand Final', NULL, 8),
+(475, 12, 11, 0, 2, '2025-03-22', 1, 'Group Stage', NULL, 1),
+(476, 6, 9, 2, 1, '2025-03-22', 1, 'Group Stage', NULL, 1),
+(477, 2, 1, 2, 1, '2025-03-23', 1, 'Group Stage', NULL, 1),
+(478, 5, 10, 2, 1, '2025-03-23', 1, 'Group Stage', NULL, 1),
+(479, 4, 8, 0, 2, '2025-03-24', 1, 'Group Stage', NULL, 1),
+(480, 7, 3, 2, 1, '2025-03-24', 1, 'Group Stage', NULL, 1),
+(481, 10, 9, 0, 2, '2025-03-29', 1, 'Group Stage', NULL, 2),
+(482, 6, 7, 2, 0, '2025-03-29', 1, 'Group Stage', NULL, 2),
+(483, 4, 1, 2, 1, '2025-03-30', 1, 'Group Stage', NULL, 2),
+(484, 2, 12, 2, 0, '2025-03-30', 1, 'Group Stage', NULL, 2),
+(485, 5, 3, 0, 2, '2025-03-31', 1, 'Group Stage', NULL, 2),
+(486, 8, 11, 2, 0, '2025-03-31', 1, 'Group Stage', NULL, 2),
+(487, 4, 12, 2, 0, '2025-04-05', 1, 'Group Stage', NULL, 3),
+(488, 3, 9, 2, 0, '2025-04-05', 1, 'Group Stage', NULL, 3),
+(489, 1, 8, 1, 2, '2025-04-06', 1, 'Group Stage', NULL, 3),
+(490, 5, 7, 2, 1, '2025-04-06', 1, 'Group Stage', NULL, 3),
+(491, 2, 11, 2, 0, '2025-04-07', 1, 'Group Stage', NULL, 3),
+(492, 6, 10, 2, 1, '2025-04-07', 1, 'Group Stage', NULL, 3),
+(493, 7, 10, 2, 0, '2025-04-12', 1, 'Group Stage', NULL, 4),
+(494, 2, 8, 1, 2, '2025-04-12', 1, 'Group Stage', NULL, 4),
+(495, 6, 3, 1, 2, '2025-04-13', 1, 'Group Stage', NULL, 4),
+(496, 4, 11, 2, 0, '2025-04-13', 1, 'Group Stage', NULL, 4),
+(497, 5, 9, 0, 2, '2025-04-14', 1, 'Group Stage', NULL, 4),
+(498, 12, 1, 1, 2, '2025-04-14', 1, 'Group Stage', NULL, 4),
+(499, 1, 11, 2, 0, '2025-04-19', 1, 'Group Stage', NULL, 5),
+(500, 6, 5, 0, 2, '2025-04-19', 1, 'Group Stage', NULL, 5),
+(501, 2, 4, 2, 1, '2025-04-20', 1, 'Group Stage', NULL, 5),
+(502, 7, 9, 2, 1, '2025-04-20', 1, 'Group Stage', NULL, 5),
+(503, 12, 8, 0, 2, '2025-04-21', 1, 'Group Stage', NULL, 5),
+(504, 3, 10, 1, 2, '2025-04-21', 1, 'Group Stage', NULL, 5),
+(505, 5, 4, 1, 2, '2025-04-26', 1, 'Playoffs', NULL, 1),
+(506, 2, 6, 2, 0, '2025-04-26', 1, 'Playoffs', NULL, 1),
+(507, 8, 4, 0, 2, '2025-04-27', 1, 'Playoffs', NULL, 2),
+(508, 3, 2, 2, 1, '2025-04-27', 1, 'Playoffs', NULL, 2),
+(509, 5, 7, 2, 1, '2025-05-03', 1, 'Playoffs', NULL, 4),
+(510, 6, 1, 1, 2, '2025-05-03', 1, 'Playoffs', NULL, 4),
+(511, 2, 5, 2, 0, '2025-05-04', 1, 'Playoffs', NULL, 5),
+(512, 8, 1, 0, 2, '2025-05-04', 1, 'Playoffs', NULL, 5),
+(513, 4, 3, 2, 0, '2025-05-09', 1, 'Playoffs', NULL, 3),
+(514, 2, 1, 0, 2, '2025-05-09', 1, 'Playoffs', NULL, 6),
+(515, 3, 1, 3, 2, '2025-05-10', 1, 'Playoffs', NULL, 7),
+(516, 4, 3, 1, 3, '2025-05-11', 1, 'Grand Final', NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -304,9 +318,8 @@ CREATE TABLE `pickem_predictions` (
 --
 
 INSERT INTO `pickem_predictions` (`prediction_id`, `user_id`, `match_id`, `predicted_winner_id`, `predicted_score_t1`, `predicted_score_t2`, `is_graded`, `score_awarded`, `prediction_date`) VALUES
-(1, 3, 234, 3, 2, 1, 0, 0, '2025-11-28 11:29:27'),
-(2, 3, 233, 1, 2, 0, 0, 0, '2025-11-28 11:29:37'),
-(3, 3, 236, 5, 2, 0, 0, 0, '2025-11-28 12:28:16');
+(11, 3, 233, 1, 2, 0, 1, 15, '2025-11-29 01:21:14'),
+(12, 3, 244, 4, 2, 0, 1, 15, '2025-11-29 07:35:23');
 
 -- --------------------------------------------------------
 
@@ -413,7 +426,7 @@ CREATE TABLE `system_settings` (
 --
 
 INSERT INTO `system_settings` (`setting_key`, `setting_value`) VALUES
-('active_week', 'Week 1');
+('active_week', 'Playoff');
 
 -- --------------------------------------------------------
 
@@ -426,28 +439,28 @@ CREATE TABLE `team` (
   `team_name` varchar(255) NOT NULL,
   `country` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
-  `group_name` varchar(50) DEFAULT NULL
+  `logo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`team_id`, `team_name`, `country`, `description`, `logo`, `group_name`) VALUES
-(1, 'Paper Rex', 'Singapore', 'Paper Rex adalah salah satu tim Valorant paling ikonik di APAC, terkenal dengan gaya bermain yang agresif dan kreatif. Mereka sering tampil memukau di turnamen regional maupun internasional, membawa nama Singapore ke level tinggi dan selalu menjadi favorit fans di setiap kompetisi.', 'https://i.imgur.com/HdiTzhg.webp', 'Group A'),
-(2, 'DRX', 'Korea', 'DRX merupakan tim Korea yang dikenal dengan kedisiplinan luar biasa dan strategi matang. Meskipun menghadapi tekanan dari tim-tim APAC lain, DRX selalu mampu menunjukkan permainan solid yang membuat mereka menjadi salah satu tim terkuat di regional, serta memiliki beberapa pemain bintang yang diakui secara internasional.', 'https://owcdn.net/img/63b17abd77fc0.png', 'Group B'),
-(3, 'RRQ', 'Indonesia', 'RRQ Valorant adalah wakil Indonesia yang sudah membuktikan diri di berbagai turnamen APAC. Dengan kombinasi pemain muda berbakat dan veteran berpengalaman, mereka mampu menghadirkan permainan yang cepat, taktis, dan sering memberikan momen-momen menegangkan bagi fans. RRQ terus membangun reputasi sebagai tim yang sulit dikalahkan.', 'https://owcdn.net/img/629f17f51e7a3.png', 'Group B'),
-(4, 'Gen.G', 'Malaysia', 'Gen.G adalah tim Malaysia yang fokus membina pemain muda berbakat untuk bersaing di kancah APAC. Mereka dikenal dengan gaya bermain agresif, kerja sama tim yang solid, dan sering menampilkan kejutan-kejutan menarik di setiap turnamen, menjadikan mereka tim yang selalu diperhitungkan oleh lawan.', 'https://liquipedia.net/commons/images/thumb/3/34/Gen.G_Esports_2019_full_darkmode.png/600px-Gen.G_Esports_2019_full_darkmode.png', NULL),
-(5, 'Talon Esports', 'Thailand', 'Talon Esports berasal dari Thailand dan telah lama berkompetisi di berbagai turnamen APAC. Tim ini terkenal dengan roster yang seimbang antara pengalaman dan pemain muda, serta strategi yang fleksibel. Talon sering menjadi sorotan karena kemampuan mereka mengubah alur pertandingan dengan taktik brilian.', 'https://owcdn.net/img/6226f3d764e03.png', 'Group B'),
-(6, 'T1', 'Korea', 'T1 adalah tim Korea yang memiliki reputasi kuat dalam hal strategi dan disiplin. Mereka selalu mempersiapkan diri secara matang sebelum setiap turnamen, sehingga mampu mengontrol permainan lawan dan menunjukkan performa stabil. T1 juga sering menjadi pelopor inovasi strategi baru di kancah APAC.', 'https://owcdn.net/img/62fe0b8f6b084.png', 'Group A'),
-(7, 'Nongshim RedForce', 'Korea', 'Nongshim RedForce (NS RedForce) adalah tim Valorant Korea yang agresif dan memiliki pemain muda berbakat. Mereka tampil konsisten di kancah APAC dan selalu menjadi lawan tangguh di setiap turnamen.', 'https://owcdn.net/img/6399bb707aacb.png', 'Group B'),
-(8, 'BOOM Esports', 'Indonesia', 'BOOM Esports adalah salah satu tim Indonesia yang dikenal konsisten dan kompetitif di APAC. Mereka menekankan komunikasi tim yang kuat dan strategi matang, sering menunjukkan performa mengejutkan dalam turnamen regional dan selalu memberikan pertandingan seru bagi para penonton.', 'https://owcdn.net/img/629f1bdae82ab.png', 'Group B'),
-(9, 'ZETA Division', 'Japan', 'ZETA Division adalah tim Jepang yang memiliki reputasi tinggi berkat pemain muda berbakat dan kerja sama tim yang solid. Mereka sering tampil di turnamen APAC dengan performa menawan, serta dikenal karena ketekunan dalam latihan dan inovasi strategi yang membuat lawan kesulitan.', 'https://liquipedia.net/commons/images/thumb/9/95/ZETA_DIVISION_darkmode.png/600px-ZETA_DIVISION_darkmode.png', 'Group A'),
-(10, 'Team Secret', 'Thailand', 'Team Secret dari Thailand dikenal fleksibilitas pemainnya dan gaya bermain kreatif. Tim ini mampu menyesuaikan strategi di tengah pertandingan dan sering menciptakan momen mengejutkan yang membuat mereka menjadi lawan yang tangguh di setiap turnamen APAC.', 'https://liquipedia.net/commons/images/thumb/d/d2/Team_Secret_darkmode.png/600px-Team_Secret_darkmode.png', 'Group A'),
-(11, 'Global Esports', 'Malaysia', 'Global Esports adalah tim Malaysia yang fokus mengembangkan pemain muda berbakat. Mereka dikenal mampu menghadirkan permainan cepat dan agresif, dengan kerja sama tim yang baik, serta sering memberikan kejutan pada turnamen-turnamen besar di APAC.', 'https://owcdn.net/img/629f316ddd4dd.png', 'Group A'),
-(12, 'Detonation FocusMe', 'Japan', 'Detonation FocusMe (DFM) adalah tim Jepang yang konsisten menunjukkan performa tinggi di kancah APAC. Mereka terkenal dengan strategi matang, komunikasi yang efektif, dan kemampuan adaptasi yang baik, menjadikan DFM selalu diperhitungkan dalam setiap pertandingan.', 'https://liquipedia.net/commons/images/thumb/0/08/DetonatioN_FocusMe_2022_full_darkmode.png/600px-DetonatioN_FocusMe_2022_full_darkmode.png', 'Group B'),
-(13, 'SLT Seongnam', 'South Korea', 'SLT Seongnam merupakan tim akademi Gen.G Esports yang berkompetisi di VCL Korea. Dikenal sebagai tim pengembang bakat muda Korea.', 'https://owcdn.net/img/641d8f2b943ee.png', 'Group C');
+INSERT INTO `team` (`team_id`, `team_name`, `country`, `description`, `logo`) VALUES
+(1, 'Paper Rex', 'Singapore', 'Paper Rex adalah salah satu tim Valorant paling ikonik di APAC, terkenal dengan gaya bermain yang agresif dan kreatif. Mereka sering tampil memukau di turnamen regional maupun internasional, membawa nama Singapore ke level tinggi dan selalu menjadi favorit fans di setiap kompetisi.', 'https://i.imgur.com/HdiTzhg.webp'),
+(2, 'DRX', 'Korea', 'DRX merupakan tim Korea yang dikenal dengan kedisiplinan luar biasa dan strategi matang. Meskipun menghadapi tekanan dari tim-tim APAC lain, DRX selalu mampu menunjukkan permainan solid yang membuat mereka menjadi salah satu tim terkuat di regional, serta memiliki beberapa pemain bintang yang diakui secara internasional.', 'https://owcdn.net/img/63b17abd77fc0.png'),
+(3, 'RRQ', 'Indonesia', 'RRQ Valorant adalah wakil Indonesia yang sudah membuktikan diri di berbagai turnamen APAC. Dengan kombinasi pemain muda berbakat dan veteran berpengalaman, mereka mampu menghadirkan permainan yang cepat, taktis, dan sering memberikan momen-momen menegangkan bagi fans. RRQ terus membangun reputasi sebagai tim yang sulit dikalahkan.', 'https://owcdn.net/img/629f17f51e7a3.png'),
+(4, 'Gen.G', 'Malaysia', 'Gen.G adalah tim Malaysia yang fokus membina pemain muda berbakat untuk bersaing di kancah APAC. Mereka dikenal dengan gaya bermain agresif, kerja sama tim yang solid, dan sering menampilkan kejutan-kejutan menarik di setiap turnamen, menjadikan mereka tim yang selalu diperhitungkan oleh lawan.', 'https://liquipedia.net/commons/images/thumb/3/34/Gen.G_Esports_2019_full_darkmode.png/600px-Gen.G_Esports_2019_full_darkmode.png'),
+(5, 'Talon Esports', 'Thailand', 'Talon Esports berasal dari Thailand dan telah lama berkompetisi di berbagai turnamen APAC. Tim ini terkenal dengan roster yang seimbang antara pengalaman dan pemain muda, serta strategi yang fleksibel. Talon sering menjadi sorotan karena kemampuan mereka mengubah alur pertandingan dengan taktik brilian.', 'https://owcdn.net/img/6226f3d764e03.png'),
+(6, 'T1', 'Korea', 'T1 adalah tim Korea yang memiliki reputasi kuat dalam hal strategi dan disiplin. Mereka selalu mempersiapkan diri secara matang sebelum setiap turnamen, sehingga mampu mengontrol permainan lawan dan menunjukkan performa stabil. T1 juga sering menjadi pelopor inovasi strategi baru di kancah APAC.', 'https://owcdn.net/img/62fe0b8f6b084.png'),
+(7, 'Nongshim RedForce', 'Korea', 'Nongshim RedForce (NS RedForce) adalah tim Valorant Korea yang agresif dan memiliki pemain muda berbakat. Mereka tampil konsisten di kancah APAC dan selalu menjadi lawan tangguh di setiap turnamen.', 'https://owcdn.net/img/6399bb707aacb.png'),
+(8, 'BOOM Esports', 'Indonesia', 'BOOM Esports adalah salah satu tim Indonesia yang dikenal konsisten dan kompetitif di APAC. Mereka menekankan komunikasi tim yang kuat dan strategi matang, sering menunjukkan performa mengejutkan dalam turnamen regional dan selalu memberikan pertandingan seru bagi para penonton.', 'https://owcdn.net/img/629f1bdae82ab.png'),
+(9, 'ZETA Division', 'Japan', 'ZETA Division adalah tim Jepang yang memiliki reputasi tinggi berkat pemain muda berbakat dan kerja sama tim yang solid. Mereka sering tampil di turnamen APAC dengan performa menawan, serta dikenal karena ketekunan dalam latihan dan inovasi strategi yang membuat lawan kesulitan.', 'https://liquipedia.net/commons/images/thumb/9/95/ZETA_DIVISION_darkmode.png/600px-ZETA_DIVISION_darkmode.png'),
+(10, 'Team Secret', 'Thailand', 'Team Secret dari Thailand dikenal fleksibilitas pemainnya dan gaya bermain kreatif. Tim ini mampu menyesuaikan strategi di tengah pertandingan dan sering menciptakan momen mengejutkan yang membuat mereka menjadi lawan yang tangguh di setiap turnamen APAC.', 'https://liquipedia.net/commons/images/thumb/d/d2/Team_Secret_darkmode.png/600px-Team_Secret_darkmode.png'),
+(11, 'Global Esports', 'Malaysia', 'Global Esports adalah tim Malaysia yang fokus mengembangkan pemain muda berbakat. Mereka dikenal mampu menghadirkan permainan cepat dan agresif, dengan kerja sama tim yang baik, serta sering memberikan kejutan pada turnamen-turnamen besar di APAC.', 'https://owcdn.net/img/629f316ddd4dd.png'),
+(12, 'Detonation FocusMe', 'Japan', 'Detonation FocusMe (DFM) adalah tim Jepang yang konsisten menunjukkan performa tinggi di kancah APAC. Mereka terkenal dengan strategi matang, komunikasi yang efektif, dan kemampuan adaptasi yang baik, menjadikan DFM selalu diperhitungkan dalam setiap pertandingan.', 'https://liquipedia.net/commons/images/thumb/0/08/DetonatioN_FocusMe_2022_full_darkmode.png/600px-DetonatioN_FocusMe_2022_full_darkmode.png'),
+(13, 'SLT Seongnam', 'South Korea', 'SLT Seongnam merupakan tim akademi Gen.G Esports yang berkompetisi di VCL Korea. Dikenal sebagai tim pengembang bakat muda Korea.', 'https://owcdn.net/img/641d8f2b943ee.png'),
+(999, 'TBD', 'Unknown', 'Menunggu Pemenang', 'assets/images/default.png');
 
 -- --------------------------------------------------------
 
@@ -492,8 +505,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `riot_id`, `discord_username`, `password`, `role`, `created_at`, `bio`, `avatar_image`, `rank_tier`, `favorite_team_id`, `agent_id`, `total_pickem_points`) VALUES
-(2, 'raihan', 'ad@gmail.com', '', '', 'admin', 'user', '2025-11-24 15:17:47', '', 'assets/images/avatar.png', 'Bronze', NULL, NULL, 0),
-(3, 'admin', 'admin@val.id', 'BAJA', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/69298b6ee496e.jpg', 'Radiant', 8, 23, 0);
+(2, 'raihan', 'ad@gmail.com', '33', '', 'admin', 'user', '2025-11-24 15:17:47', 'Jangan lupa makan', 'assets/images/6929b3f49b70b.png', 'Radiant', 4, 10, 0),
+(3, 'admin', 'admin@val.id', 'BAJA', '', 'adadad', 'admin', '2025-11-25 07:47:37', 'Jangan lupa makan', 'assets/images/6929a1286e017.png', 'Radiant', 8, 23, 30),
+(4, 'bismajembut', 'bismaganteng@gmail.com', '', '', '123', 'user', '2025-11-28 16:24:21', '', 'assets/images/6929d03e354ff.png', 'Unranked', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -580,7 +594,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agents`
 --
 ALTER TABLE `agents`
-  MODIFY `agent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `agent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -592,19 +606,19 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `event_teams`
 --
 ALTER TABLE `event_teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `match_esports`
 --
 ALTER TABLE `match_esports`
-  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=517;
 
 --
 -- AUTO_INCREMENT for table `pickem_predictions`
 --
 ALTER TABLE `pickem_predictions`
-  MODIFY `prediction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `prediction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `players`
@@ -616,7 +630,7 @@ ALTER TABLE `players`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 
 --
 -- AUTO_INCREMENT for table `team_stats`
@@ -628,7 +642,7 @@ ALTER TABLE `team_stats`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

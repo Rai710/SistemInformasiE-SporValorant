@@ -286,4 +286,4 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
 </script>
 
 </body>
-</html>
+</html> 

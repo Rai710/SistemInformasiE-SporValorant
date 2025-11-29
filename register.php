@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,9 +9,10 @@
 </head>
 
     <style>
+        /* ANIMASI SAAT HALAMAN DIBUKA (Zoom Out dikit + Fade In) */
         body.auth-page {
             animation: zoomInStart 0.8s ease-out forwards;
-            opacity: 0; 
+            opacity: 0; /* Mulai dari transparan */
         }
 
         @keyframes zoomInStart {
@@ -18,7 +20,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-
+        /* ANIMASI SAAT KELUAR (Pindah Halaman) */
         body.zoom-out {
             transform: scale(1.2);
             opacity: 0;
