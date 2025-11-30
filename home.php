@@ -116,7 +116,7 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
   /* 3. META WATCH */
   .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
   .meta-card { 
-      position: relative; height: 500px; background: #1b2733; border-radius: 8px; overflow: hidden; 
+      position: relative; height: 700px; background: #1b2733; border-radius: 8px; overflow: hidden; 
       border: 1px solid #333; transition: 0.3s;
   }
   .meta-card:hover { border-color: #ff4655; transform: scale(1.02); }
