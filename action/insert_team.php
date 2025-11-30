@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($team_name)) throw new Exception("Nama Tim wajib diisi!");
 
         // --- UPLOAD LOGO ---
-        $db_path = NULL; // Default NULL
+        $db_path = NULL;
         
         if (!empty($_FILES['logo']['name'])) {
             $target_dir = "../assets/images/teams/";
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 throw new Exception("Format logo harus JPG, PNG, atau WEBP!");
             }
 
-            // Nama file unik: team_randomstring.jpg
+            // Nama file unik
             $new_name = uniqid("team_") . "." . $file_ext;
             $target_file = $target_dir . $new_name;
             
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // --- INSERT DATABASE ---
-        // Kolom group_name SUDAH DIHAPUS dari query ini sesuai request
+        // Kolom group_name SUDAH DIHAPUS dari query
         $sql = "INSERT INTO team (team_name, country, description, logo) VALUES (?, ?, ?, ?)";
         
         $stmt = $koneksi->prepare($sql);

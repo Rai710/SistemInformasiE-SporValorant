@@ -21,7 +21,7 @@ if (isset($_GET['player_id']) && isset($_GET['team_id'])) {
         $_SESSION['success_msg'] = "Gagal kick pemain.";
     }
     
-    // Balik ke halaman roster tim tadi
+    // Balik ke halaman roster tim
     header("Location: ../admin/manage_team_players.php?team_id=" . $team_id);
     exit();
 }

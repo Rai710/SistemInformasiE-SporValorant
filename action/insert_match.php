@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Kita bungkus semua proses berbahaya dalam TRY
     try {
         $event_id   = (int)$_POST['event_id'];
         $team1_id   = (int)$_POST['team1_id'];
@@ -26,14 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if ($match_week > 5) {
-            // Kecuali Grand Final, mungkin mau lebih dari 5 week? Sesuaikan aja.
             throw new Exception("Week maksimal cuma sampai 5 bro!");
         }
 
         // --- VALIDASI 2: KHUSUS GROUP STAGE ---
         if ($stage == 'Group Stage') {
             
-            // Helper Function: Ambil Grup Tim
             function getGroup($conn, $tid, $evid) {
                 $q = $conn->prepare("SELECT group_name FROM event_teams WHERE event_id = ? AND team_id = ?");
                 $q->bind_param("ii", $evid, $tid);
@@ -86,16 +83,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $stmt->close();
 
-        // SUKSES? 
         $_SESSION['success_msg'] = "Match berhasil dibuat!";
         header("Location: ../admin/manage_matches.php");
         exit();
 
     } catch (Exception $e) {
-        // Tangkap pesan error dari 'throw' di atas
+        // Tangkap pesan error
         $_SESSION['error_msg'] = $e->getMessage();
         
-        // Balikin ke halaman Add Match
         header("Location: ../admin/add_match.php");
         exit();
     }

@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ign         = trim($_POST['ign']);
         $real_name   = trim($_POST['real_name']);
         
-        // Kalau kosong berarti Free Agent (NULL)
         $team_id     = !empty($_POST['team_id']) ? (int)$_POST['team_id'] : NULL;
         
         $role        = $_POST['role'];
@@ -21,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($ign)) throw new Exception("IGN Wajib diisi bos!");
 
         // --- UPLOAD FOTO ---
-        $db_path = NULL; // Default kalau gak upload
+        $db_path = NULL;
         if (!empty($_FILES['photo']['name'])) {
             $target_dir = "../assets/images/players/";
             if (!file_exists($target_dir)) mkdir($target_dir, 0777, true);
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 throw new Exception("Format gambar salah! Harus JPG/PNG/WEBP.");
             }
 
-            // Nama unik biar gak bentrok
+            // Nama unik
             $new_name = "player_" . uniqid() . "." . $file_ext;
             $target_file = $target_dir . $new_name;
             
@@ -49,13 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES (?, ?, ?, ?, ?, ?, NOW())";
         
         $stmt = $koneksi->prepare($sql);
-        // types: s=string, i=int. team_id bisa null jadi tetep 'i' gapapa di php 8+
+        // types: s=string, i=int.
         $stmt->bind_param("ssisss", $ign, $real_name, $team_id, $role, $nationality, $db_path);
 
         if ($stmt->execute()) {
             $_SESSION['success_msg'] = "Player baru <strong>$ign</strong> berhasil direkrut!";
             
-            // --- REDIRECT PINTAR ---
             if ($team_id) {
                 // Balik ke Roster Tim tempat dia direkrut
                 header("Location: ../admin/manage_team_players.php?team_id=" . $team_id);
@@ -70,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } catch (Exception $e) {
         $_SESSION['error_msg'] = $e->getMessage();
-        // Kalau error, balikin ke form add, bawa parameter team_id biar gak ilang
+        // Kalau error, balikin ke form add
         $back_url = "../admin/add_player.php";
         if(!empty($_POST['team_id'])) $back_url .= "?pre_team_id=" . $_POST['team_id'];
         
