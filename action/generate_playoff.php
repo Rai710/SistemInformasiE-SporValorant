@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 }
 
 // ==========================================
-// BAGIAN 1: PROSES GENERATE (JALAN KALAU DI-POST)
+// BAGIAN 1: PROSES GENERATE
 // ==========================================
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
@@ -28,10 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $koneksi->query("INSERT IGNORE INTO team (team_id, team_name, logo) VALUES (999, 'TBD', 'assets/images/default.png')");
         $tbd = 999;
 
-        // 2. SAFETY DELETE (Hapus Playoff Event Terpilih Saja)
+        // 2. SAFETY DELETE
         $koneksi->query("DELETE FROM match_esports WHERE event_id = $event_id AND stage IN ('Playoffs', 'Grand Final')");
 
-        // 3. HITUNG KLASEMEN (Logic Klasemen)
+        // 3. HITUNG KLASEMEN
         $sql_teams = "SELECT t.team_id, et.group_name FROM team t JOIN event_teams et ON t.team_id = et.team_id WHERE et.event_id = $event_id";
         $res = $koneksi->query($sql_teams);
         
@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $diff = $m['team1_score'] - $m['team2_score'];
             $win1 = $m['team1_score'] > $m['team2_score'];
             
-            // Cek Grup (Manual check via array key biar aman)
             foreach(['Group A', 'Group B'] as $g) {
                 if(isset($standings[$g][$id1])) { $standings[$g][$id1]['diff'] += $diff; if($win1) $standings[$g][$id1]['win']++; }
                 if(isset($standings[$g][$id2])) { $standings[$g][$id2]['diff'] -= $diff; if(!$win1) $standings[$g][$id2]['win']++; }
@@ -108,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $koneksi->commit();
         
-        // Redirect balik ke manage matches dengan filter event yang baru digenerate
         header("Location: ../admin/manage_matches.php?event_id=$event_id&msg=generated_success");
         exit();
 
@@ -119,8 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
     
 
-// BAGIAN 2: TAMPILAN FORM (KALAU BELUM DI-POST)
-// Ambil daftar event buat dropdown
+// BAGIAN 2: TAMPILAN FORM 
 $q_events = $koneksi->query("SELECT * FROM events ORDER BY event_date DESC");
 ?>
 

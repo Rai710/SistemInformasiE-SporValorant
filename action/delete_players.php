@@ -12,8 +12,7 @@ if (isset($_GET['id'])) {
     $data = $q->fetch_assoc();
 
     if ($data) {
-        $team_id_lama = $data['team_id']; // Simpen ID timnya
-
+        $team_id_lama = $data['team_id'];
         // Hapus Foto
         if (!empty($data['photo']) && strpos($data['photo'], 'http') === false) {
             $file_path = "../" . $data['photo'];
@@ -30,9 +29,8 @@ if (isset($_GET['id'])) {
             $_SESSION['success_msg'] = "Gagal hapus: " . $koneksi->error;
         }
 
-        // REDIRECT PINTAR
         if (!empty($team_id_lama)) {
-            // Kalau dia punya tim, balik ke halaman timnya
+            // Punya tim, balik ke halaman timnya
             header("Location: ../admin/manage_team_players.php?team_id=" . $team_id_lama);
         } else {
             header("Location: ../admin/manage_players.php");

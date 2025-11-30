@@ -18,7 +18,7 @@
     $stage_name = $stage_data['event_name'] ?? "VCT PACIFIC";
     $q_event_name->close();
 
-    // SIAPKAN CONTAINER DATA
+    // CONTAINER DATA
     $matches_by_week = [
         'week1' => ['label' => 'WEEK 1', 'data' => []],
         'week2' => ['label' => 'WEEK 2', 'data' => []],
@@ -46,17 +46,15 @@
     if($result && $result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             
-            // === [FIX] PENGAMAN DATA KOSONG ===
-            // Kalau logo/nama gak ketemu (karena tim dihapus/salah ID), pake default
+            // === PENGAMAN DATA KOSONG ===
             $row['team1_name'] = $row['team1_name'] ?? 'TBD';
             $row['team1_logo'] = !empty($row['team1_logo']) ? $row['team1_logo'] : 'assets/images/default.png';
             
             $row['team2_name'] = $row['team2_name'] ?? 'TBD';
             $row['team2_logo'] = !empty($row['team2_logo']) ? $row['team2_logo'] : 'assets/images/default.png';
-            // ==================================
 
             if($row['stage'] == 'Playoffs' || $row['stage'] == 'Grand Final'){
-                $round_code = $row['match_week'] ?? 0; // Default 0 kalau null
+                $round_code = $row['match_week'] ?? 0;
                 if(isset($playoff_rounds[$round_code])) {
                     $playoff_rounds[$round_code][] = $row;
                 }
@@ -117,7 +115,6 @@
     // Helper Render Kartu Match (Untuk Playoff)
     function renderMatchCard($m) {
         if(!$m) return;
-        // Data sudah diamankan di atas, jadi aman langsung echo
         $win1 = ($m['team1_score'] > $m['team2_score']) ? 'win' : '';
         $win2 = ($m['team2_score'] > $m['team1_score']) ? 'win' : '';
         
@@ -134,7 +131,7 @@
         </div>";
     }
     $gf_match = null;
-    if (!empty($playoff_rounds[8])) { // Update index ke 8
+    if (!empty($playoff_rounds[8])) {
         $gf_match = reset($playoff_rounds[8]); 
     }
     ?>

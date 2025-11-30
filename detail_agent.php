@@ -23,12 +23,12 @@ if ($result->num_rows == 0) {
 
 $row = $result->fetch_assoc();
 
-// 3. Logika Media (Video vs Gambar)
+// 3. Logika Media
 $source = $row['agent_image'] ? $row['agent_image'] : 'image/default_agent.png';
 $ext = pathinfo($source, PATHINFO_EXTENSION);
 $is_video = in_array(strtolower($ext), ['mp4', 'webm', 'ogg']);
 
-// 4. Deskripsi Statis Berdasarkan Role (Karena di DB belum ada kolom deskripsi)
+// 4. Deskripsi Statis Berdasarkan Role
 $role_desc = "";
 switch ($row['role']) {
     case 'Duelist':
@@ -56,7 +56,7 @@ switch ($row['role']) {
 <?php include 'config/head.php'; ?>
 <style>
     body {
-        background-color: #0f1923; /* Warna dasar Valorant */
+        background-color: #0f1923;
         color: white;
         overflow-x: hidden;
     }
@@ -64,24 +64,24 @@ switch ($row['role']) {
     /* CONTAINER UTAMA */
     .detail-section {
         display: flex;
-        min-height: 85vh; /* Agar memenuhi layar */
+        min-height: 85vh;
         align-items: center;
         justify-content: center;
         position: relative;
         padding: 40px 20px;
-        background-image: url('assets/images/bg-grid.png'); /* Opsional: background pattern */
+        background-image: url('assets/images/bg-grid.png');
         background-size: cover;
     }
 
-    /* BACKGROUND HURUF BESAR (Di belakang agent) */
+    /* BACKGROUND HURUF BESAR */
     .bg-text {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 15vw; /* Sangat besar */
+        font-size: 15vw;
         font-weight: 900;
-        color: rgba(255, 255, 255, 0.03); /* Transparan */
+        color: rgba(255, 255, 255, 0.03); 
         z-index: 0;
         text-transform: uppercase;
         pointer-events: none;
@@ -93,7 +93,7 @@ switch ($row['role']) {
         flex-wrap: wrap;
         max-width: 1200px;
         width: 100%;
-        z-index: 1; /* Di atas background text */
+        z-index: 1;
     }
 
     /* KOLOM KIRI (MEDIA) */
@@ -110,7 +110,7 @@ switch ($row['role']) {
         max-width: 100%;
         max-height: 600px;
         filter: drop-shadow(0 0 20px rgba(255, 70, 85, 0.3));
-        mask-image: linear-gradient(to bottom, black 80%, transparent 100%); /* Efek pudar di kaki */
+        mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     }
 
@@ -142,7 +142,7 @@ switch ($row['role']) {
         text-transform: uppercase;
         line-height: 1;
         margin-bottom: 30px;
-        font-family: 'Tungsten', sans-serif; /* Jika font tersedia, jika tidak pakai font standar */
+        font-family: 'Tungsten', sans-serif;
     }
 
     .info-box {
@@ -191,7 +191,7 @@ switch ($row['role']) {
             flex-direction: column;
         }
         .detail-media {
-            order: 1; /* Gambar di atas pada HP */
+            order: 1;
         }
         .detail-info {
             order: 2;

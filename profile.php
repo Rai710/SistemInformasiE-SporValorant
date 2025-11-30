@@ -25,7 +25,7 @@ $query->execute();
 $result = $query->get_result();
 $user = $result->fetch_assoc();
 
-// [FIX] Cek apakah user ketemu?
+// Cek user
 if (!$user) {
     echo "Error: User data not found for ID: " . $user_id;
     exit();

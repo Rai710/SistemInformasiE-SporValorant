@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// [FIX 1] Tangkap Event ID dari URL (Default ke 1/2025)
+// Tangkap Event ID dari URL
 $event_id = isset($_GET['event_id']) ? (int)$_GET['event_id'] : 1;
 
 // Ambil Nama Event untuk Judul Halaman
@@ -42,7 +42,6 @@ $event_name = $q_event['event_name'] ?? 'VCT PACIFIC';
 
 .teams-container {
     display: grid;
-    /* KUNCI: repeat(4, 1fr) */
     grid-template-columns: repeat(4, 1fr); 
     
     gap: 30px;               
@@ -98,7 +97,7 @@ $event_name = $q_event['event_name'] ?? 'VCT PACIFIC';
     align-items: center;
     position: relative;
     
-    /* BENTUK LANCIP (Clip Path) */
+    /* BENTUK LANCIP */
     clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
     
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -132,7 +131,7 @@ $event_name = $q_event['event_name'] ?? 'VCT PACIFIC';
   
   <div class="teams-container">
     <?php
-    // [FIX 2] Update SQL Query: JOIN ke event_teams dan filter berdasarkan event_id
+    // Update SQL Query: JOIN ke event_teams dan filter berdasarkan event_id
     $sql = "SELECT t.* FROM team t
             JOIN event_teams et ON t.team_id = et.team_id
             WHERE et.event_id = $event_id

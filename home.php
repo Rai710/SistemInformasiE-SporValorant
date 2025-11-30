@@ -35,7 +35,7 @@ $q_next = $koneksi->query("SELECT m.*, t1.team_name as t1_name, t1.logo as t1_lo
                            ORDER BY m.match_date ASC, m.match_id ASC LIMIT 1");
 $next_match = $q_next->fetch_assoc();
 
-// --- [FITUR BARU] REAL STATS ---
+// --- REAL STATS ---
 $total_teams = $koneksi->query("SELECT COUNT(*) as total FROM team")->fetch_assoc()['total'];
 $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports WHERE team1_score > 0 OR team2_score > 0")->fetch_assoc()['total'];
 ?>
@@ -60,13 +60,12 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
     .section-spacing { margin: 120px auto; max-width: 1400px; padding: 0 40px; }
     .glitch-text { font-size: 80px; font-weight: 900; line-height: 0.8; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); position: absolute; z-index: -1; opacity: 0.5; top: -40px; left: -20px; pointer-events: none; }
     
-    /* === 1. HERO SLIDER (PERTAHANKAN STRUKTUR LAMA, MODERNISASI CSS) === */
+    /* === 1. HERO SLIDER  === */
     .hero-section { position: relative; width: 100%; height: 750px; overflow: hidden; border-bottom: 4px solid var(--vct-red); }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; transform: scale(1.05); }
     .slide.active { opacity: 1; transform: scale(1); transition: opacity 0.8s ease-in-out, transform 6s linear; }
     .slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: brightness(0.7); }
     
-    /* Overlay Baru yg Lebih "Tech" */
     .slide-overlay { 
         position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
         background: linear-gradient(90deg, rgba(15,25,35,0.9) 0%, rgba(15,25,35,0.6) 40%, transparent 100%);
@@ -93,7 +92,6 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
     }
     .cta-btn:hover { background: white; color: var(--vct-black); transform: translateX(10px); }
     
-    /* Navigasi Slider */
     .slider-nav { position: absolute; bottom: 50px; right: 100px; display: flex; gap: 10px; z-index: 20; }
     .nav-arrow { 
         width: 60px; height: 60px; border: 1px solid rgba(255,255,255,0.3); 
@@ -144,7 +142,6 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
         padding-bottom: 10px; letter-spacing: 1px;
     }
 
-    /* Baris Tim */
     .rec-row { 
         display: flex; justify-content: space-between; align-items: center; 
         margin-bottom: 15px; 
@@ -154,7 +151,6 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
     .rec-team { display: flex; align-items: center; gap: 15px; font-weight: 800; font-size: 18px; color: white; text-transform: uppercase; }
     .rec-logo { width: 30px; height: 30px; object-fit: contain; }
 
-    /* Skor */
     .rec-score { 
         font-size: 24px; font-weight: 900; color: #555; 
         width: 30px; text-align: center;
@@ -218,7 +214,7 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
       border: 1px solid #333; transition: 0.3s;
   }
   .meta-card:hover { border-color: #ff4655; transform: scale(1.02); }
-  /* Ubah .meta-img agar bisa dipakai oleh tag VIDEO juga */
+
   .meta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: 0.3s; display: block; }
   
   .meta-overlay {

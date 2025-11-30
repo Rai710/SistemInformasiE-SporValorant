@@ -9,14 +9,14 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$event_id = 3; // Event VCT 2026
+$event_id = 3;
 
 // AMBIL POIN
 $q_user = $koneksi->query("SELECT total_pickem_points FROM users WHERE user_id = $user_id");
 $my_points = $q_user->fetch_assoc()['total_pickem_points'] ?? 0;
 $_SESSION['total_pickem_points'] = $my_points; 
 
-// CEK WEEK AKTIF (Hanya untuk keperluan tampilan active tab, tidak untuk lock)
+// CEK WEEK AKTIF 
 $q_set = $koneksi->query("SELECT setting_value FROM system_settings WHERE setting_key = 'active_week'");
 $active_week_str = ($q_set->num_rows > 0) ? $q_set->fetch_assoc()['setting_value'] : 'Week 1';
 
@@ -82,7 +82,7 @@ while($row = $result->fetch_assoc()){
         }
         .card-wrong { opacity: 0.7; filter: grayscale(0.6); border-color: #444 !important; }
 
-        /* LOCKED STYLE (Hanya visual jika diperlukan nanti) */
+        /* LOCKED STYLE */
         .card-locked {
             filter: grayscale(100%) brightness(0.6);
             pointer-events: none;

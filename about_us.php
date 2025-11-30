@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// --- DATA DUMMY PENGEMBANG ---
+// --- DATA PENDIRI PENGEMBANG ---
 $developers = [
     [
         "ign" => "Pak Kambing",
@@ -77,7 +77,7 @@ $site_desc = "Kami adalah platform terdepan yang menyajikan informasi statistik,
   .drawer-card {
     position: relative;
     width: 300px;
-    height: 380px; /* Dipertinggi sedikit untuk memuat sosial media */
+    height: 380px;
     border-radius: 12px;
     overflow: hidden; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
@@ -112,7 +112,7 @@ $site_desc = "Kami adalah platform terdepan yang menyajikan informasi statistik,
     background: linear-gradient(to top, #0f1923 10%, rgba(15, 25, 35, 0.98) 90%, transparent 100%);
     padding: 25px 20px 20px;
     color: white;
-    transform: translateY(110px); /* Sembunyikan detail & sosmed */
+    transform: translateY(110px);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
@@ -165,7 +165,7 @@ $site_desc = "Kami adalah platform terdepan yang menyajikan informasi statistik,
 
   .social-item:hover {
     color: white;
-    background: #ff4655; /* Valorant Red */
+    background: #ff4655;
     transform: translateY(-3px);
   }
 

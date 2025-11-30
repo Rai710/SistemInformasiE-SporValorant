@@ -9,10 +9,10 @@
 </head>
 
     <style>
-        /* ANIMASI SAAT HALAMAN DIBUKA (Zoom Out dikit + Fade In) */
+        /* ANIMASI SAAT HALAMAN DIBUKA */
         body.auth-page {
             animation: zoomInStart 0.8s ease-out forwards;
-            opacity: 0; /* Mulai dari transparan */
+            opacity: 0;
         }
 
         @keyframes zoomInStart {
@@ -20,7 +20,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* ANIMASI SAAT KELUAR (Pindah Halaman) */
+        /* ANIMASI SAAT KELUAR */
         body.zoom-out {
             transform: scale(1.2);
             opacity: 0;

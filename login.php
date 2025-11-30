@@ -11,7 +11,7 @@
     <style>
         body.auth-page {
             animation: zoomInStart 0.8s ease-out forwards;
-            opacity: 0; /* Mulai dari transparan */
+            opacity: 0;
         }
 
         @keyframes zoomInStart {

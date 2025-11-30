@@ -82,7 +82,7 @@ if (!isset($_SESSION['username'])) {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     position: relative;
-    z-index: 2; /* Agar header di atas video */
+    z-index: 2;
   }
 
   .agent-role {
@@ -95,7 +95,7 @@ if (!isset($_SESSION['username'])) {
 
   .agent-body {
     background: radial-gradient(circle, #34495e 0%, #1b2733 80%);
-    height: 300px; /* Tinggi diperbesar sedikit */
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: flex-end; 
@@ -109,14 +109,12 @@ if (!isset($_SESSION['username'])) {
   .agent-media {
     height: 100%;
     width: 100%;
-    object-fit: cover; /* Agar video/gambar memenuhi kotak */
-    object-position: top center; /* Fokus ke bagian atas (wajah agent) */
+    object-fit: cover;
+    object-position: top center;
     transition: transform 0.3s;
-    /* Hilangkan background agar video transparan (webm) bisa menyatu */
     background: transparent; 
   }
   
-  /* Khusus jika ingin video/gambar sedikit zoom saat hover */
   .agent-card:hover .agent-media {
     transform: scale(1.05);
   }

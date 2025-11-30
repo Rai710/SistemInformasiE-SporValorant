@@ -9,7 +9,6 @@ if (!isset($_SESSION['username'])) {
 }
 
 // --- KONFIGURASI WHATSAPP ---
-// Ganti dengan nomor WhatsApp admin (gunakan format internasional tanpa +, contoh: 628...)
 $wa_number = "6282120185813"; 
 
 // Pesan default saat user klik tombol
@@ -32,7 +31,7 @@ $site_name = "VALORANT ESPORTS HUB";
 
 <?php include 'config/head.php'; ?>
 <style>
-  /* --- LAYOUT UMUM (Konsisten dengan halaman lain) --- */
+  /* --- LAYOUT UMUM --- */
   .header-contact { text-align: center; padding: 60px 20px 40px; animation: fadeIn 1s; }
   
   .contact-title { font-size: 50px; font-weight: 900; margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); color: white; }
@@ -61,14 +60,12 @@ $site_name = "VALORANT ESPORTS HUB";
     overflow: hidden;
   }
 
-  /* Efek Hover pada Kartu */
   .wa-card:hover {
     transform: translateY(-10px);
     border-color: #25D366; /* Warna Hijau WA */
     box-shadow: 0 15px 40px rgba(37, 211, 102, 0.2);
   }
 
-  /* Icon Besar */
   .wa-icon-large {
     font-size: 80px;
     color: #ccc;
@@ -120,7 +117,6 @@ $site_name = "VALORANT ESPORTS HUB";
 
   .btn-chat i { margin-right: 8px; }
 
-  /* Garis Dekorasi ala Valorant */
   .deco-line {
     height: 4px;
     width: 50px;

@@ -77,7 +77,7 @@ $result_players = $query_players->get_result();
     height: 100%;
     object-fit: cover;
     object-position: top;
-    transition: transform 0.5s ease; /* Zoom effect */
+    transition: transform 0.5s ease;
   }
 
   /* Efek Zoom pas hover */
@@ -101,12 +101,10 @@ $result_players = $query_players->get_result();
   }
 
   .drawer-card:hover .drawer-info {
-    /* Pas hover, balikin ke posisi normal (Slide Up) */
     transform: translateY(0);
     background: linear-gradient(to top, #0f1923 40%, rgba(15, 25, 35, 0.9) 100%);
   }
 
-  /* Teks di dalam Panel */
   .p-ign { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; line-height: 1; margin-bottom: 5px; }
   .p-role { font-size: 14px; color: #ff4655; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; display: block; }
   

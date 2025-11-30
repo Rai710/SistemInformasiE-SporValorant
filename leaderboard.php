@@ -2,7 +2,7 @@
 session_start();
 include "config/koneksi.php";
 
-// Cek Login (Opsional: Kalau mau leaderboard bisa dilihat publik, hapus aja ini)
+// Cek Login
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -72,7 +72,7 @@ $result = $koneksi->query($sql);
         /* BADGE PEMAIN */
         .tier-badge { padding: 2px 8px; border-radius: 4px; font-size: 10px; background: #333; color: #ccc; margin-left: 10px; vertical-align: middle; }
 
-        /* YOUR RANK (Sticky Bottom jika mau, tapi ini versi standar dulu) */
+        /* YOUR RANK */
         .my-rank-bar {
             margin-top: 30px; padding: 15px; background: #ff4655; color: white; border-radius: 6px;
             text-align: center; font-weight: bold;

@@ -30,13 +30,12 @@ if (isset($_SESSION['user_id'])) {
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Memastikan video menutupi seluruh layar tanpa gepeng */
+            object-fit: cover;
             z-index: 1;
         }
 
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* Gradient sedikit lebih transparan agar video terlihat jelas */
             background: radial-gradient(circle, rgba(15,25,35,0.4) 0%, rgba(15,25,35,0.9) 90%);
             z-index: 2;
         }
@@ -46,20 +45,18 @@ if (isset($_SESSION['user_id'])) {
         z-index: 10; 
         text-align: center; 
         
-        /* KONDISI AWAL: Sembunyi & Turun sedikit */
         opacity: 0; 
         transform: translateY(50px);
         transition: opacity 1.5s ease-out, transform 1.5s ease-out; 
         
-        /* Agar user tidak bisa klik tombol saat masih sembunyi */
         pointer-events: none; 
     }
 
-    /* KONDISI AKHIR: Muncul (Akan ditambahkan oleh JS) */
+    /* KONDISI AKHIR */
     .landing-content.show-content {
         opacity: 1;
         transform: translateY(0);
-        pointer-events: auto; /* Tombol bisa diklik lagi */
+        pointer-events: auto;
     }
         .logo-vct { width: 120px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(255, 70, 85, 0.6)); }
         h1 { font-size: 80px; font-weight: 900; letter-spacing: 5px; margin: 0; line-height: 0.9; text-transform: uppercase; }
@@ -108,12 +105,11 @@ if (isset($_SESSION['user_id'])) {
         const video = document.getElementById('introVideo');
         const content = document.querySelector('.landing-content');
 
-        // Event Listener: Dengar apakah video sudah 'ended'
         video.addEventListener('ended', () => {
-            content.classList.add('show-content'); // Tambahkan class CSS agar muncul
+            content.classList.add('show-content');
         });
 
-        // FALLBACK (JAGA-JAGA): 
+        // FALLBACK: 
         // Jika browser memblokir autoplay atau video error, konten tetap muncul setelah 3 detik
         setTimeout(() => {
             if (video.paused && video.currentTime === 0) {
@@ -122,7 +118,7 @@ if (isset($_SESSION['user_id'])) {
         }, 3000);
 
 
-        // 2. FUNGSI ANIMASI PINDAH HALAMAN (Tetap sama)
+        // 2. FUNGSI ANIMASI PINDAH HALAMAN
         function animatePage(e, url) {
             e.preventDefault(); 
             document.body.classList.add('zoom-out'); 

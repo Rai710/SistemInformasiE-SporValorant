@@ -4,9 +4,9 @@ include "config/koneksi.php";
 
 // 1. Ambil Keyword dari URL
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
-$keyword_db = "%" . $keyword . "%"; // Tambahin % buat fitur LIKE di SQL
+$keyword_db = "%" . $keyword . "%";
 
-// 2. Logic Pencarian (Cuma jalan kalau ada keyword)
+// 2. Logic Pencarian
 $teams = [];
 $players = [];
 
@@ -22,7 +22,7 @@ if(!empty($keyword)) {
                                        FROM players p 
                                        LEFT JOIN team t ON p.team_id = t.team_id 
                                        WHERE p.in_game_name LIKE ? OR p.player_name LIKE ?");
-    $query_player->bind_param("ss", $keyword_db, $keyword_db); // Cek IGN atau Nama Asli
+    $query_player->bind_param("ss", $keyword_db, $keyword_db);
     $query_player->execute();
     $res_player = $query_player->get_result();
 }

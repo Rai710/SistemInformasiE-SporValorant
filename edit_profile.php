@@ -92,7 +92,6 @@ $avatar = !empty($user['avatar_image']) ? $user['avatar_image'] : 'assets/images
         .btn-back { color: white; text-decoration: none; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
         .btn-back:hover { color: #ccc; }
 
-        /* Alert Box */
         .alert-box {
             padding: 15px; margin-bottom: 25px; border-radius: 6px; 
             text-align: center; font-weight: bold; font-size: 14px;
