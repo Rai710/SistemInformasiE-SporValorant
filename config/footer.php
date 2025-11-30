@@ -56,10 +56,8 @@
         </div>
 
         <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Support</a>
-            <a href="#">Esports API</a>
+            <a href="about_us.php" class="nav-link <?= ($current_page == 'berita.php') ? 'active' : '' ?>">About Us</a>
+            <a href="contact_us.php" class="nav-link <?= ($current_page == 'berita.php') ? 'active' : '' ?>">Contact Us</a>
         </div>
 
         <div class="social-icons">
