@@ -249,17 +249,17 @@ $q_champs = $koneksi->query("SELECT * FROM team WHERE team_id IN (1, 2, 3, 6) OR
     <div class="meta-grid">
         <div class="meta-card">
             <div class="meta-pick">85% PICK RATE</div>
-            <video src="assets/video/jett.mp4" class="meta-img" autoplay loop muted playsinline></video>
+            <video src="assets/video/Jett.mp4" class="meta-img" autoplay loop muted playsinline></video>
             <div class="meta-overlay"><div class="meta-name">JETT</div><div class="meta-role">DUELIST</div></div>
         </div>
         <div class="meta-card">
             <div class="meta-pick">78% PICK RATE</div>
-            <video src="assets/video/omen.mp4" class="meta-img" autoplay loop muted playsinline></video>
+            <video src="assets/video/Omen.mp4" class="meta-img" autoplay loop muted playsinline></video>
             <div class="meta-overlay"><div class="meta-name">OMEN</div><div class="meta-role">CONTROLLER</div></div>
         </div>
         <div class="meta-card">
             <div class="meta-pick">72% PICK RATE</div>
-            <video src="assets/video/viper.mp4" class="meta-img" autoplay loop muted playsinline></video>
+            <video src="assets/video/Viper.mp4" class="meta-img" autoplay loop muted playsinline></video>
             <div class="meta-overlay"><div class="meta-name">VIPER</div><div class="meta-role">CONTROLLER</div></div>
         </div>
     </div>
