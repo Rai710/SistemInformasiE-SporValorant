@@ -177,7 +177,7 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
     }
     .ts-card:hover { transform: translateY(-10px); border-color: var(--vct-red); }
     .ts-bg { 
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; 
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.5; 
         background-size: contain; background-position: center; background-repeat: no-repeat;
         transition: 0.4s; filter: grayscale(100%);
     }

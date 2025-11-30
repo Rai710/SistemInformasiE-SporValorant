@@ -11,30 +11,23 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $event_id = 3; // Event VCT 2026
 
-// [FIX] AMBIL POIN TERBARU REAL-TIME
+// AMBIL POIN
 $q_user = $koneksi->query("SELECT total_pickem_points FROM users WHERE user_id = $user_id");
 $my_points = $q_user->fetch_assoc()['total_pickem_points'] ?? 0;
 $_SESSION['total_pickem_points'] = $my_points; 
 
-// 1. Cek Week Aktif
+// CEK WEEK AKTIF (Hanya untuk keperluan tampilan active tab, tidak untuk lock)
 $q_set = $koneksi->query("SELECT setting_value FROM system_settings WHERE setting_key = 'active_week'");
-$active_week = ($q_set->num_rows > 0) ? $q_set->fetch_assoc()['setting_value'] : 'Week 1';
+$active_week_str = ($q_set->num_rows > 0) ? $q_set->fetch_assoc()['setting_value'] : 'Week 1';
 
-// 2. Siapkan Array Data
 $matches_by_week = ['Week 1' => [], 'Week 2' => [], 'Week 3' => [], 'Week 4' => [], 'Week 5' => []];
 
 $bracket = [
-    1 => [], // UB QF
-    2 => [], // UB Semi
-    3 => [], // UB Final
-    4 => [], // LB R1
-    5 => [], // LB R2
-    6 => [], // LB Semi
-    7 => [], // LB Final
-    8 => []  // Grand Final
+    1 => [], 2 => [], 3 => [], // UB
+    4 => [], 5 => [], 6 => [], 7 => [], // LB
+    8 => []  // GF
 ];
 
-// 3. Query Match & Join Prediksi
 $sql = "SELECT m.match_id, m.match_date, m.stage, m.match_week, m.team1_score, m.team2_score, m.team1_id, m.team2_id,
                t1.team_name as t1_name, t1.logo as t1_logo,
                t2.team_name as t2_name, t2.logo as t2_logo,
@@ -75,31 +68,36 @@ while($row = $result->fetch_assoc()){
         .match-link { text-decoration: none; display: block; }
         .pred-status { font-size: 10px; font-weight: 800; float: right; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px; }
         
-        /* WARNA BADGE */
         .st-done  { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; } 
         .st-open  { background: rgba(255, 255, 255, 0.1); color: #888; border: 1px solid #555; }    
         .st-close { background: rgba(255, 70, 85, 0.2); color: #ff4655; border: 1px solid #ff4655; }  
-
-        /* SKOR FINAL (LEBIH TERANG) */
         .score-final { color: #fff !important; text-shadow: 0 0 5px rgba(255,255,255,0.5); font-weight: 900; }
         
-        /* === EFEK KARTU === */
         .m-card:hover { border-color: #ff4655; transform: translateY(-3px); cursor: pointer; transition: 0.2s; }
         
-        /* CARD CORRECT (Hijau Glowing) */
         .card-correct {
             background: linear-gradient(145deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05)) !important;
             border: 1px solid #10b981 !important;
             box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
         }
-        /* CARD WRONG (Agak Redup/Abu) */
-        .card-wrong {
-            opacity: 0.7;
-            filter: grayscale(0.6);
+        .card-wrong { opacity: 0.7; filter: grayscale(0.6); border-color: #444 !important; }
+
+        /* LOCKED STYLE (Hanya visual jika diperlukan nanti) */
+        .card-locked {
+            filter: grayscale(100%) brightness(0.6);
+            pointer-events: none;
+            cursor: not-allowed;
+            position: relative;
+            border-style: dashed !important;
             border-color: #444 !important;
         }
+        .locked-overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #000; color: #aaa; padding: 4px 8px; border-radius: 4px;
+            font-size: 9px; font-weight: 800; border: 1px solid #444; letter-spacing: 1px;
+            z-index: 10; display: flex; align-items: center; gap: 5px;
+        }
 
-        /* BRACKET & HEADER */
         .user-points-area { text-align: center; margin-bottom: 30px; }
         .point-val { font-size: 32px; font-weight: 900; color: #ffd700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
         .bracket-section-title { color: #ff4655; font-size: 18px; font-weight: 900; margin: 30px 0 15px; border-bottom: 2px solid #333; padding-bottom: 10px; }
@@ -108,10 +106,6 @@ while($row = $result->fetch_assoc()){
 <body>
 
 <?php include 'config/navbar.php'; ?>
-
-<?php if(isset($_GET['pesan']) && $_GET['pesan'] == 'success_predict'): ?>
-    <div class="alert alert-success text-center fw-bold">TEBAKAN TERSIMPAN!</div>
-<?php endif; ?>
 
 <div class="container">
     
@@ -131,7 +125,7 @@ while($row = $result->fetch_assoc()){
             <div class="timeline-line"></div>
             <div class="week-nav">
                 <?php foreach($matches_by_week as $week => $data): 
-                    $isActive = ($week == $active_week) ? 'active' : ''; $weekId = str_replace(' ', '', $week);
+                    $isActive = ($week == $active_week_str) ? 'active' : ''; $weekId = str_replace(' ', '', $week);
                 ?>
                     <button class="week-btn <?php echo $isActive; ?>" onclick="openWeek('<?php echo $weekId; ?>', this)">
                         <span><?php echo $week; ?></span><div class="week-dot"></div>
@@ -140,12 +134,12 @@ while($row = $result->fetch_assoc()){
             </div>
         </div>
 
-        <?php foreach($matches_by_week as $week => $matches): $weekId = str_replace(' ', '', $week); $isActive = ($week == $active_week) ? 'active' : ''; ?>
+        <?php foreach($matches_by_week as $week => $matches): $weekId = str_replace(' ', '', $week); $isActive = ($week == $active_week_str) ? 'active' : ''; ?>
         <div id="<?php echo $weekId; ?>" class="grid-matches week-matches <?php echo $isActive; ?>">
             <?php if(empty($matches)): ?>
                 <div style="grid-column:1/-1; text-align:center; padding:50px; color:#666;"><h3>TBD</h3><p>Jadwal belum tersedia.</p></div>
             <?php else: ?>
-                <?php foreach($matches as $m) renderPredCard($m); ?>
+                <?php foreach($matches as $m) renderPredCard($m, false); ?>
             <?php endif; ?>
         </div>
         <?php endforeach; ?>
@@ -161,17 +155,38 @@ while($row = $result->fetch_assoc()){
                     
                     <h3 class="bracket-section-title"><i class="fas fa-level-up-alt"></i> UPPER BRACKET</h3>
                     <div class="bracket-row">
-                        <div class="round-col"> <div class="round-label">UB Quarterfinals</div> <?php foreach($bracket[1] as $m) renderPredCard($m); ?> </div>
-                        <div class="round-col"> <div class="round-label">UB Semifinals</div> <?php foreach($bracket[2] as $m) renderPredCard($m); ?> </div>
-                        <div class="round-col"> <div class="round-label">UB Final</div> <?php foreach($bracket[3] as $m) renderPredCard($m); ?> </div>
+                        <div class="round-col"> 
+                            <div class="round-label">UB Quarterfinals</div> 
+                            <?php foreach($bracket[1] as $m) renderPredCard($m, false); ?> 
+                        </div>
+                        <div class="round-col"> 
+                            <div class="round-label">UB Semifinals</div> 
+                            <?php foreach($bracket[2] as $m) renderPredCard($m, false); ?> 
+                        </div>
+                        <div class="round-col"> 
+                            <div class="round-label">UB Final</div> 
+                            <?php foreach($bracket[3] as $m) renderPredCard($m, false); ?> 
+                        </div>
                     </div>
 
                     <h3 class="bracket-section-title" style="margin-top:50px; border-color:#555; color:#aaa;"><i class="fas fa-level-down-alt"></i> LOWER BRACKET</h3>
                     <div class="bracket-row">
-                        <div class="round-col"> <div class="round-label">LB Round 1</div> <?php foreach($bracket[4] as $m) renderPredCard($m); ?> </div>
-                        <div class="round-col"> <div class="round-label">LB Round 2</div> <?php foreach($bracket[5] as $m) renderPredCard($m); ?> </div>
-                        <div class="round-col"> <div class="round-label">LB Round 3</div> <?php foreach($bracket[6] as $m) renderPredCard($m); ?> </div>
-                        <div class="round-col"> <div class="round-label">LB Final</div> <?php foreach($bracket[7] as $m) renderPredCard($m); ?> </div>
+                        <div class="round-col"> 
+                            <div class="round-label">LB Round 1</div> 
+                            <?php foreach($bracket[4] as $m) renderPredCard($m, false); ?> 
+                        </div>
+                        <div class="round-col"> 
+                            <div class="round-label">LB Round 2</div> 
+                            <?php foreach($bracket[5] as $m) renderPredCard($m, false); ?> 
+                        </div>
+                        <div class="round-col"> 
+                            <div class="round-label">LB Round 3</div> 
+                            <?php foreach($bracket[6] as $m) renderPredCard($m, false); ?> 
+                        </div>
+                        <div class="round-col"> 
+                            <div class="round-label">LB Final</div> 
+                            <?php foreach($bracket[7] as $m) renderPredCard($m, false); ?> 
+                        </div>
                     </div>
 
                 </div>
@@ -183,15 +198,12 @@ while($row = $result->fetch_assoc()){
                         $gfFinished = ($gf['team1_score'] > 0 || $gf['team2_score'] > 0);
                         $gfHasPred  = !empty($gf['prediction_id']);
                         
-                        // Cek Winner
                         $gfRealWinner = 0;
                         if($gf['team1_score'] > $gf['team2_score']) $gfRealWinner = $gf['team1_id'];
                         elseif($gf['team2_score'] > $gf['team1_score']) $gfRealWinner = $gf['team2_id'];
 
-                        // Cek Correct
                         $gfIsCorrect = ($gfFinished && $gfHasPred && $gf['predicted_winner_id'] == $gfRealWinner);
                         
-                        // Class Extra
                         $gfExtraClass = "";
                         if($gfFinished) {
                             if($gfIsCorrect) { $gfExtraClass = "card-correct"; $gfLabel = "WIN (+15)"; $gfClass = "st-done"; }
@@ -233,64 +245,56 @@ while($row = $result->fetch_assoc()){
             </div>
         <?php endif; ?>
     </div>
-
 </div>
 
 <?php include 'config/footer.php'; ?>
 
 <?php 
-function renderPredCard($m) {
+function renderPredCard($m, $isLocked = false) {
     $hasPred = !empty($m['prediction_id']);
     $isFinished = ($m['team1_score'] > 0 || $m['team2_score'] > 0);
     $weekParam = ($m['stage'] == 'Group Stage') ? 'Week '.$m['match_week'] : 'Playoff';
 
-    // 1. CEK PEMENANG ASLI
     $realWinner = 0;
     if($m['team1_score'] > $m['team2_score']) $realWinner = $m['team1_id'];
     elseif($m['team2_score'] > $m['team1_score']) $realWinner = $m['team2_id'];
 
-    // 2. CEK TEBAKAN BENAR
     $isCorrect = ($isFinished && $hasPred && $m['predicted_winner_id'] == $realWinner);
 
-    // 3. LOGIKA VISUAL
     $extraClass = "";
     if ($isFinished) {
-        if ($isCorrect) {
-            $statusLabel = "CORRECT"; $statusClass = "st-done"; $extraClass = "card-correct";
-        } else {
-            $statusLabel = "CLOSED"; $statusClass = "st-close"; $extraClass = "card-wrong";
-        }
+        if ($isCorrect) { $statusLabel = "CORRECT"; $statusClass = "st-done"; $extraClass = "card-correct"; } 
+        else { $statusLabel = "CLOSED"; $statusClass = "st-close"; $extraClass = "card-wrong"; }
         $s1 = $m['team1_score']; $s2 = $m['team2_score'];
         $scoreClass = "score-final";
     } else {
-        if ($hasPred) {
-            $statusLabel = "PREDICTED"; $statusClass = "st-done"; 
-            $s1 = $m['predicted_score_t1']; $s2 = $m['predicted_score_t2'];
-        } else {
-            $statusLabel = "OPEN"; $statusClass = "st-open"; 
-            $s1 = "-"; $s2 = "-";
-        }
+        if ($hasPred) { $statusLabel = "PREDICTED"; $statusClass = "st-done"; $s1 = $m['predicted_score_t1']; $s2 = $m['predicted_score_t2']; } 
+        else { $statusLabel = "OPEN"; $statusClass = "st-open"; $s1 = "-"; $s2 = "-"; }
         $scoreClass = "";
     }
+
+    $linkHref = $isLocked ? '#' : "detail_prediction.php?id={$m['match_id']}&week={$weekParam}";
+    $lockedClass = $isLocked ? 'card-locked' : '';
     ?>
     
-    <a href="detail_prediction.php?id=<?php echo $m['match_id']; ?>&week=<?php echo $weekParam; ?>" class="match-link">
+    <a href="<?php echo $linkHref; ?>" class="match-link <?php echo $lockedClass; ?>">
+        <?php if($isLocked): ?>
+            <div class="locked-overlay"><i class="fas fa-lock"></i> LOCKED</div>
+        <?php endif; ?>
+
         <div class="m-card <?php echo $extraClass; ?>">
             <div class="card-header" style="justify-content:space-between; display:flex;">
                 <span><?php echo date('d M', strtotime($m['match_date'])); ?></span>
-                
                 <?php if($isCorrect): ?>
                     <span class="pred-status st-done" style="border-color:#fff; color:#fff; background:#10b981;"><i class="fas fa-check"></i> WIN</span>
                 <?php else: ?>
                     <span class="pred-status <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span>
                 <?php endif; ?>
             </div>
-            
             <div class="m-row">
                 <span><img src="<?php echo $m['t1_logo']; ?>" class="m-logo"><?php echo $m['t1_name']; ?></span>
                 <span class="m-score <?php echo $scoreClass; ?> <?php echo ($s1 > $s2 && $s1 !== '-')?'win':''; ?>"><?php echo $s1; ?></span>
             </div>
-            
             <div class="m-row">
                 <span><img src="<?php echo $m['t2_logo']; ?>" class="m-logo"><?php echo $m['t2_name']; ?></span>
                 <span class="m-score <?php echo $scoreClass; ?> <?php echo ($s2 > $s1 && $s2 !== '-')?'win':''; ?>"><?php echo $s2; ?></span>
