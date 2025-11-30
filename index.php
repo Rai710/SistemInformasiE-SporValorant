@@ -23,19 +23,44 @@ if (isset($_SESSION['user_id'])) {
 
         body.zoom-out { transform: scale(3); opacity: 0; filter: blur(10px); }
 
-        .bg-image {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('assets/images/Ep8a1_Defiance_Riot_Client_Login_Page_1440p.png') no-repeat center center/cover;
-            z-index: 1; animation: zoomSlow 20s infinite alternate;
+        /* CSS KHUSUS VIDEO BACKGROUND */
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Memastikan video menutupi seluruh layar tanpa gepeng */
+            z-index: 1;
         }
 
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(15,25,35,0.7) 0%, rgba(15,25,35,1) 90%);
+            /* Gradient sedikit lebih transparan agar video terlihat jelas */
+            background: radial-gradient(circle, rgba(15,25,35,0.4) 0%, rgba(15,25,35,0.9) 90%);
             z-index: 2;
         }
 
-        .landing-content { position: relative; z-index: 10; text-align: center; animation: slideUp 1s ease-out; }
+        .landing-content { 
+        position: relative; 
+        z-index: 10; 
+        text-align: center; 
+        
+        /* KONDISI AWAL: Sembunyi & Turun sedikit */
+        opacity: 0; 
+        transform: translateY(50px);
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out; 
+        
+        /* Agar user tidak bisa klik tombol saat masih sembunyi */
+        pointer-events: none; 
+    }
+
+    /* KONDISI AKHIR: Muncul (Akan ditambahkan oleh JS) */
+    .landing-content.show-content {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto; /* Tombol bisa diklik lagi */
+    }
         .logo-vct { width: 120px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(255, 70, 85, 0.6)); }
         h1 { font-size: 80px; font-weight: 900; letter-spacing: 5px; margin: 0; line-height: 0.9; text-transform: uppercase; }
         h1 span { color: #ff4655; }
@@ -56,13 +81,15 @@ if (isset($_SESSION['user_id'])) {
         }
         .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-        @keyframes zoomSlow { from { transform: scale(1); } to { transform: scale(1.1); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="bg-image"></div>
+    <video id="introVideo" autoplay muted playsinline class="bg-video">
+        <source src="assets/videos/Index.mp4" type="video/mp4">
+    </video>
+
     <div class="overlay"></div>
 
     <div class="landing-content">
@@ -77,21 +104,36 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
     <script>
-        // 1. FUNGSI ANIMASI PINDAH HALAMAN
+        // 1. LOGIKA MUNCUL SETELAH VIDEO SELESAI
+        const video = document.getElementById('introVideo');
+        const content = document.querySelector('.landing-content');
+
+        // Event Listener: Dengar apakah video sudah 'ended'
+        video.addEventListener('ended', () => {
+            content.classList.add('show-content'); // Tambahkan class CSS agar muncul
+        });
+
+        // FALLBACK (JAGA-JAGA): 
+        // Jika browser memblokir autoplay atau video error, konten tetap muncul setelah 3 detik
+        setTimeout(() => {
+            if (video.paused && video.currentTime === 0) {
+                content.classList.add('show-content');
+            }
+        }, 3000);
+
+
+        // 2. FUNGSI ANIMASI PINDAH HALAMAN (Tetap sama)
         function animatePage(e, url) {
             e.preventDefault(); 
-            document.body.classList.add('zoom-out'); // Mulai animasi gelap
-            setTimeout(() => { window.location.href = url; }, 800); // Pindah setelah 0.8 detik
+            document.body.classList.add('zoom-out'); 
+            setTimeout(() => { window.location.href = url; }, 800); 
         }
 
-        // 2. FUNGSI RESET KALAU USER TEKAN BACK (FIX LAYAR HITAM)
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
-                // Kalau halaman diambil dari cache (history back), hapus class zoom-out
                 document.body.classList.remove('zoom-out');
             }
         });
     </script>
 
 </body>
-</html> 
