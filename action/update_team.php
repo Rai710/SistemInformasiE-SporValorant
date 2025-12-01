@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        // --- QUERY BARU (Tanpa group_name) ---
+        // --- QUERY (Tanpa group_name) ---
         $sql = "UPDATE team SET team_name=?, country=?, description=? $logo_query_part WHERE team_id=?";
         
         $params[] = $team_id; 

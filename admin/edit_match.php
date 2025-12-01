@@ -190,9 +190,9 @@ $maxScore = $is_bo5 ? 3 : 2;
 
             if (val === max) {
                 if (parseInt(opInput.value) >= max) {
-                    opInput.value = max - 1; // Turunin skor lawan otomatis
+                    opInput.value = max - 1;
                 }
-                opInput.setAttribute('max', max - 1); // Kunci max lawan
+                opInput.setAttribute('max', max - 1);
             } else {
 
                 opInput.setAttribute('max', max);
@@ -202,29 +202,25 @@ $maxScore = $is_bo5 ? 3 : 2;
                 // === UPDATE FORMAT SAAT GANTI STAGE ===
         function updateFormat() {
             let stage = document.getElementById('stageSelect').value;
-            // Ambil value week dari inputan
+
             let week  = parseInt(document.querySelector('input[name="match_week"]').value);
             
-            // Logika JS: Jika Grand Final ATAU Week 7, maka Max 3 (BO5)
+            // Jika Grand Final ATAU Week 7, maka Max 3 (BO5)
             let isBO5 = (stage === 'Grand Final' || week === 7);
             let max = isBO5 ? 3 : 2;
             
             let s1 = document.getElementById('score1');
             let s2 = document.getElementById('score2');
 
-            // Update atribut max HTML
             s1.setAttribute('max', max);
             s2.setAttribute('max', max);
             
-            // Reset kalau nilai yang ada kegedean (misal dari 3 jadi 2)
             if(parseInt(s1.value) > max) s1.value = max;
             if(parseInt(s2.value) > max) s2.value = max;
             
-            // Update Badge Visual
             let badge = document.querySelector('.badge-bo');
             if(badge) badge.innerText = 'BO' + (max === 3 ? '5' : '3');
             
-            // Jalankan validasi ulang
             autoWin(1, max);
             autoWin(2, max);
         }

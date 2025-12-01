@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // 2. AUTO ADVANCE BRACKET
         if ($stage != 'Group Stage') {
             
-            // --- Helper: Cek Posisi (HANYA DIANTARA SESAMA PLAYOFF) ---
+            // --- Helper: Cek Posisi ---
             // Tambahan: AND stage != 'Group Stage' biar match Group Stage gak ikut kehitung
             function getMatchPosition($conn, $ev, $wk, $my_id) {
                 $sql = "SELECT COUNT(*) as antrian FROM match_esports 

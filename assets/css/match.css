@@ -75,7 +75,7 @@
 
  /* AREA KIRI: UPPER & LOWER */
  .bracket-main-area {
-   display: flex; flex-direction: column; gap: 80px; /* Jarak Atas & Bawah */
+   display: flex; flex-direction: column; gap: 80px; 
  }
 
  /* BARIS RONDE */
@@ -122,7 +122,7 @@
 /* Container Horizontal (Kiri Skor, Kanan Piala) */
 .victory-stage {
   display: flex;
-  align-items: center; /* Center Vertikal */
+  align-items: center;
   gap: 30px;
   
   background: rgba(255, 215, 0, 0.03);
@@ -165,7 +165,7 @@
 /* CONTAINER HORIZONTAL: */
 .victory-stage {
   display: flex;
-  align-items: center; /* Center Vertikal */
+  align-items: center; 
   gap: 50px; 
   position: relative;
 }
@@ -216,13 +216,13 @@
 /* Gambar Piala */
 .trophy-img {
   width: 150px; 
-  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7)); /* Glow Emas */
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7));
   animation: floatTrophy 4s ease-in-out infinite;
   margin-bottom: 15px; 
 }
 @keyframes floatTrophy {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); } /* Melayang */
+  50% { transform: translateY(-15px); } 
   100% { transform: translateY(0); }
 }
 

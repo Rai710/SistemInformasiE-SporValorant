@@ -8,14 +8,14 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
     exit();
 }
 
-// 2. AMBIL DAFTAR EVENT (Untuk Filter Dropdown)
+// 2. AMBIL DAFTAR EVENT
 $q_events = $koneksi->query("SELECT * FROM events ORDER BY event_date DESC");
 
 // 3. TENTUKAN EVENT ID YANG DIPILIH
 if (isset($_GET['event_id'])) {
     $selected_event = (int)$_GET['event_id'];
 } else {
-    // Default: Ambil event dengan ID terbesar (paling baru dibuat)
+    // Default: Ambil event dengan ID terbesar
     $q_latest = $koneksi->query("SELECT event_id FROM events ORDER BY event_id DESC LIMIT 1");
     $latest = $q_latest->fetch_assoc();
     $selected_event = $latest['event_id'] ?? 1;
@@ -33,7 +33,6 @@ $sql = "SELECT m.*,
 
 $matches = $koneksi->query($sql);
 
-// Debugging: Cek error SQL jika ada
 if (!$matches) {
     die("Error Database: " . $koneksi->error);
 }
@@ -73,7 +72,7 @@ if (!$matches) {
         .match-table tr:hover { background: rgba(255,255,255,0.02); }
         
         .team-cell { display: flex; align-items: center; gap: 10px; font-weight: bold; }
-        /* Fix ukuran gambar biar gak gepeng */
+
         .team-cell img { width: 30px; height: 30px; object-fit: contain; background: rgba(0,0,0,0.3); border-radius: 4px; padding: 2px; }
         
         .score-badge { 

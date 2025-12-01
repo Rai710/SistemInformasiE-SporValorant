@@ -26,7 +26,6 @@ $players = $koneksi->query($sql_players);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
     <style>
-        /* Header Tim Spesial */
         .team-header-card {
             background: #1b2733; padding: 30px; border-radius: 8px; border: 1px solid #333;
             display: flex; align-items: center; gap: 20px; margin-bottom: 30px;
@@ -35,7 +34,6 @@ $players = $koneksi->query($sql_players);
         .th-info h2 { margin: 0; color: white; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .th-info p { margin: 5px 0 0; color: #888; }
 
-        /* Tabel Pemain */
         .player-table { width: 100%; border-collapse: collapse; }
         .player-table th { text-align: left; padding: 15px; background: #0f1923; color: #aaa; font-size: 12px; }
         .player-table td { padding: 15px; border-bottom: 1px solid #333; color: white; vertical-align: middle; }

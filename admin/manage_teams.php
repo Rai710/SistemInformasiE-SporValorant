@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
     header("Location: ../login.php"); exit();
 }
 
-// 2. AMBIL DATA TIM (Tanpa group_name)
+// 2. AMBIL DATA TIM
 $sql = "SELECT * FROM team ORDER BY team_name ASC";
 $teams = $koneksi->query($sql);
 ?>

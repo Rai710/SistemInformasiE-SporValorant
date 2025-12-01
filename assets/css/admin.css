@@ -9,14 +9,14 @@
         body {
             display: flex;
             min-height: 100vh;
-            background-color: #0f1923; /* Dark Background */
-            overflow: hidden; /* Biar gak ada scroll double */
+            background-color: #0f1923;
+            overflow: hidden;
         }
 
         /* 1. SIDEBAR (Menu Kiri) */
         .sidebar {
             width: 260px;
-            height: 100vh; /* Full tinggi */
+            height: 100vh;
             background: #1b2733;
             border-right: 1px solid #333;
             display: flex;
@@ -60,9 +60,9 @@
         /* 2. MAIN CONTENT (Kanan) */
         .main-content {
             flex: 1;
-            height: 100vh; /* Full tinggi */
+            height: 100vh;
             padding: 40px;
-            overflow-y: auto; /* Scroll kontennya aja */
+            overflow-y: auto;
             background: #0f1923;
         }
 

@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
     header("Location: ../login.php"); exit();
 }
 
-// Cek apakah ada titipan ID Tim? (Misal dari halaman Roster)
+// Cek apakah ada titipan ID Tim
 $pre_selected_team = isset($_GET['pre_team_id']) ? (int)$_GET['pre_team_id'] : 0;
 
 // Ambil Daftar Tim buat Dropdown
@@ -103,7 +103,6 @@ $teams = $koneksi->query("SELECT team_id, team_name FROM team ORDER BY team_name
                 <button type="submit" class="btn-submit">ADD PLAYER</button>
                 
                 <?php 
-                    // Kalau datang dari tim tertentu, balik ke tim itu. Kalau gak, ke Manage Teams.
                     $cancel_link = ($pre_selected_team > 0) ? "manage_team_players.php?team_id=$pre_selected_team" : "manage_teams.php";
                 ?>
                 <a href="<?php echo $cancel_link; ?>" style="display:block; text-align:center; margin-top:15px; color:#aaa; text-decoration:none;">Cancel</a>

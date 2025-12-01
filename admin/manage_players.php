@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
     header("Location: ../login.php"); exit();
 }
 
-// 2. AMBIL DATA PLAYERS (JOIN ke Team biar muncul nama timnya)
+// 2. AMBIL DATA PLAYERS
 $sql = "SELECT p.*, t.team_name, t.logo as team_logo 
         FROM players p 
         LEFT JOIN team t ON p.team_id = t.team_id 

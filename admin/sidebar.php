@@ -1,5 +1,5 @@
 <?php
-// Cek halaman mana yang lagi dibuka
+
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">

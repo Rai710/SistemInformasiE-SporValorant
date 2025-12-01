@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
     exit();
 }
 
-// Ambil Daftar Event (Biar admin milih ini match buat event mana)
+// Ambil Daftar Event
 $q_events = $koneksi->query("SELECT * FROM events ORDER BY event_date DESC");
 
 // Ambil Daftar Tim
