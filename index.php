@@ -83,8 +83,8 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 
-    <video id="introVideo" autoplay muted playsinline class="bg-video">
-        <source src="assets/videos/Index.mp4" type="video/mp4">
+    <video id="introVideo" autoplay loop muted playsinline class="bg-video">
+        <source src="assets/video/index.mp4" type="video/mp4">
     </video>
 
     <div class="overlay"></div>
@@ -101,21 +101,23 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
     <script>
-        // 1. LOGIKA MUNCUL SETELAH VIDEO SELESAI
         const video = document.getElementById('introVideo');
         const content = document.querySelector('.landing-content');
 
-        video.addEventListener('ended', () => {
-            content.classList.add('show-content');
+        video.addEventListener('play', () => {
+            setTimeout(() => {
+                content.classList.add('show-content');
+            }, 500); 
         });
 
         // FALLBACK: 
-        // Jika browser memblokir autoplay atau video error, konten tetap muncul setelah 3 detik
-        setTimeout(() => {
-            if (video.paused && video.currentTime === 0) {
-                content.classList.add('show-content');
-            }
-        }, 3000);
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (!content.classList.contains('show-content')) {
+                    content.classList.add('show-content');
+                }
+            }, 1000);
+        });
 
 
         // 2. FUNGSI ANIMASI PINDAH HALAMAN

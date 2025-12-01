@@ -1,15 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <title>Register - VCT Pacific</title>
+    
+    <?php 
+    $path = isset($path) ? $path : ''; 
+    ?>
     <link rel="stylesheet" href="<?php echo $path; ?>assets/css/auth.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/auth.css">
-</head>
 
     <style>
-        /* ANIMASI SAAT HALAMAN DIBUKA */
+        body {
+            overflow: hidden; 
+            background: #0f1923;
+        }
+
+        .bg-video {
+            position: fixed; 
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(15,25,35,0.6) 0%, rgba(15,25,35,0.9) 90%);
+            z-index: -1; 
+        }
+
+        /* POSISI CONTENT */
+        .container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            align-items: center; 
+        }
+
+        /* ANIMASI */
         body.auth-page {
             animation: zoomInStart 0.8s ease-out forwards;
             opacity: 0;
@@ -20,7 +51,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* ANIMASI SAAT KELUAR */
         body.zoom-out {
             transform: scale(1.2);
             opacity: 0;
@@ -28,8 +58,14 @@
             transition: all 0.6s ease-in;
         }
     </style>
+</head>
+
 <body class="auth-page">
 
+    <video autoplay loop muted playsinline class="bg-video">
+        <source src="assets/video/index.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
     <div class="container d-flex justify-content-center">
         
         <div class="card auth-card p-4">
