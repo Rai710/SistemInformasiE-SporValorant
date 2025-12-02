@@ -129,7 +129,7 @@ $link_my_team = $fav_team_id ? "detail_tim.php?id=" . $fav_team_id : "edit_profi
             </div>
             <div class="profile-menu">
                 <div class="menu-header">General</div>
-                <a href="profile.php" class="menu-item"><i class="fas fa-user-circle"></i> View Dossier</a>
+                <a href="profile.php" class="menu-item"><i class="fas fa-user-circle"></i> Profile</a>
                 <a href="<?php echo $link_my_team; ?>" class="menu-item"><i class="fas fa-users"></i> My Team</a>
                 <div class="menu-divider"></div>
                 <div class="menu-header">Account</div>
