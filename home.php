@@ -42,212 +42,226 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
 
 <!DOCTYPE html>
 <html lang="id">
-    <head>
-<meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8" />
+    <title>VCT Pacific - Home</title>
+    <?php include 'config/head.php'; ?>
+    <style>
+        :root {
+            --vct-red: #ff4655;
+            --vct-dark: #0f1923;
+            --vct-light: #ece8e1;
+            --vct-black: #000000;
+        }
 
-<title>VCT Pacific - Home</title>
-<?php include 'config/head.php'; ?>
-<style>
-    
- 
-:root {
-        --vct-red: #ff4655;
-        --vct-dark: #0f1923;
-        --vct-light: #ece8e1;
-        --vct-black: #000000;
-    }
+        .section-spacing { margin: 120px auto; max-width: 1400px; padding: 0 40px; }
+        .glitch-text { font-size: 80px; font-weight: 900; line-height: 0.8; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); position: absolute; z-index: -1; opacity: 0.5; top: -40px; left: -20px; pointer-events: none; }
+        
+        /* === 1. HERO SLIDER === */
+        .hero-section { position: relative; width: 100%; height: 750px; overflow: hidden; border-bottom: 4px solid var(--vct-red); }
+        
+        .slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            opacity: 0; 
+            transition: opacity 0.8s ease-in-out; 
+            transform: scale(1.05); 
+            pointer-events: none; 
+            z-index: 0;
+        }
 
-    .section-spacing { margin: 120px auto; max-width: 1400px; padding: 0 40px; }
-    .glitch-text { font-size: 80px; font-weight: 900; line-height: 0.8; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); position: absolute; z-index: -1; opacity: 0.5; top: -40px; left: -20px; pointer-events: none; }
-    
-    /* === 1. HERO SLIDER  === */
-    .hero-section { position: relative; width: 100%; height: 750px; overflow: hidden; border-bottom: 4px solid var(--vct-red); }
-    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; transform: scale(1.05); }
-    .slide.active { opacity: 1; transform: scale(1); transition: opacity 0.8s ease-in-out, transform 6s linear; }
-    .slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: brightness(0.7); }
-    
-    .slide-overlay { 
-        position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
-        background: linear-gradient(90deg, rgba(15,25,35,0.9) 0%, rgba(15,25,35,0.6) 40%, transparent 100%);
-        display: flex; flex-direction: column; justify-content: center; padding-left: 100px;
-    }
-    .slide-tag { 
-        background: transparent; color: var(--vct-red); border: 1px solid var(--vct-red); 
-        padding: 8px 16px; font-weight: 800; letter-spacing: 3px; width: fit-content; 
-        margin-bottom: 20px; font-size: 14px; 
-    }
-    .slide-title { 
-        font-size: 90px; font-weight: 900; text-transform: uppercase; color: #fff; 
-        line-height: 0.9; margin-bottom: 20px; letter-spacing: -2px;
-    }
-    .slide-desc { 
-        font-size: 18px; color: #aaa; max-width: 600px; margin-bottom: 40px; 
-        border-left: 3px solid var(--vct-red); padding-left: 20px; line-height: 1.5;
-    }
-    .cta-btn { 
-        padding: 20px 50px; background: var(--vct-red); color: white; text-decoration: none; 
-        font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
-        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        transition: 0.3s; width: fit-content;
-    }
-    .cta-btn:hover { background: white; color: var(--vct-black); transform: translateX(10px); }
-    
-    .slider-nav { position: absolute; bottom: 50px; right: 100px; display: flex; gap: 10px; z-index: 20; }
-    .nav-arrow { 
-        width: 60px; height: 60px; border: 1px solid rgba(255,255,255,0.3); 
-        display: flex; align-items: center; justify-content: center; color: white; 
-        cursor: pointer; transition: 0.3s; background: rgba(0,0,0,0.5);
-    }
-    .nav-arrow:hover { background: var(--vct-red); border-color: var(--vct-red); }
-  /* === TICKER === */
-  .ticker-wrap { width: 100%; background: #ff4655; overflow: hidden; height: 40px; display: flex; align-items: center; }
-  .ticker { display: inline-block; white-space: nowrap; animation: marquee 20s linear infinite; padding-left: 100%; }
-  .ticker-item { display: inline-block; padding: 0 30px; font-size: 14px; font-weight: bold; color: white; text-transform: uppercase; }
-  @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+        .slide.active { 
+            opacity: 1; 
+            transform: scale(1); 
+            transition: opacity 0.8s ease-in-out, transform 6s linear; 
+            pointer-events: auto;
+            z-index: 1;
+        }
 
-  /* CONTAINER & TITLES  */
-    .content-container { max-width: 1300px; margin: 80px auto; padding: 0 20px; }
-    .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 15px; }
-    .sec-title { font-size: 48px; font-weight: 900; text-transform: uppercase; line-height: 1; color: white; }
-    .sec-subtitle { color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: brightness(0.7); }
+        
+        .slide-overlay { 
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(90deg, rgba(15,25,35,0.9) 0%, rgba(15,25,35,0.6) 40%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: center; padding-left: 100px;
+        }
+        .slide-tag { 
+            background: transparent; color: var(--vct-red); border: 1px solid var(--vct-red); 
+            padding: 8px 16px; font-weight: 800; letter-spacing: 3px; width: fit-content; 
+            margin-bottom: 20px; font-size: 14px; 
+        }
+        .slide-title { 
+            font-size: 90px; font-weight: 900; text-transform: uppercase; color: #fff; 
+            line-height: 0.9; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .slide-desc { 
+            font-size: 18px; color: #aaa; max-width: 600px; margin-bottom: 40px; 
+            border-left: 3px solid var(--vct-red); padding-left: 20px; line-height: 1.5;
+        }
+        .cta-btn { 
+            padding: 20px 50px; background: var(--vct-red); color: white; text-decoration: none; 
+            font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: 0.3s; width: fit-content;
+        }
+        .cta-btn:hover { background: white; color: var(--vct-black); transform: translateX(10px); }
+        
+        .slider-nav { position: absolute; bottom: 50px; right: 100px; display: flex; gap: 10px; z-index: 20; }
+        .nav-arrow { 
+            width: 60px; height: 60px; border: 1px solid rgba(255,255,255,0.3); 
+            display: flex; align-items: center; justify-content: center; color: white; 
+            cursor: pointer; transition: 0.3s; background: rgba(0,0,0,0.5);
+        }
+        .nav-arrow:hover { background: var(--vct-red); border-color: var(--vct-red); }
+      
+      /* === TICKER === */
+      .ticker-wrap { width: 100%; background: #ff4655; overflow: hidden; height: 40px; display: flex; align-items: center; }
+      .ticker { display: inline-block; white-space: nowrap; animation: marquee 20s linear infinite; padding-left: 100%; }
+      .ticker-item { display: inline-block; padding: 0 30px; font-size: 14px; font-weight: bold; color: white; text-transform: uppercase; }
+      @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-  /* NEW: PACIFIC FACTS */
-    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
-    .feat-card {
-        background: #1b2733; padding: 40px 30px; border: 1px solid #333; transition: 0.3s;
-        position: relative; overflow: hidden;
-    }
-    .feat-card:hover { transform: translateY(-10px); border-color: #ff4655; }
-    .feat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #ff4655; opacity: 0; transition: 0.3s; }
-    .feat-card:hover::before { opacity: 1; }
-    .feat-icon { font-size: 40px; margin-bottom: 20px; color: #ff4655; }
-    .feat-h { font-size: 24px; font-weight: 900; color: white; margin-bottom: 10px; text-transform: uppercase; }
-    .feat-p { color: #aaa; font-size: 14px; line-height: 1.6; }
+      /* CONTAINER & TITLES  */
+        .content-container { max-width: 1300px; margin: 80px auto; padding: 0 20px; }
+        .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .sec-title { font-size: 48px; font-weight: 900; text-transform: uppercase; line-height: 1; color: white; }
+        .sec-subtitle { color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
 
-    /* === RECENT MATCHES SECTION === */
-    .rec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
+      /* NEW: PACIFIC FACTS */
+        .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
+        .feat-card {
+            background: #1b2733; padding: 40px 30px; border: 1px solid #333; transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .feat-card:hover { transform: translateY(-10px); border-color: #ff4655; }
+        .feat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #ff4655; opacity: 0; transition: 0.3s; }
+        .feat-card:hover::before { opacity: 1; }
+        .feat-icon { font-size: 40px; margin-bottom: 20px; color: #ff4655; }
+        .feat-h { font-size: 24px; font-weight: 900; color: white; margin-bottom: 10px; text-transform: uppercase; }
+        .feat-p { color: #aaa; font-size: 14px; line-height: 1.6; }
 
-    .rec-card {
-        background: #1b2733; border: 1px solid #333; border-radius: 4px;
-        padding: 25px; position: relative; transition: 0.3s;
-        display: flex; flex-direction: column; justify-content: center;
-    }
-    .rec-card:hover { transform: translateY(-5px); border-color: #ff4655; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        /* === RECENT MATCHES SECTION === */
+        .rec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
 
-    /* Header Kartu (Tanggal & Stage) */
-    .rec-meta { 
-        display: flex; justify-content: space-between; font-size: 11px; 
-        color: #888; text-transform: uppercase; font-weight: bold; 
-        margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); 
-        padding-bottom: 10px; letter-spacing: 1px;
-    }
+        .rec-card {
+            background: #1b2733; border: 1px solid #333; border-radius: 4px;
+            padding: 25px; position: relative; transition: 0.3s;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .rec-card:hover { transform: translateY(-5px); border-color: #ff4655; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
-    .rec-row { 
-        display: flex; justify-content: space-between; align-items: center; 
-        margin-bottom: 15px; 
-    }
-    .rec-row:last-child { margin-bottom: 0; }
+        /* Header Kartu (Tanggal & Stage) */
+        .rec-meta { 
+            display: flex; justify-content: space-between; font-size: 11px; 
+            color: #888; text-transform: uppercase; font-weight: bold; 
+            margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding-bottom: 10px; letter-spacing: 1px;
+        }
 
-    .rec-team { display: flex; align-items: center; gap: 15px; font-weight: 800; font-size: 18px; color: white; text-transform: uppercase; }
-    .rec-logo { width: 30px; height: 30px; object-fit: contain; }
+        .rec-row { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 15px; 
+        }
+        .rec-row:last-child { margin-bottom: 0; }
 
-    .rec-score { 
-        font-size: 24px; font-weight: 900; color: #555; 
-        width: 30px; text-align: center;
-    }
-    .rec-score.win { color: #10b981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
-    .rec-score.lose { opacity: 0.6; }
+        .rec-team { display: flex; align-items: center; gap: 15px; font-weight: 800; font-size: 18px; color: white; text-transform: uppercase; }
+        .rec-logo { width: 30px; height: 30px; object-fit: contain; }
 
-    /* Responsive */
-    @media (max-width: 900px) { .rec-grid { grid-template-columns: 1fr; } }
-  /* 1. CHAMPIONS QUALIFIED  */
-    .paris-section { position: relative; }
-    .paris-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 50px; border-bottom: 2px solid #333; padding-bottom: 20px; }
-    .ph-title { font-size: 42px; font-weight: 900; text-transform: uppercase; color: white; }
-    .ph-sub { font-size: 14px; color: var(--vct-red); font-weight: bold; letter-spacing: 2px; }
-    
-    .team-showcase { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .ts-card { 
-        height: 350px; background: #1b2733; position: relative; overflow: hidden; transition: 0.4s;
-        border: 1px solid #333; display: flex; flex-direction: column; justify-content: flex-end;
-    }
-    .ts-card:hover { transform: translateY(-10px); border-color: var(--vct-red); }
-    .ts-bg { 
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.5; 
-        background-size: contain; background-position: center; background-repeat: no-repeat;
-        transition: 0.4s; filter: grayscale(100%);
-    }
-    .ts-card:hover .ts-bg { opacity: 0.2; transform: scale(1.2); }
-    .ts-content { padding: 30px; position: relative; z-index: 2; background: linear-gradient(to top, #0f1923, transparent); }
-    .ts-logo { width: 60px; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
-    .ts-name { font-size: 24px; font-weight: 900; text-transform: uppercase; line-height: 1; }
-    .ts-seed { font-size: 12px; color: var(--vct-red); font-weight: bold; letter-spacing: 1px; margin-top: 5px; display: block; }
-  /* 2. MVP SECTION  */
-  .mvp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 100px; }
-  .mvp-card {
-      background: #1b2733; border-radius: 12px; overflow: hidden; display: flex;
-      border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s; position: relative;
-  }
-  .mvp-card:hover { transform: translateY(-10px); border-color: #ff4655; }
-  .stage-badge {
-      position: absolute; top: 0; left: 0; background: #ff4655; color: white;
-      padding: 8px 20px; font-weight: 900; font-size: 14px; border-bottom-right-radius: 12px; z-index: 10;
-  }
-  .mvp-img-box { width: 40%; position: relative; overflow: hidden; }
-  .mvp-img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: 0.5s; }
-  .mvp-card:hover .mvp-img { transform: scale(1.1); }
-  .mvp-info { width: 60%; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
-  .mvp-role { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-  .mvp-ign { font-size: 42px; font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 10px; color: #fff; }
-  .mvp-team-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .mvp-team-logo { width: 30px; }
-  .mvp-team-name { font-size: 16px; font-weight: bold; color: #ccc; }
-  .mvp-stat { display: flex; justify-content: space-between; }
-  .stat-box { text-align: center; }
-  .stat-val { font-size: 24px; font-weight: 800; color: #ff4655; display: block; }
-  .stat-lbl { font-size: 10px; color: #888; text-transform: uppercase; }
-  
-  /* 3. META WATCH */
-  .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
-  .meta-card { 
-      position: relative; height: 560px; background: #1b2733; border-radius: 8px; overflow: hidden; 
-      border: 1px solid #333; transition: 0.3s;
-  }
-  .meta-card:hover { border-color: #ff4655; transform: scale(1.02); }
+        .rec-score { 
+            font-size: 24px; font-weight: 900; color: #555; 
+            width: 30px; text-align: center;
+        }
+        .rec-score.win { color: #10b981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+        .rec-score.lose { opacity: 0.6; }
 
-  .meta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: 0.3s; display: block; }
-  
-  .meta-overlay {
-      position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
-      background: linear-gradient(to top, #0f1923 10%, transparent 100%);
-  }
-  .meta-name { font-size: 32px; font-weight: 900; text-transform: uppercase; color: #fff; line-height: 1; }
-  .meta-role { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
-  .meta-pick { position: absolute; top: 20px; right: 20px; background: #fff; color: #000; font-weight: 800; padding: 5px 10px; border-radius: 4px; font-size: 12px; z-index: 5; }
+        /* Responsive */
+        @media (max-width: 900px) { .rec-grid { grid-template-columns: 1fr; } }
+      /* 1. CHAMPIONS QUALIFIED  */
+        .paris-section { position: relative; }
+        .paris-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 50px; border-bottom: 2px solid #333; padding-bottom: 20px; }
+        .ph-title { font-size: 42px; font-weight: 900; text-transform: uppercase; color: white; }
+        .ph-sub { font-size: 14px; color: var(--vct-red); font-weight: bold; letter-spacing: 2px; }
+        
+        .team-showcase { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .ts-card { 
+            height: 350px; background: #1b2733; position: relative; overflow: hidden; transition: 0.4s;
+            border: 1px solid #333; display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .ts-card:hover { transform: translateY(-10px); border-color: var(--vct-red); }
+        .ts-bg { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.5; 
+            background-size: contain; background-position: center; background-repeat: no-repeat;
+            transition: 0.4s; filter: grayscale(100%);
+        }
+        .ts-card:hover .ts-bg { opacity: 0.2; transform: scale(1.2); }
+        .ts-content { padding: 30px; position: relative; z-index: 2; background: linear-gradient(to top, #0f1923, transparent); }
+        .ts-logo { width: 60px; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+        .ts-name { font-size: 24px; font-weight: 900; text-transform: uppercase; line-height: 1; }
+        .ts-seed { font-size: 12px; color: var(--vct-red); font-weight: bold; letter-spacing: 1px; margin-top: 5px; display: block; }
+      /* 2. MVP SECTION  */
+      .mvp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 100px; }
+      .mvp-card {
+          background: #1b2733; border-radius: 12px; overflow: hidden; display: flex;
+          border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s; position: relative;
+      }
+      .mvp-card:hover { transform: translateY(-10px); border-color: #ff4655; }
+      .stage-badge {
+          position: absolute; top: 0; left: 0; background: #ff4655; color: white;
+          padding: 8px 20px; font-weight: 900; font-size: 14px; border-bottom-right-radius: 12px; z-index: 10;
+      }
+      .mvp-img-box { width: 40%; position: relative; overflow: hidden; }
+      .mvp-img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: 0.5s; }
+      .mvp-card:hover .mvp-img { transform: scale(1.1); }
+      .mvp-info { width: 60%; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+      .mvp-role { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+      .mvp-ign { font-size: 42px; font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 10px; color: #fff; }
+      .mvp-team-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .mvp-team-logo { width: 30px; }
+      .mvp-team-name { font-size: 16px; font-weight: bold; color: #ccc; }
+      .mvp-stat { display: flex; justify-content: space-between; }
+      .stat-box { text-align: center; }
+      .stat-val { font-size: 24px; font-weight: 800; color: #ff4655; display: block; }
+      .stat-lbl { font-size: 10px; color: #888; text-transform: uppercase; }
+      
+      /* 3. META WATCH */
+      .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px; }
+      .meta-card { 
+          position: relative; height: 560px; background: #1b2733; border-radius: 8px; overflow: hidden; 
+          border: 1px solid #333; transition: 0.3s;
+      }
+      .meta-card:hover { border-color: #ff4655; transform: scale(1.02); }
 
-  /* 5. TOURNAMENT STATS */
-  .stats-banner {
-      background: rgba(255,255,255,0.03);
-      padding: 40px; border-radius: 12px; border: 1px solid #333;
-      display: flex; justify-content: space-around; align-items: center; text-align: center;
-  }
-  .stat-item h3 { font-size: 48px; color: #fff; margin: 0; font-weight: 900; }
-  .stat-item p { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; margin-top: 5px; }
-  .stat-divider { width: 1px; height: 60px; background: #444; }
+      .meta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: 0.3s; display: block; }
+      
+      .meta-overlay {
+          position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
+          background: linear-gradient(to top, #0f1923 10%, transparent 100%);
+      }
+      .meta-name { font-size: 32px; font-weight: 900; text-transform: uppercase; color: #fff; line-height: 1; }
+      .meta-role { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+      .meta-pick { position: absolute; top: 20px; right: 20px; background: #fff; color: #000; font-weight: 800; padding: 5px 10px; border-radius: 4px; font-size: 12px; z-index: 5; }
 
-  @media (max-width: 900px) { 
-      .mvp-grid, .meta-grid, .facts-grid { grid-template-columns: 1fr; } 
-      .stats-banner { flex-direction: column; gap: 30px; }
-      .stat-divider { width: 100px; height: 1px; }
-  }
+      /* 5. TOURNAMENT STATS */
+      .stats-banner {
+          background: rgba(255,255,255,0.03);
+          padding: 40px; border-radius: 12px; border: 1px solid #333;
+          display: flex; justify-content: space-around; align-items: center; text-align: center;
+      }
+      .stat-item h3 { font-size: 48px; color: #fff; margin: 0; font-weight: 900; }
+      .stat-item p { color: #ff4655; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; margin-top: 5px; }
+      .stat-divider { width: 1px; height: 60px; background: #444; }
 
-
-</style>
+      @media (max-width: 900px) { 
+          .mvp-grid, .meta-grid, .facts-grid { grid-template-columns: 1fr; } 
+          .stats-banner { flex-direction: column; gap: 30px; }
+          .stat-divider { width: 100px; height: 1px; }
+      }
+    </style>
 </head>
 
 <body>
-
-
 
 <?php include 'config/navbar.php'; ?>
 
@@ -261,6 +275,7 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
             <a href="match.php?stage=1" class="cta-btn">VIEW STAGE 1</a>
         </div>
     </div>
+    
     <div class="slide">
         <img src="https://valo2asia.com/wp-content/uploads/2025/08/54721215025_694f9dd835_k-1170x780.jpg">
         <div class="slide-overlay">
@@ -444,4 +459,4 @@ $matches_played = $koneksi->query("SELECT COUNT(*) as total FROM match_esports W
 </script>
 
 </body>
-</html> 
+</html>
